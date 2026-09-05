@@ -1,0 +1,11 @@
+The following options are enabled by -fhardened:
+  -D_FORTIFY_SOURCE=3 (or =2 for glibc < 2.35)
+  -D_GLIBCXX_ASSERTIONS
+  -ftrivial-auto-var-init=zero
+  -fPIE  -pie
+  -Wl,-z,now
+  -Wl,-z,relro
+  -fstack-protector-strong
+  -fstack-clash-protection
+  -fcf-protection=full
+

@@ -725,7 +725,7 @@ The following options are language-independent:
   -gz=<format>                		
   -imultiarch <dir>           		x86_64-linux-gnu
   -iplugindir=<dir>           		
-  -o <file>                   		/tmp/ccVNLMup.s
+  -o <file>                   		/tmp/ccMLSZ9U.s
   -p                          		[disabled]
   -pedantic-errors            		[disabled]
   -quiet                      		[disabled]

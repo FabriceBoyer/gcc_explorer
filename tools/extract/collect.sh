@@ -40,6 +40,7 @@ for v in $VERSIONS; do
     -e HOME=/tmp \
     -v "$ROOT/tools/extract/in-container.sh:/extract.sh:ro" \
     -v "$ROOT/tools/extract/samples:/samples:ro" \
+    -v "$ROOT/tools/extract/bench:/bench:ro" \
     -v "$out:/out" \
     "$image" /bin/sh /extract.sh
 

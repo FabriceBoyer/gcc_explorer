@@ -725,7 +725,7 @@ The following options are language-independent:
   -gz=<format>                		
   -imultiarch <dir>           		x86_64-linux-gnu
   -iplugindir=<dir>           		
-  -o <file>                   		/tmp/ccP8H8bC.s
+  -o <file>                   		/tmp/ccmZCD3C.s
   -p                          		[disabled]
   -pedantic-errors            		[disabled]
   -quiet                      		[disabled]

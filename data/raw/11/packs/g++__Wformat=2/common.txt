@@ -616,7 +616,7 @@ The following options are language-independent:
   -gz=<format>                		
   -imultiarch <dir>           		x86_64-linux-gnu
   -iplugindir=<dir>           		
-  -o <file>                   		/tmp/ccD6P2Vq.s
+  -o <file>                   		/tmp/ccaOfZFL.s
   -p                          		[disabled]
   -pedantic-errors            		[disabled]
   -quiet                      		[disabled]

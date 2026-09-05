@@ -7,34 +7,50 @@ import { selectedOptionNames, useStore } from '../lib/store';
 import { defaultAt, defaultVaries } from '../lib/filters';
 import { categoryLabel, categoryStyle } from '../lib/catalog';
 import { VersionStrip } from './VersionStrip';
+import { ImpactMeter } from './ImpactMeter';
+/** Sentinel for a score of "varies", which never participates in ordering. */
+const UNKNOWN = Symbol('varies');
 import { Badge, Checkbox, Empty } from './ui';
 
-export type SortKey = 'name' | 'default' | 'category' | 'since' | 'until' | 'relevance';
+export type SortKey =
+  | 'name' | 'default' | 'category' | 'since' | 'until' | 'relevance'
+  | 'build' | 'runtime';
 export interface SortState { key: SortKey; dir: 'asc' | 'desc' }
 
 const COLUMNS: { key: SortKey; label: string; className: string; sortable: boolean; hint?: string }[] = [
   { key: 'name', label: 'Option', className: 'flex-[1.5] min-w-[196px]', sortable: true },
   { key: 'default', label: 'Default', className: 'w-[92px] shrink-0 hidden sm:flex', sortable: true, hint: 'Value reported by `gcc -Q --help` for the pivot release' },
   { key: 'relevance', label: 'Description', className: 'flex-[2.6] min-w-0 hidden md:flex', sortable: false },
-  { key: 'category', label: 'Category', className: 'w-[128px] shrink-0 hidden xl:flex', sortable: true },
+  { key: 'build', label: 'Build', className: 'w-[62px] shrink-0 hidden lg:flex', sortable: true, hint: 'Compile-time cost of adding this option — measured where a benchmark can show it' },
+  { key: 'runtime', label: 'Runtime', className: 'w-[72px] shrink-0 hidden lg:flex', sortable: true, hint: 'Effect on how fast the produced program runs' },
+  { key: 'category', label: 'Category', className: 'w-[128px] shrink-0 hidden 2xl:flex', sortable: true },
   { key: 'since', label: 'Versions', className: 'w-[124px] shrink-0', sortable: true, hint: 'Release range in which the option exists' },
 ];
 
 function sortRows(rows: OptionRow[], sort: SortState, versions: number[], pivot: number): OptionRow[] {
   if (sort.key === 'relevance') return rows;
   const dir = sort.dir === 'asc' ? 1 : -1;
-  const value = (r: OptionRow): string | number => {
+  const value = (r: OptionRow): string | number | typeof UNKNOWN => {
     switch (sort.key) {
       case 'default': return defaultAt(r, versions, pivot) ?? '￿';
       case 'category': return r.c;
       case 'since': return r.since;
       case 'until': return r.until;
+      case 'build': return r.im.b ?? UNKNOWN;
+      case 'runtime': return r.im.r ?? UNKNOWN;
       default: return r.n;
     }
   };
   return [...rows].sort((a, b) => {
     const va = value(a);
     const vb = value(b);
+    // "Varies" always sinks to the bottom, whichever way the column is sorted:
+    // sorting by cost descending should surface the expensive options, not the
+    // ones we could not put a number on.
+    if (va === UNKNOWN || vb === UNKNOWN) {
+      if (va === vb) return a.n.localeCompare(b.n);
+      return va === UNKNOWN ? 1 : -1;
+    }
     if (va === vb) return a.n.localeCompare(b.n);
     return (va < vb ? -1 : 1) * dir;
   });
@@ -215,10 +231,21 @@ export function OptionsTable({
                 </div>
 
                 <div className={clsx('items-center', COLUMNS[3].className)}>
+                  <ImpactMeter score={row.im.b} axis="b" source={row.im.s} />
+                </div>
+
+                <div className={clsx('items-center gap-1', COLUMNS[4].className)}>
+                  <ImpactMeter score={row.im.r} axis="r" source={row.im.s} />
+                  {row.im.s === 'm' && (
+                    <span className="text-[9px] text-ok" title="Benchmarked in the release containers">●</span>
+                  )}
+                </div>
+
+                <div className={clsx('items-center', COLUMNS[5].className)}>
                   <Badge style={categoryStyle(row.c, theme === 'dark')}>{categoryLabel(row.c)}</Badge>
                 </div>
 
-                <div className={clsx('flex items-center gap-2', COLUMNS[4].className)}>
+                <div className={clsx('flex items-center gap-2', COLUMNS[6].className)}>
                   <VersionStrip mask={row.m} versions={manifest.versions} highlight={pivot} />
                   <span className="font-mono text-[11px] text-faint">
                     {row.since}

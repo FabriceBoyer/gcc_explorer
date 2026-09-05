@@ -114,6 +114,41 @@ on both command lines):
 
 The dialog also warns when a selected flag does not exist in the pivot release.
 
+### What a flag costs
+
+Two sortable columns, **Build** and **Runtime**, plus binary size in the detail
+panel. Filterable from the sidebar by level (*improves · negligible · low ·
+moderate · high · varies*), and by "only benchmarked options".
+
+The score comes from one of three places, and the UI always says which:
+
+| Source | How | Coverage |
+| --- | --- | --- |
+| **Measured** | 42 flags are compiled *and run* inside each release's own container, against a benchmark that exercises dense array arithmetic, pointer chasing, bounded string work, allocation churn and non-inlinable calls | the options those flags inform |
+| **Curated** | costs that are established fact but that no single generic benchmark can show, hand-written with their reasoning in `tools/data/impact.json` | ~1 800 options |
+| **Derived** | what the option's category makes certain — a pure diagnostic cannot change generated code, so its runtime cost is exactly zero | the rest |
+
+Four things keep the measurement from lying:
+
+- **Paired baselines.** The reference build is re-measured immediately before
+  every flag, never once at the start, so a machine that gets busier during the
+  run cannot masquerade as a flag that costs something.
+- **Fastest run wins.** Background load can only inflate a timing, so the
+  minimum of several runs is the observation closest to the truth; each is
+  preceded by a discarded warm-up.
+- **Median across the eight releases**, so one noisy run cannot decide a rating.
+- **A baseline measured against itself** is recorded on every release. It lands
+  within ~1% on build and runtime, and the bands separating *negligible* from
+  *low* sit well outside that.
+
+A curated statement **beats** a measurement on the axis it covers. Wall-clock
+timing on a shared machine will occasionally claim that adding a warning made
+the program faster, and publishing that is worse than publishing nothing.
+
+Binary size is exact — a byte count, not a stopwatch. Build time is stable to a
+few percent. **Runtime is wall clock on one developer machine**: treat 2× as
+meaningful and 5% as noise.
+
 ### Compare releases
 
 A dedicated diff view: which options were **added**, **removed**, or had their
@@ -217,6 +252,11 @@ Everything is derived from GCC. For each major release 8 → 15, one official
    are compiled with the flags declared on their `// FLAGS:` line and the
    compiler's output is captured verbatim, per release.
 
+6. **What each flag costs** — `tools/extract/bench/` compiles a
+   compile-heavy translation unit and builds and runs a mixed-workload
+   benchmark, once per flag and once for a baseline taken immediately before
+   it, recording build time, binary size and runtime.
+
 The raw dumps land in `data/raw/<major>/` and are **committed**.
 `tools/build-dataset.mjs` then merges them into `public/data/` — no Docker
 required for that step, which is what lets CI verify the dataset without ever
@@ -240,8 +280,13 @@ npm run data:build
 `ENGINE=podman ./tools/extract/collect.sh` works too, and `IMAGE_PREFIX`
 lets you point at a mirror.
 
+Benchmarking is the slow part — about seven minutes per release, and it wants a
+quiet machine. Set `SKIP_BENCH=1` to leave it out.
+
 To add an umbrella flag, add a line to the `PACKS` list in
-`tools/extract/in-container.sh`. To add a diagnostic example, drop a `.c` or
+`tools/extract/in-container.sh`. To benchmark another flag, add it to the
+`FLAGS` list in `tools/extract/bench/bench.sh` and map it to the options it
+informs under `benchTargets` in `tools/data/impact.json`. To add a diagnostic example, drop a `.c` or
 `.cc` file into `tools/extract/samples/` with a `// FLAGS:` first line — it is
 wired up automatically, and attached to every option named on that line.
 Curated profiles live in `tools/data/profiles.json`.
@@ -316,11 +361,14 @@ is unavailable the app falls back to whatever is cached.
 │   ├── extract/
 │   │   ├── collect.sh          host driver: one container per release
 │   │   ├── in-container.sh     everything that runs inside gcc:<major>
-│   │   └── samples/            32 sample programs with a // FLAGS: line
+│   │   ├── samples/            32 sample programs with a // FLAGS: line
+│   │   └── bench/              compile-time and runtime benchmarks
 │   ├── lib/
 │   │   ├── roff.mjs            the gcc.1 troff parser
-│   │   └── parse-help.mjs      parsers for --help and -Q --help output
+│   │   ├── parse-help.mjs      parsers for --help and -Q --help output
+│   │   └── impact.mjs          measured/curated/derived cost resolution
 │   ├── data/profiles.json      curated flag sets (hand written)
+│   ├── data/impact.json        cost rules, thresholds, bench→option mapping
 │   └── build-dataset.mjs       merges data/raw → public/data
 ├── data/raw/<major>/           committed raw dumps, one directory per release
 ├── public/data/                the generated dataset served to the browser
@@ -399,6 +447,14 @@ A few decisions worth knowing about if you work on this:
   showing something wrong.
 - Only major releases are covered. Point releases within a major line rarely
   add or remove options, but they do occasionally change a default.
+- **Runtime impact is measured on one machine, on one benchmark**, much of
+  whose time is spent inside libc. That makes it sharp at separating
+  instrumentation overhead (ASan+UBSan measures at 4.8×) and blunt at
+  separating optimisation levels — which is why the `-O` family is scored from
+  a curated verdict rather than from the stopwatch. It is not a substitute for
+  profiling your own workload. Options whose effect depends entirely on the
+  code being compiled — `--param`, the individual optimisation passes,
+  `-march=` — are reported as *varies* rather than given a number.
 
 ---
 

@@ -74,6 +74,9 @@ export function filterOptions(
     if (!f.includeAliases && row.al) continue;
     if (f.onlyDocumented && !row.doc) continue;
     if (f.onlyWithSamples && !row.ex) continue;
+    if (f.onlyMeasured && row.im.s !== 'm') continue;
+    if (f.buildImpact.length && !f.buildImpact.includes(row.im.b ?? 99)) continue;
+    if (f.runtimeImpact.length && !f.runtimeImpact.includes(row.im.r ?? 99)) continue;
     if (f.onlySelected && !selected.has(row.n)) continue;
     if (cats.size && !cats.has(row.c)) continue;
 

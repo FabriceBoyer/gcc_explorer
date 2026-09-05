@@ -1,0 +1,314 @@
+{
+  "version": 1,
+  "note": "Three layers feed the build/runtime/size impact shown in the UI. (1) MEASURED: tools/extract/bench compiles and runs a benchmark with and without the flag, in every release's own container, each flag paired against a baseline measured immediately before it. The median across the eight releases is what gets scored, so one noisy run cannot decide a rating. (2) CURATED: the rules below — costs that are established fact, which win over a measurement on the axes they state, because wall-clock timing on a shared machine will occasionally claim a diagnostic made the program faster. (3) DERIVED: everything else falls back to what the option's category makes certain, e.g. a pure diagnostic cannot change generated code. Thresholds are deliberately wider than the measured noise floor (±1% build, ±1% runtime on the baseline-against-itself row).",
+  "scale": {
+    "-1": "improves (faster / smaller)",
+    "0": "negligible",
+    "1": "low",
+    "2": "moderate",
+    "3": "high",
+    "null": "varies / not established"
+  },
+  "thresholds": {
+    "build": [
+      0.88,
+      1.12,
+      1.35,
+      1.8
+    ],
+    "runtime": [
+      0.88,
+      1.12,
+      1.3,
+      1.7
+    ],
+    "size": [
+      0.98,
+      1.02,
+      1.15,
+      1.75
+    ]
+  },
+  "benchTargets": {
+    "-O0": [
+      "-O"
+    ],
+    "-O1": [
+      "-O"
+    ],
+    "-O3": [
+      "-O"
+    ],
+    "-Os": [
+      "-Os",
+      "-O"
+    ],
+    "-Oz": [
+      "-Oz"
+    ],
+    "-Ofast": [
+      "-Ofast"
+    ],
+    "-Og": [
+      "-Og"
+    ],
+    "-flto": [
+      "-flto",
+      "-flto="
+    ],
+    "-fno-inline": [
+      "-finline"
+    ],
+    "-funroll-loops": [
+      "-funroll-loops"
+    ],
+    "-fno-omit-frame-pointer": [
+      "-fomit-frame-pointer"
+    ],
+    "-g": [
+      "-g"
+    ],
+    "-g3": [
+      "-g"
+    ],
+    "-fstack-protector": [
+      "-fstack-protector"
+    ],
+    "-fstack-protector-strong": [
+      "-fstack-protector-strong"
+    ],
+    "-fstack-protector-all": [
+      "-fstack-protector-all"
+    ],
+    "-fstack-clash-protection": [
+      "-fstack-clash-protection"
+    ],
+    "-fcf-protection=full": [
+      "-fcf-protection="
+    ],
+    "-fPIE -pie": [
+      "-fPIE",
+      "-pie"
+    ],
+    "-ftrivial-auto-var-init=zero": [
+      "-ftrivial-auto-var-init="
+    ],
+    "-ftrivial-auto-var-init=pattern": [
+      "-ftrivial-auto-var-init="
+    ],
+    "-fzero-call-used-regs=used-gpr": [
+      "-fzero-call-used-regs="
+    ],
+    "-fzero-call-used-regs=all": [
+      "-fzero-call-used-regs="
+    ],
+    "-fstrict-flex-arrays=3": [
+      "-fstrict-flex-arrays="
+    ],
+    "-fhardened": [
+      "-fhardened"
+    ],
+    "-fsanitize=address": [
+      "-fsanitize="
+    ],
+    "-fsanitize=undefined": [
+      "-fsanitize="
+    ],
+    "-fsanitize=address -fsanitize=undefined": [
+      "-fsanitize="
+    ],
+    "-fsanitize=thread -fPIE -pie": [
+      "-fsanitize="
+    ],
+    "-fsanitize=leak": [
+      "-fsanitize="
+    ],
+    "-fanalyzer": [
+      "-fanalyzer"
+    ],
+    "--coverage": [
+      "--coverage",
+      "-fprofile-arcs",
+      "-ftest-coverage"
+    ],
+    "-pg": [
+      "-pg"
+    ],
+    "-fno-strict-aliasing": [
+      "-fstrict-aliasing"
+    ],
+    "-fno-semantic-interposition": [
+      "-fsemantic-interposition"
+    ],
+    "-fvisibility=hidden": [
+      "-fvisibility="
+    ],
+    "-fno-common": [
+      "-fcommon"
+    ],
+    "-fexceptions": [
+      "-fexceptions"
+    ],
+    "-Wall -Wextra": [
+      "-Wall",
+      "-Wextra"
+    ],
+    "-Wall -Wextra -Wconversion -Wformat=2": [
+      "-Wconversion",
+      "-Wformat="
+    ]
+  },
+  "rules": [
+    {
+      "match": "^-fanalyzer",
+      "runtime": 0,
+      "size": 0,
+      "note": "The static analyzer runs an interprocedural symbolic execution over the whole translation unit. It costs build time and nothing else — no code is generated differently. Run it as a separate CI job rather than in the normal build."
+    },
+    {
+      "match": "^-fdiagnostics",
+      "build": 0,
+      "runtime": 0,
+      "size": 0,
+      "note": "Changes only how diagnostics are printed."
+    },
+    {
+      "match": "^-fdump-|^-fopt-info|^-fstats$|^-ftime-report|^-fmem-report|^-fira-verbose",
+      "build": 1,
+      "runtime": 0,
+      "size": 0,
+      "note": "Writes a dump or a report during compilation. Slows the build a little; the generated code is unchanged."
+    },
+    {
+      "match": "^-fsanitize=|^-fsanitize-",
+      "note": "Sanitizers instrument every access of interest and carry a runtime library. Expect a large runtime and memory cost — they belong in test and fuzzing builds, never in production."
+    },
+    {
+      "match": "^-fprofile-|^--coverage$|^-ftest-coverage$|^-fprofile$",
+      "note": "Instrumentation for coverage or profile-guided optimisation. The instrumented build is slower and much larger; a later PGO build using the data is normally faster than the baseline."
+    },
+    {
+      "match": "^-g",
+      "runtime": 0,
+      "note": "Debug information is a separate section in the binary. It costs disk and build time; it does not change the instructions executed, so runtime is unaffected."
+    },
+    {
+      "match": "^--param",
+      "build": null,
+      "runtime": null,
+      "size": null,
+      "note": "Tuning parameters move the optimiser's own cost/benefit thresholds. Both build time and runtime move with them, in a direction that depends entirely on the code being compiled — measure on your own workload."
+    },
+    {
+      "match": "^-march=|^-mtune=|^-mcpu=",
+      "build": 0,
+      "runtime": null,
+      "size": null,
+      "note": "Targeting a newer microarchitecture usually helps runtime and can grow code size, but it also restricts the machines the binary will run on. Measure on the hardware you actually deploy to."
+    },
+    {
+      "match": "^-m",
+      "build": 0,
+      "runtime": null,
+      "size": null,
+      "note": "A machine-dependent option: its effect depends on the target and on the code being compiled."
+    },
+    {
+      "match": "^-fipa-|^-fdevirtualize|^-finline|^-funroll|^-fpeel|^-ftree-|^-fgcse|^-fpredictive|^-fvect|^-floop",
+      "note": "An individual optimisation pass. It is enabled or disabled by the -O levels; toggling it on its own rarely pays unless you have a measurement that says otherwise."
+    },
+    {
+      "match": "^-flto",
+      "build": 2,
+      "note": "Link-time optimisation moves most of the work to the link step, which becomes much slower and more memory hungry, and usually produces faster and smaller code. The build figure here is asserted, not measured: our compile benchmark stops at -c, where LTO looks cheaper precisely because it has postponed the work."
+    }
+  ],
+  "options": {
+    "-fstack-protector-all": {
+      "note": "A canary in every function, including leaves that hold no arrays. Noticeably more overhead than -fstack-protector-strong for very little extra coverage in most codebases."
+    },
+    "-D": {
+      "build": 0,
+      "runtime": 0,
+      "size": 0,
+      "note": "Defining a macro costs nothing by itself, but what you define can: -D_FORTIFY_SOURCE=3 adds bounds checks and -D_GLIBCXX_DEBUG replaces the whole libstdc++ implementation. See the profiles for the ones that matter."
+    },
+    "-Werror": {
+      "build": 0,
+      "runtime": 0,
+      "size": 0,
+      "note": "Turns warnings into errors. No effect on the generated code — only on whether it gets generated at all."
+    },
+    "-fexceptions": {
+      "build": 0,
+      "runtime": 0,
+      "size": 1,
+      "note": "Unwind tables cost binary size and nothing on the happy path; throwing is what is expensive."
+    },
+    "-fvisibility=": {
+      "build": 0,
+      "runtime": -1,
+      "size": -1,
+      "note": "Hiding symbols shrinks the dynamic symbol table, speeds up loading and gives the optimiser more freedom inside the shared object."
+    },
+    "-fsemantic-interposition": {
+      "note": "On by default. Turning it off (-fno-semantic-interposition) lets a shared library inline calls to its own exported functions — often a large win for C++ libraries."
+    },
+    "-O": {
+      "runtime": -1,
+      "size": null,
+      "note": "Raising the optimisation level costs build time and buys runtime; the table below shows each level measured against -O2. Code size moves in either direction — -O3 and -Ofast trade size for speed, -Os and -Oz do the reverse."
+    },
+    "-Os": {
+      "runtime": 1,
+      "size": -1,
+      "note": "Optimises for size: everything -O2 does except the transformations that tend to grow code. Slightly slower than -O2 on most workloads, and smaller."
+    },
+    "-Oz": {
+      "runtime": 1,
+      "size": -1,
+      "note": "More aggressive than -Os about size, and correspondingly more willing to give up speed."
+    },
+    "-Og": {
+      "runtime": 1,
+      "size": 0,
+      "note": "The debugging optimisation level: faster to compile than -O2 and slower at runtime, but it does not reorder code out from under the debugger."
+    },
+    "-Ofast": {
+      "runtime": -1,
+      "size": 1,
+      "note": "-O3 plus optimisations that break strict standards conformance, -ffast-math in particular. Faster on floating point code, at the price of NaN/infinity handling and reproducible results."
+    },
+    "-fno-common": {
+      "build": 0,
+      "runtime": 0,
+      "size": 0
+    },
+    "-fzero-call-used-regs=": {
+      "runtime": 1,
+      "note": "Scrubbing registers on return costs a few instructions per function. `used-gpr` is the cheap setting; `all` is measurably slower on call-heavy code."
+    },
+    "-fcf-protection=": {
+      "runtime": 1,
+      "note": "CET landing pads add one instruction at the start of every indirect branch target. Low single-digit overhead on hardware that supports it, and it is a no-op on hardware that does not."
+    },
+    "-fstack-protector": {
+      "runtime": 1
+    },
+    "-fstack-protector-strong": {
+      "runtime": 1,
+      "note": "A canary only in functions that actually hold arrays or take addresses of locals — the setting distributions ship, because it catches nearly everything -fstack-protector-all does at a fraction of the cost."
+    },
+    "-fstack-clash-protection": {
+      "runtime": 0,
+      "note": "Adds a stack probe per page when a frame grows. Free for ordinary functions; only large or variable-length frames pay."
+    },
+    "-fPIE": {
+      "runtime": 1,
+      "note": "Position independent code costs a register and an indirection on global access. Small on x86-64, more noticeable on register-poor targets."
+    },
+    "-pie": {
+      "runtime": 1
+    }
+  }
+}

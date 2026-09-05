@@ -701,7 +701,7 @@ The following options are language-independent:
   -gz=<format>                		
   -imultiarch <dir>           		x86_64-linux-gnu
   -iplugindir=<dir>           		
-  -o <file>                   		/tmp/ccwy7zLf.s
+  -o <file>                   		/tmp/cc6kQ7kF.s
   -p                          		[disabled]
   -pedantic-errors            		[disabled]
   -quiet                      		[disabled]

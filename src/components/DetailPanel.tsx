@@ -2,7 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { clsx } from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
-  BookText, CircleAlert, Copy, Check, Layers, Link2, Loader2, Minus, Plus, ShieldCheck, Terminal, X,
+  BookText, CircleAlert, Copy, Check, Gauge, Layers, Link2, Loader2, Minus, Plus,
+  ShieldCheck, Terminal, X,
 } from 'lucide-react';
 import type { Dataset } from '../lib/dataset';
 import { maskToVersions } from '../lib/dataset';
@@ -14,6 +15,9 @@ import { cxxDefaultAt, defaultAt } from '../lib/filters';
 import { renderMarkdown } from '../lib/markdown';
 import { buildFlag } from '../lib/export';
 import { VersionMatrix } from './VersionStrip';
+import { ImpactRow } from './ImpactMeter';
+import { formatRatio, SOURCE_EXPLAINER, SOURCE_LABEL } from '../lib/impact';
+import type { Benchmark } from '../lib/types';
 import { Badge, Button, SectionTitle } from './ui';
 
 function CopyButton({ text, label = 'Copy' }: { text: string; label?: string }) {
@@ -81,6 +85,54 @@ function SampleBlock({ sample, versions }: { sample: Sample; versions: number[] 
   );
 }
 
+/** Per-release measurements for one benchmarked flag. */
+function BenchTable({ flag, bench, versions }: { flag: string; bench: Benchmark; versions: number[] }) {
+  const rows = versions.filter((v) => bench.versions[String(v)]);
+  if (!rows.length) return null;
+  return (
+    <div className="overflow-hidden rounded-xl border border-line bg-surface">
+      <div className="border-b border-line px-2.5 py-1.5">
+        <code className="font-mono text-[11.5px] font-semibold text-ink">{flag}</code>
+      </div>
+      <table className="w-full text-[11.5px]">
+        <thead className="text-faint">
+          <tr>
+            <th className="px-2.5 py-1 text-left font-medium">GCC</th>
+            <th className="px-2 py-1 text-right font-medium">Build</th>
+            <th className="px-2 py-1 text-right font-medium">Runtime</th>
+            <th className="px-2.5 py-1 text-right font-medium">Size</th>
+          </tr>
+        </thead>
+        <tbody className="font-mono">
+          {rows.map((v) => {
+            const m = bench.versions[String(v)];
+            const cell = (ratio: number | null) => (
+              <span className={clsx(
+                ratio === null ? 'text-faint'
+                  : ratio > 1.05 ? 'text-warn'
+                    : ratio < 0.95 ? 'text-ok' : 'text-muted',
+              )}
+              >
+                {formatRatio(ratio)}
+              </span>
+            );
+            return (
+              <tr key={v} className="border-t border-line">
+                <td className="px-2.5 py-1 text-muted">{v}</td>
+                <td className="px-2 py-1 text-right">{cell(m.b)}</td>
+                <td className="px-2 py-1 text-right">
+                  {m.status === 'ok' ? cell(m.r) : <span className="text-faint" title={m.status}>{m.status}</span>}
+                </td>
+                <td className="px-2.5 py-1 text-right">{cell(m.z)}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 export function DetailPanel({ data }: { data: Dataset }) {
   const { selected, select, selection, toggleOption, setOptionValue, theme } = useStore();
   const { docs, docsLoading, requestDocs } = useDataset();
@@ -89,6 +141,13 @@ export function DetailPanel({ data }: { data: Dataset }) {
   useEffect(() => { if (selected) requestDocs(); }, [selected, requestDocs]);
 
   const doc = row && docs ? docs.docs[row.n] : undefined;
+  const impactNote = row && docs ? docs.impactNotes[row.n] : undefined;
+  const benchTables = useMemo<[string, Benchmark][]>(
+    () => (row?.bm && docs
+      ? row.bm.map((f) => [f, docs.benchmarks[f]] as [string, Benchmark]).filter(([, b]) => b)
+      : []),
+    [row, docs],
+  );
   const samples = useMemo(
     () => (row?.ex && docs ? docs.samples.filter((s) => row.ex!.includes(s.id)) : []),
     [row, docs],
@@ -189,6 +248,43 @@ export function DetailPanel({ data }: { data: Dataset }) {
               {row.p.min !== undefined && <>, min <code className="font-mono text-ink">{row.p.min}</code></>}
               {row.p.max !== undefined && <>, max <code className="font-mono text-ink">{row.p.max}</code></>}
             </p>
+          )}
+        </section>
+
+        {/* ---- impact ---- */}
+        <section>
+          <SectionTitle hint={SOURCE_EXPLAINER[row.im.s]}>
+            <Gauge className="size-3" />
+            Cost
+            <span className={clsx(
+              'ml-1 rounded px-1 py-px text-[9.5px] font-medium normal-case tracking-normal',
+              row.im.s === 'm' ? 'bg-ok-soft text-ok' : 'bg-surface-3 text-faint',
+            )}
+            >
+              {SOURCE_LABEL[row.im.s]}
+            </span>
+          </SectionTitle>
+          <div className="space-y-1.5">
+            <ImpactRow axis="b" score={row.im.b} source={row.im.s} />
+            <ImpactRow axis="r" score={row.im.r} source={row.im.s} />
+            <ImpactRow axis="z" score={row.im.z} source={row.im.s} />
+          </div>
+          {impactNote && (
+            <p className="mt-2 text-[12.5px] leading-relaxed text-muted">{impactNote}</p>
+          )}
+          {benchTables.length > 0 && (
+            <div className="mt-2.5 space-y-2">
+              <p className="text-[11px] text-faint">
+                Ratios against a baseline measured immediately before, fastest of several runs in each
+                release's own container, scored on the median across releases. Size is exact. Runtime is wall
+                clock on one machine and the workload is allocation and libc heavy, so it separates
+                instrumentation overhead well and optimisation levels poorly — read it as an order of
+                magnitude, not a benchmark result.
+              </p>
+              {benchTables.map(([flag, bench]) => (
+                <BenchTable key={flag} flag={flag} bench={bench} versions={versions} />
+              ))}
+            </div>
           )}
         </section>
 

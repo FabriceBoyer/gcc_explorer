@@ -42,7 +42,7 @@ export function DatasetProvider({ children }: { children: ReactNode }) {
     setDocsLoading(true);
     loadDocs(hash)
       .then(setDocs)
-      .catch(() => setDocs({ docs: {}, samples: [] }))
+      .catch(() => setDocs({ docs: {}, samples: [], impactNotes: {}, benchmarks: {} }))
       .finally(() => setDocsLoading(false));
   }, []);
 

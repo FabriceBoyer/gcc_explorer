@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  ArrowRight, BookText, Boxes, Container, Database, GitCompareArrows, Layers,
+  ArrowRight, BookText, Boxes, Container, Database, Gauge, GitCompareArrows, Layers,
   PackageCheck, ShieldCheck, Table2, Terminal, WifiOff,
 } from 'lucide-react';
 import { useDataset } from '../lib/dataset-context';
@@ -37,6 +37,11 @@ const FEATURES = [
     icon: GitCompareArrows,
     title: 'Diff two releases',
     body: 'See precisely which options were added, removed or had their default changed between any two of the eight supported releases.',
+  },
+  {
+    icon: Gauge,
+    title: 'What it costs you',
+    body: 'Build time, runtime and binary size per option — measured by actually compiling and running a benchmark in each release, curated where a benchmark cannot show it, and sortable and filterable like everything else.',
   },
 ];
 
@@ -95,7 +100,7 @@ export default function HomePage() {
                 { k: 'options catalogued', v: m.counts.options.toLocaleString() },
                 { k: 'with manual text', v: m.counts.documented.toLocaleString() },
                 { k: 'releases compared', v: m.versions.length },
-                { k: 'umbrella flags mapped', v: m.packs.length },
+                { k: 'flags benchmarked', v: m.counts.benchmarked },
               ].map((s) => (
                 <div key={s.k} className="surface-card px-4 py-3">
                   <dt className="text-[11px] uppercase tracking-wider text-faint">{s.k}</dt>
@@ -141,6 +146,7 @@ export default function HomePage() {
             {[
               { icon: Container, t: 'Run the real compiler', d: 'One container per release, GCC 8 to 15, so the answers are the answers that release actually gives.' },
               { icon: Terminal, t: 'Ask it everything', d: '`--help=<class>` for names and descriptions, `-Q --help=<class>` for default values, once per umbrella flag to diff what it enables.' },
+              { icon: Gauge, t: 'Time it', d: 'A benchmark is compiled and run with and without each of the interesting flags, paired against a baseline taken moments before, to measure what it actually costs.' },
               { icon: BookText, t: 'Parse the shipped manual', d: 'The installed gcc.1 troff source is parsed into Markdown, keeping each entry in its manual section — which is what tells compile options from link options.' },
               { icon: Database, t: 'Commit the result', d: 'The merged JSON lives in git and is served as static files. No backend, no API, no build-time network access.' },
             ].map((s, i) => (

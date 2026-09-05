@@ -17,6 +17,9 @@ import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { parseHelpDump, parseStateDump, parseLegacyParams } from './lib/parse-help.mjs';
 import { parseManPage, blocksToMarkdown, manKeys, manPrimary } from './lib/roff.mjs';
+import {
+  parseBenchResults, benchRatios, summariseFlag, resolveImpact,
+} from './lib/impact.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const RAW = path.join(ROOT, 'data', 'raw');
@@ -168,6 +171,22 @@ for (const v of versions) {
     }
   }
 
+  // What `-fhardened` enables (GCC 14+), straight from `gcc --help=hardened`.
+  const hardened = [];
+  {
+    const txt = read(path.join(base, 'help', 'hardened.txt'));
+    if (txt) {
+      for (const line of txt.split('\n')) {
+        const m = /^\s{2,}(-\S.*?)\s*$/.exec(line);
+        if (!m) continue;
+        // `-fPIE  -pie` and `-D_FORTIFY_SOURCE=3 (or =2 for glibc < 2.35)`
+        for (const tok of m[1].replace(/\s*\(.*\)\s*$/, '').split(/\s+/)) {
+          if (tok.startsWith('-')) hardened.push(tok);
+        }
+      }
+    }
+  }
+
   // Baseline state per driver.
   const state = {};
   for (const driver of ['gcc', 'g++']) {
@@ -229,6 +248,12 @@ for (const v of versions) {
     }
   }
 
+  // Benchmark results.
+  const bench = (() => {
+    const tsv = read(path.join(base, 'bench', 'results.tsv'));
+    return tsv ? parseBenchResults(tsv) : null;
+  })();
+
   // Sample diagnostics.
   const samples = new Map();
   for (const f of dirs(path.join(base, 'samples'))) {
@@ -243,8 +268,9 @@ for (const v of versions) {
     target: meta.target || '',
     extractedAt: meta.date || '',
     optionCount: help.size,
+    benchmarked: bench ? bench.size - 1 : 0,
   });
-  perVersion.set(v, { help, state, packs, man, manEntries, samples, paramBounds });
+  perVersion.set(v, { help, state, packs, man, manEntries, samples, paramBounds, bench, hardened });
   console.log(`  gcc ${String(v).padStart(2)}  ${help.size} options, ${man.size} man keys, ${packs.size} packs`);
 }
 
@@ -320,6 +346,22 @@ for (const v of versions) {
     }
   }
 
+  // `-fhardened` behaves like an umbrella flag, but its contents have to come
+  // from `--help=hardened` because macros and linker flags never show up in
+  // `-Q --help`.
+  for (const flag of perVersion.get(v).hardened) {
+    const [name, value] = (() => {
+      const eq = flag.indexOf('=');
+      return eq > 0 ? [flag.slice(0, eq + 1), flag.slice(eq + 1)] : [flag, 'enabled'];
+    })();
+    const o = options.get(name) || options.get(flag) || options.get(name.replace(/=$/, ''));
+    if (!o) continue;
+    const p = (o.packs['-fhardened'] ||= { m: 0, v: value, l: new Set() });
+    p.m |= bit;
+    p.v = value;
+    p.l.add('C').add('C++');
+  }
+
   for (const [flags, byDriver] of packs) {
     for (const [driver, m] of byDriver) {
       const baseline = state[driver];
@@ -373,6 +415,52 @@ for (const v of versions) {
 
 for (const o of options.values()) {
   o.cat = deriveCategory({ name: o.name, manSubsection: o.manSection, classes: [...o.cls] });
+}
+
+// --- build / runtime / size impact -----------------------------------------
+
+const impactTable = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'data', 'impact.json'), 'utf8'));
+
+const benchByVersion = new Map();
+for (const v of versions) {
+  const b = perVersion.get(v).bench;
+  if (b) benchByVersion.set(v, b);
+}
+
+// flag -> { [version]: ratios }
+const ratiosByFlag = benchRatios(benchByVersion);
+
+// flag -> collapsed score triple
+const scoreByFlag = new Map();
+for (const [flag, byVersion] of ratiosByFlag) {
+  scoreByFlag.set(flag, summariseFlag(byVersion, impactTable.thresholds));
+}
+
+// option name -> the benchmarked flags that inform it
+const benchByOption = new Map();
+for (const [flag, targets] of Object.entries(impactTable.benchTargets)) {
+  if (!scoreByFlag.has(flag)) continue;
+  for (const name of targets) {
+    if (!benchByOption.has(name)) benchByOption.set(name, []);
+    benchByOption.get(name).push(flag);
+  }
+}
+
+for (const o of options.values()) {
+  const flags = benchByOption.get(o.name);
+  let measured = null;
+  if (flags?.length) {
+    // Several benchmarked flags can inform one option (`-O` is measured at
+    // every level). Take the worst cost of the lot so the summary never
+    // undersells what the option can do.
+    const worst = (key) => {
+      const values = flags.map((f) => scoreByFlag.get(f)?.[key]).filter((x) => x !== null && x !== undefined);
+      return values.length ? Math.max(...values) : null;
+    };
+    measured = { b: worst('b'), r: worst('r'), z: worst('z') };
+  }
+  o.impact = resolveImpact({ name: o.name, cat: o.cat }, measured, impactTable);
+  o.benchFlags = flags ?? null;
 }
 
 // --- samples ----------------------------------------------------------------
@@ -473,11 +561,57 @@ const optionRecords = sorted.map((o) => {
   if (Object.keys(packs).length) rec.pk = packs;
   const sids = samplesByOption.get(o.name);
   if (sids) rec.ex = [...sids];
+  rec.im = {
+    b: o.impact.b, r: o.impact.r, z: o.impact.z, s: o.impact.s[0],
+  };
+  if (o.benchFlags) rec.bm = o.benchFlags;
   return rec;
 });
 
 const docs = {};
 for (const o of sorted) if (o.doc) docs[o.name] = { md: o.doc, from: o.docFrom };
+
+// Impact notes and the raw benchmark rows are only needed when a detail panel
+// is open, so they ride along with the manual text rather than the index.
+const impactNotes = {};
+for (const o of sorted) if (o.impact.n) impactNotes[o.name] = o.impact.n;
+
+// The baseline measured against itself: whatever spread this shows is pure
+// measurement noise, and the UI quotes it so nobody has to take our word for
+// how much the runtime column can be trusted.
+const noiseFloor = (() => {
+  const row = ratiosByFlag.get('__BASELINE__');
+  if (!row) return null;
+  const spread = (key) => {
+    const values = Object.values(row)
+      .map((v) => v[key])
+      .filter((x) => typeof x === 'number' && Number.isFinite(x))
+      .map((x) => Math.abs(x - 1))
+      .sort((a, b) => a - b);
+    if (!values.length) return null;
+    const pct = (x) => Math.round(x * 1000) / 10;
+    return {
+      // What a single release's ratio typically deviates by …
+      typical: pct(values[Math.floor(values.length / 2)]),
+      // … and the worst it got. Scores use the median across releases, so the
+      // error on a score is closer to the typical figure than to the worst.
+      worst: pct(values[values.length - 1]),
+    };
+  };
+  return { build: spread('b'), runtime: spread('r'), size: spread('z') };
+})();
+
+const benchmarks = {};
+for (const [flag, byVersion] of ratiosByFlag) {
+  benchmarks[flag] = {
+    versions: byVersion,
+    score: {
+      b: scoreByFlag.get(flag)?.b ?? null,
+      r: scoreByFlag.get(flag)?.r ?? null,
+      z: scoreByFlag.get(flag)?.z ?? null,
+    },
+  };
+}
 
 const packList = new Map();
 for (const o of options.values()) {
@@ -512,7 +646,13 @@ const manifest = {
     options: optionRecords.length,
     documented: Object.keys(docs).length,
     samples: samples.length,
+    benchmarked: Object.keys(benchmarks).length,
+    impactMeasured: optionRecords.filter((r) => r.im.s === 'm').length,
+    impactCurated: optionRecords.filter((r) => r.im.s === 'c').length,
+    impactKnown: optionRecords.filter((r) => r.im.r !== null).length,
   },
+  impactScale: impactTable.scale,
+  benchNoise: noiseFloor,
 };
 
 fs.mkdirSync(OUT, { recursive: true });
@@ -524,7 +664,7 @@ const write = (file, data) => {
 
 const sizes = {
   'options.json': write('options.json', optionRecords),
-  'docs.json': write('docs.json', { docs, samples }),
+  'docs.json': write('docs.json', { docs, samples, impactNotes, benchmarks }),
   'profiles.json': write('profiles.json', profiles),
 };
 
@@ -542,3 +682,5 @@ for (const [f, s] of Object.entries(sizes)) {
 console.log(`\n  ${optionRecords.length} options, ${Object.keys(docs).length} documented, ` +
   `${samples.length} samples, ${manifest.packs.length} umbrella flags`);
 console.log(`  categories: ${Object.entries(categories).sort((a, b) => b[1] - a[1]).map(([k, n]) => `${k}=${n}`).join(' ')}`);
+console.log(`  impact: ${manifest.counts.impactMeasured} measured, ${manifest.counts.impactCurated} curated, ` +
+  `${manifest.counts.impactKnown} with a known runtime cost, ${Object.keys(benchmarks).length} benchmarked flags`);

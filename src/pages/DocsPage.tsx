@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { clsx } from 'clsx';
 import {
-  BookText, Database, ExternalLink, Keyboard, PackageCheck, RefreshCw, ShieldCheck, Table2, Trash2,
+  BookText, Database, ExternalLink, Gauge, Keyboard, PackageCheck, RefreshCw, ShieldCheck,
+  Table2, Trash2,
 } from 'lucide-react';
 import { useDataset } from '../lib/dataset-context';
 import { cacheStats, clearCache } from '../lib/dataset';
@@ -15,6 +16,7 @@ const SECTIONS = [
   { id: 'filters', label: 'Filters & search', icon: BookText },
   { id: 'packs', label: 'Umbrella flags', icon: RefreshCw },
   { id: 'profiles', label: 'Profiles', icon: ShieldCheck },
+  { id: 'impact', label: 'Cost of a flag', icon: Gauge },
   { id: 'export', label: 'Export', icon: PackageCheck },
   { id: 'shortcuts', label: 'Shortcuts', icon: Keyboard },
   { id: 'data', label: 'Data & caching', icon: Database },
@@ -149,6 +151,77 @@ export default function DocsPage() {
                 </li>
               ))}
             </ul>
+          </Section>
+
+          <Section id="impact" title="What a flag costs">
+            <p>
+              Two columns in the table, <strong>Build</strong> and <strong>Runtime</strong>, say what an
+              option costs — sortable, and filterable from the <em>Impact</em> section of the sidebar. The
+              detail panel adds binary size and, where the figure was measured, the raw numbers per release.
+              Scores read <em>improves · negligible · low · moderate · high</em>, or <em>varies</em> when the
+              honest answer is that it depends on your code.
+            </p>
+            <p>The score comes from one of three places, and the panel always says which:</p>
+            <ul>
+              <li>
+                <strong>Measured</strong> — {manifest.counts.benchmarked} flags are actually compiled and run
+                inside each release's own container. A benchmark that exercises dense array arithmetic,
+                pointer chasing, bounded string work, allocation churn and non-inlinable calls is built and
+                timed with the flag and without it, and the binary is measured. Covers{' '}
+                {manifest.counts.impactMeasured} options.
+              </li>
+              <li>
+                <strong>Curated</strong> — costs that are established fact but that no single generic
+                benchmark can show, written down by hand with the reasoning attached. Covers{' '}
+                {manifest.counts.impactCurated} options. A curated statement <em>beats</em> a measurement on
+                the axis it covers, because a wall-clock timing on a shared machine will occasionally claim
+                that adding a warning made the program faster, and publishing that would be worse than
+                publishing nothing.
+              </li>
+              <li>
+                <strong>Derived</strong> — what the option's category makes certain. A pure diagnostic cannot
+                change the generated code, so its runtime and size cost is exactly zero. That covers several
+                hundred options for free, and it is the reason{' '}
+                {manifest.counts.impactKnown.toLocaleString()} of {manifest.counts.options.toLocaleString()}{' '}
+                options have a runtime answer at all.
+              </li>
+            </ul>
+            <h4>How the measurement avoids lying to you</h4>
+            <ul>
+              <li>
+                <strong>Paired baselines.</strong> The reference build is re-measured immediately before every
+                flag, not once at the start, so a machine that gets busier during the run cannot masquerade as
+                a flag that costs something.
+              </li>
+              <li>
+                <strong>Fastest run wins.</strong> Background load can only ever inflate a timing, so the
+                minimum of several runs is the observation closest to the truth. Each measurement is preceded
+                by a discarded warm-up.
+              </li>
+              <li>
+                <strong>Median across releases.</strong> A flag is scored on the median of its eight
+                per-release ratios, so a single noisy run cannot decide a rating.
+              </li>
+              <li>
+                <strong>Thresholds wider than the noise.</strong> A baseline measured against itself is
+                recorded on every release. On this dataset it deviates by{' '}
+                {manifest.benchNoise?.build?.typical ?? '?'}% on build and{' '}
+                {manifest.benchNoise?.runtime?.typical ?? '?'}% on runtime for a typical release
+                (worst case {manifest.benchNoise?.runtime?.worst ?? '?'}%), and exactly{' '}
+                {manifest.benchNoise?.size?.typical ?? 0}% on size. Scoring on the median across eight
+                releases pulls that down a lot, and the bands separating <em>negligible</em> from{' '}
+                <em>low</em> sit outside what is left.
+              </li>
+            </ul>
+            <p>
+              Binary size is exact — it is a byte count, not a stopwatch. <strong>Runtime is wall clock on
+              one developer machine</strong>, and the benchmark spends much of its time in allocation and
+              libc, which means it separates instrumentation overhead sharply (AddressSanitizer and
+              UndefinedBehaviorSanitizer together measure at 4.8× here) but is insensitive to optimisation
+              level. That is exactly why the <code>-O</code> family carries a curated verdict rather than a
+              measured one. Treat 2× as meaningful and 10% as noise, and profile your own workload before
+              making a decision that depends on the difference.
+            </p>
           </Section>
 
           <Section id="export" title="Exporting a selection">

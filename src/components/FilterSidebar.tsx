@@ -1,12 +1,23 @@
 import { clsx } from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Cpu, FilterX, Layers, ShieldCheck, Tag, X } from 'lucide-react';
+import { Cpu, FilterX, Gauge, Layers, ShieldCheck, Tag, X } from 'lucide-react';
 import type { Dataset } from '../lib/dataset';
 import type { OptionRow } from '../lib/types';
 import { activeFilterCount, useStore } from '../lib/store';
 import type { DefaultFilter, VersionMode } from '../lib/store';
 import { CATEGORIES, categoryStyle } from '../lib/catalog';
+import { ImpactMeter } from './ImpactMeter';
 import { Badge, Button, SectionTitle, Toggle } from './ui';
+
+/** -1 improves · 0 negligible · 1 low · 2 moderate · 3 high · 99 varies. */
+const IMPACT_LEVELS = [
+  { score: -1, label: 'improves' },
+  { score: 0, label: 'none' },
+  { score: 1, label: 'low' },
+  { score: 2, label: 'moderate' },
+  { score: 3, label: 'high' },
+  { score: 99, label: 'varies' },
+];
 
 const VERSION_MODES: { id: VersionMode; label: string; hint: string }[] = [
   { id: 'any', label: 'any of', hint: 'Option exists in at least one of the selected releases' },
@@ -61,7 +72,9 @@ export function FilterSidebar({
   /** Set when the sidebar is rendered as a drawer, which is the case below `md`. */
   onClose?: () => void;
 }) {
-  const { filters, patchFilters, toggleIn, toggleVersion, resetFilters, theme, pivot, setPivot } = useStore();
+  const {
+    filters, patchFilters, toggleIn, toggleImpact, toggleVersion, resetFilters, theme, pivot, setPivot,
+  } = useStore();
   const { manifest, profiles } = data;
   const active = activeFilterCount(filters);
 
@@ -204,6 +217,53 @@ export function FilterSidebar({
               </button>
             ))}
           </div>
+        </section>
+
+        {/* ---------------- impact ---------------- */}
+        <section>
+          <SectionTitle hint="Measured in the release containers where a benchmark can show it, curated where it cannot, derived from the category where the answer is certain">
+            <Gauge className="size-3" />
+            Impact
+          </SectionTitle>
+
+          <p className="mb-1 text-[11px] text-faint">Build time</p>
+          <div className="mb-2 flex flex-wrap gap-1">
+            {IMPACT_LEVELS.map((l) => (
+              <Chip
+                key={l.score}
+                active={filters.buildImpact.includes(l.score)}
+                onClick={() => toggleImpact('buildImpact', l.score)}
+              >
+                <span className="flex items-center gap-1">
+                  <ImpactMeter score={l.score === 99 ? null : l.score} axis="b" />
+                  {l.label}
+                </span>
+              </Chip>
+            ))}
+          </div>
+
+          <p className="mb-1 text-[11px] text-faint">Runtime</p>
+          <div className="mb-2 flex flex-wrap gap-1">
+            {IMPACT_LEVELS.map((l) => (
+              <Chip
+                key={l.score}
+                active={filters.runtimeImpact.includes(l.score)}
+                onClick={() => toggleImpact('runtimeImpact', l.score)}
+              >
+                <span className="flex items-center gap-1">
+                  <ImpactMeter score={l.score === 99 ? null : l.score} axis="r" />
+                  {l.label}
+                </span>
+              </Chip>
+            ))}
+          </div>
+
+          <Toggle
+            checked={filters.onlyMeasured}
+            onChange={(v) => patchFilters({ onlyMeasured: v })}
+            label="Only benchmarked options"
+            hint={`${manifest.counts.impactMeasured} options whose cost was actually measured, from ${manifest.counts.benchmarked} benchmarked flags`}
+          />
         </section>
 
         {/* ---------------- categories ---------------- */}

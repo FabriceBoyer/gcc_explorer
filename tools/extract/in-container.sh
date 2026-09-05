@@ -13,6 +13,7 @@
 #   /out/packs/<driver>__<id>/<class>.txt  same, with an umbrella flag on
 #   /out/man/gcc.1             the installed troff man page
 #   /out/samples/<name>.txt    real diagnostics produced by sample programs
+#   /out/bench/results.tsv     compile time / size / runtime, per flag
 # ---------------------------------------------------------------------------
 set -eu
 
@@ -46,6 +47,13 @@ for cls in $CLASSES $LANGS; do
   gcc "--help=$cls"              > "$OUT/help/$safe.txt"       2>/dev/null || rm -f "$OUT/help/$safe.txt"
   gcc "--help=$cls,undocumented" > "$OUT/help/$safe.undoc.txt" 2>/dev/null || rm -f "$OUT/help/$safe.undoc.txt"
 done
+
+# GCC 14+ exposes what `-fhardened` turns on through a help class of its own.
+# Most of what it enables are macros and linker flags, which `-Q --help` cannot
+# show, so this is the only way to see the real list.
+if gcc --help=hardened 2>/dev/null | head -1 | grep -q '^The following options'; then
+  gcc --help=hardened > "$OUT/help/hardened.txt" 2>/dev/null
+fi
 
 # --- default values (-Q), per driver ---------------------------------------
 # NOTE: `--help=a,b` *intersects* the classes, it does not union them, so each
@@ -143,6 +151,12 @@ if [ -d /samples ]; then
       > "$OUT/samples/$name.txt" 2>&1 || true
     sed -i "s|/samples/||g" "$OUT/samples/$name.txt" 2>/dev/null || true
   done
+fi
+
+# --- what each flag costs -------------------------------------------------
+# Compile time, binary size and runtime, measured with and without the flag.
+if [ -d /bench ] && [ "${SKIP_BENCH:-0}" != "1" ]; then
+  BENCH=/bench OUT="$OUT" /bin/sh /bench/bench.sh
 fi
 
 echo "extraction complete for $(gcc -dumpversion)"

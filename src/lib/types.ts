@@ -36,6 +36,34 @@ export interface RawOption {
   p?: { default: string; min?: string; max?: string };  // --param bounds
   pk?: Record<string, PackEffect>;                      // umbrella membership
   ex?: string[];             // ids of diagnostic samples
+  im: Impact;                // build / runtime / size impact
+  bm?: string[];             // benchmarked flags that inform `im`
+}
+
+/**
+ * Cost of an option, scored -1 (improves) · 0 (negligible) · 1 (low) ·
+ * 2 (moderate) · 3 (high), or null when it genuinely varies.
+ */
+export interface Impact {
+  /** Build time. */
+  b: number | null;
+  /** Runtime. */
+  r: number | null;
+  /** Binary size. */
+  z: number | null;
+  /** Where the score comes from: measured · curated · derived. */
+  s: 'm' | 'c' | 'd';
+}
+
+/** One benchmarked flag, with its per-release ratios against the baseline. */
+export interface Benchmark {
+  versions: Record<string, {
+    status: string;
+    b: number | null;
+    r: number | null;
+    z: number | null;
+  }>;
+  score: { b: number | null; r: number | null; z: number | null };
 }
 
 export interface Release {
@@ -45,6 +73,7 @@ export interface Release {
   target: string;
   extractedAt: string;
   optionCount: number;
+  benchmarked: number;
 }
 
 export interface Manifest {
@@ -57,7 +86,22 @@ export interface Manifest {
   languages: string[];
   archGroups: string[];
   manSections: string[];
-  counts: { options: number; documented: number; samples: number };
+  counts: {
+    options: number;
+    documented: number;
+    samples: number;
+    benchmarked: number;
+    impactMeasured: number;
+    impactCurated: number;
+    impactKnown: number;
+  };
+  impactScale: Record<string, string>;
+  /** Spread of a baseline measured against itself, in percent. */
+  benchNoise: {
+    build: { typical: number; worst: number } | null;
+    runtime: { typical: number; worst: number } | null;
+    size: { typical: number; worst: number } | null;
+  } | null;
   files: Record<string, number>;
   hash: string;
 }
@@ -76,6 +120,8 @@ export interface Sample {
 export interface Docs {
   docs: Record<string, { md: string; from: number }>;
   samples: Sample[];
+  impactNotes: Record<string, string>;
+  benchmarks: Record<string, Benchmark>;
 }
 
 export interface ProfileFlag {

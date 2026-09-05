@@ -29,6 +29,12 @@ export interface Filters {
   onlyDocumented: boolean;
   onlySelected: boolean;
   onlyWithSamples: boolean;
+  /** Build-time impact scores to keep (-1..3, or 99 for "varies"). */
+  buildImpact: number[];
+  /** Runtime impact scores to keep. */
+  runtimeImpact: number[];
+  /** Only options whose impact was actually benchmarked. */
+  onlyMeasured: boolean;
 }
 
 export const emptyFilters: Filters = {
@@ -47,6 +53,9 @@ export const emptyFilters: Filters = {
   onlyDocumented: false,
   onlySelected: false,
   onlyWithSamples: false,
+  buildImpact: [],
+  runtimeImpact: [],
+  onlyMeasured: false,
 };
 
 /** How many filters are away from their default value. */
@@ -66,6 +75,9 @@ export function activeFilterCount(f: Filters): number {
   if (f.onlyDocumented) n += 1;
   if (f.onlySelected) n += 1;
   if (f.onlyWithSamples) n += 1;
+  n += f.buildImpact.length ? 1 : 0;
+  n += f.runtimeImpact.length ? 1 : 0;
+  if (f.onlyMeasured) n += 1;
   return n;
 }
 
@@ -93,6 +105,7 @@ interface UiState {
 
   patchFilters: (p: Partial<Filters>) => void;
   toggleIn: <K extends 'categories' | 'packs' | 'profiles' | 'languages'>(key: K, value: string) => void;
+  toggleImpact: (axis: 'buildImpact' | 'runtimeImpact', score: number) => void;
   toggleVersion: (v: number) => void;
   resetFilters: () => void;
 
@@ -135,6 +148,11 @@ export const useStore = create<UiState>()(
         const list = s.filters[key] as string[];
         const next = list.includes(value) ? list.filter((x) => x !== value) : [...list, value];
         return { filters: { ...s.filters, [key]: next } };
+      }),
+      toggleImpact: (axis, score) => set((s) => {
+        const list = s.filters[axis];
+        const next = list.includes(score) ? list.filter((x) => x !== score) : [...list, score];
+        return { filters: { ...s.filters, [axis]: next } };
       }),
       toggleVersion: (v) => set((s) => {
         const list = s.filters.versions;
@@ -181,7 +199,7 @@ export const useStore = create<UiState>()(
     }),
     {
       name: 'gccx.state',
-      version: 2,
+      version: 3,
       storage: createJSONStorage(() => localStorage),
       partialize: (s) => ({
         theme: s.theme,

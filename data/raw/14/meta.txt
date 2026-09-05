@@ -2,4 +2,4 @@ version=14.4.0
 fullversion=14.4.0
 banner=gcc (GCC) 14.4.0
 target=x86_64-linux-gnu
-date=2026-09-05T10:47:53Z
+date=2026-09-05T14:17:51Z
