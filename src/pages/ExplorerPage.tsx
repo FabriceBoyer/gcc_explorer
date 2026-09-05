@@ -2,10 +2,11 @@ import { useEffect, useMemo, useState } from 'react';
 import { clsx } from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
-  CheckSquare, PanelLeftClose, PanelLeftOpen, Rows3, Rows4, Search, ShieldPlus, Square, X,
+  CheckSquare, PanelLeftClose, PanelLeftOpen, Rows3, Rows4, Search, ShieldPlus,
+  SlidersHorizontal, Square, X,
 } from 'lucide-react';
 import { useDataset } from '../lib/dataset-context';
-import { selectedOptionNames, useStore } from '../lib/store';
+import { activeFilterCount, selectedOptionNames, useStore } from '../lib/store';
 import { filterOptions } from '../lib/filters';
 import { LoadingScreen } from '../components/LoadingScreen';
 import { FilterSidebar } from '../components/FilterSidebar';
@@ -23,6 +24,9 @@ export default function ExplorerPage() {
   } = useStore();
   const [exporting, setExporting] = useState(false);
   const [query, setQuery] = useState(filters.query);
+  // Below `md` there is no room to dock the sidebar, so it becomes a drawer.
+  // That is separate from `sidebarOpen`, which is the persisted docked state.
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   // Debounce the search box so typing stays smooth over 3 000 rows.
   useEffect(() => {
@@ -30,9 +34,19 @@ export default function ExplorerPage() {
     return () => clearTimeout(t);
   }, [query, patchFilters]);
 
+  // Leaving the drawer "open" while the layout switches to the docked sidebar
+  // would strand an invisible scrim in the state.
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)');
+    const onChange = () => { if (mq.matches) setFiltersOpen(false); };
+    onChange();
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') { setExporting(false); select(null); }
+      if (e.key === 'Escape') { setExporting(false); setFiltersOpen(false); select(null); }
       if (e.key === '/' && !(e.target instanceof HTMLInputElement) && !(e.target instanceof HTMLTextAreaElement)) {
         e.preventDefault();
         document.getElementById('gccx-search')?.focus();
@@ -64,6 +78,7 @@ export default function ExplorerPage() {
 
   const allVisibleSelected = rows.length > 0 && rows.every((r) => chosen.has(r.n));
   const selectedCount = chosen.size;
+  const activeFilters = activeFilterCount(filters);
 
   return (
     <div className="relative flex h-full min-h-0">
@@ -94,6 +109,17 @@ export default function ExplorerPage() {
             {sidebarOpen ? <PanelLeftClose className="size-4" /> : <PanelLeftOpen className="size-4" />}
           </Button>
 
+          <Button
+            size="sm"
+            variant={activeFilters > 0 ? 'primary' : 'outline'}
+            className="md:hidden"
+            onClick={() => setFiltersOpen(true)}
+            aria-label="Show filters"
+          >
+            <SlidersHorizontal className="size-4" />
+            {activeFilters > 0 && <span className="font-mono text-[11px]">{activeFilters}</span>}
+          </Button>
+
           <div className="relative min-w-0 flex-1 sm:max-w-md">
             <Search className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-faint" />
             <input
@@ -115,7 +141,7 @@ export default function ExplorerPage() {
             )}
           </div>
 
-          <Badge tone={rows.length === data.options.length ? 'neutral' : 'accent'}>
+          <Badge tone={rows.length === data.options.length ? 'neutral' : 'accent'} className="hidden sm:inline-flex">
             {rows.length.toLocaleString()} / {data.options.length.toLocaleString()}
           </Badge>
 
@@ -137,6 +163,7 @@ export default function ExplorerPage() {
             <Button
               size="sm"
               variant="ghost"
+              className="hidden sm:inline-flex"
               onClick={() => setDensity(density === 'compact' ? 'comfortable' : 'compact')}
               aria-label="Toggle row density"
               title="Row density"
@@ -152,6 +179,29 @@ export default function ExplorerPage() {
 
         <SelectionBar data={data} onExport={() => setExporting(true)} />
       </div>
+
+      {/* filters: docked from `md` up, drawer below */}
+      <AnimatePresence>
+        {filtersOpen && (
+          <>
+            <motion.div
+              key="filters-scrim"
+              className="absolute inset-0 z-40 bg-black/45 md:hidden"
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              onClick={() => setFiltersOpen(false)}
+              role="presentation"
+            />
+            <motion.div
+              key="filters-drawer"
+              className="absolute inset-y-0 left-0 z-50 md:hidden"
+              initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }}
+              transition={{ type: 'spring', stiffness: 380, damping: 40 }}
+            >
+              <FilterSidebar data={data} visible={rows} onClose={() => setFiltersOpen(false)} />
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* detail panel: docked on wide screens, drawer below */}
       <div className="hidden xl:block">
@@ -211,7 +261,7 @@ function ProfileMenu({ data }: { data: ReturnType<typeof useDataset>['data'] & o
               initial={{ opacity: 0, y: -6, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -6, scale: 0.98 }}
-              className="surface-card absolute right-0 top-9 z-50 w-80 overflow-hidden p-1"
+              className="surface-card absolute right-0 top-9 z-50 w-80 max-w-[calc(100vw-1.25rem)] overflow-hidden p-1"
             >
               {data.profiles.profiles.map((p) => {
                 const usable = p.flags.filter((f) => !f.availableIn || f.availableIn.includes(pivot));

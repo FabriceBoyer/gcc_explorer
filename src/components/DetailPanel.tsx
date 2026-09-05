@@ -96,7 +96,7 @@ export function DetailPanel({ data }: { data: Dataset }) {
 
   if (!row) {
     return (
-      <div className="flex h-full w-[384px] shrink-0 flex-col items-center justify-center gap-2 border-l border-line bg-bg-alt px-8 text-center">
+      <div className="flex h-full w-[384px] max-w-[100vw] shrink-0 flex-col items-center justify-center gap-2 border-l border-line bg-bg-alt px-8 text-center">
         <BookText className="size-7 text-faint" />
         <p className="text-sm font-medium">Nothing selected</p>
         <p className="text-[13px] text-muted">
@@ -118,7 +118,7 @@ export function DetailPanel({ data }: { data: Dataset }) {
   const cxxDefaults = row.vx ? versions.map((v) => cxxDefaultAt(row, versions, v)) : null;
 
   return (
-    <aside className="flex h-full w-[384px] shrink-0 flex-col border-l border-line bg-bg-alt">
+    <aside className="flex h-full w-[384px] max-w-[100vw] shrink-0 flex-col border-l border-line bg-bg-alt">
       <div className="flex shrink-0 items-start gap-2 border-b border-line px-4 py-3">
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-1.5">

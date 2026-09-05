@@ -1,6 +1,7 @@
 /** Small presentational primitives shared across the app. */
 import { clsx } from 'clsx';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { cn } from '../lib/cn';
 
 export function Badge({
   children, tone = 'neutral', className, style, title,
@@ -22,7 +23,7 @@ export function Badge({
     <span
       title={title}
       style={style}
-      className={clsx(
+      className={cn(
         'inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-[11px] font-medium leading-none whitespace-nowrap',
         !style && tones[tone],
         className,
@@ -48,7 +49,7 @@ export function Button({ variant = 'outline', size = 'md', className, ...props }
   return (
     <button
       type="button"
-      className={clsx(
+      className={cn(
         'inline-flex items-center justify-center gap-1.5 rounded-lg border font-medium transition-[background,color,filter,border-color] duration-150',
         'disabled:pointer-events-none disabled:opacity-45',
         size === 'sm' ? 'h-7 px-2 text-xs' : 'h-9 px-3 text-sm',

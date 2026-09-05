@@ -25,8 +25,8 @@ export function SelectionBar({ data, onExport }: { data: Dataset; onExport: () =
             <CheckCheck className="size-4 text-ok" />
             {flags.length} selected
           </span>
-          <Badge tone="accent">{split.compile.length} compile</Badge>
-          <Badge tone="warn">{split.link.length} link</Badge>
+          <Badge tone="accent" className="hidden sm:inline-flex">{split.compile.length} compile</Badge>
+          <Badge tone="warn" className="hidden sm:inline-flex">{split.link.length} link</Badge>
 
           <div className="hide-scrollbar flex min-w-0 flex-1 items-center gap-1 overflow-x-auto">
             {flags.slice(0, 40).map((f) => (
@@ -48,6 +48,7 @@ export function SelectionBar({ data, onExport }: { data: Dataset; onExport: () =
           <div className="flex shrink-0 items-center gap-1.5">
             <Button
               size="sm"
+              className="hidden md:inline-flex"
               variant={filters.onlySelected ? 'primary' : 'outline'}
               onClick={() => patchFilters({ onlySelected: !filters.onlySelected })}
             >
@@ -55,11 +56,11 @@ export function SelectionBar({ data, onExport }: { data: Dataset; onExport: () =
             </Button>
             <Button size="sm" variant="ghost" onClick={clearSelection} className="text-danger">
               <Trash2 className="size-3.5" />
-              Clear
+              <span className="hidden sm:inline">Clear</span>
             </Button>
             <Button size="sm" variant="primary" onClick={onExport}>
               <Share2 className="size-3.5" />
-              Export
+              <span className="hidden sm:inline">Export</span>
             </Button>
           </div>
         </motion.div>

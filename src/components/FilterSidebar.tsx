@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Cpu, FilterX, Layers, ShieldCheck, Tag } from 'lucide-react';
+import { Cpu, FilterX, Layers, ShieldCheck, Tag, X } from 'lucide-react';
 import type { Dataset } from '../lib/dataset';
 import type { OptionRow } from '../lib/types';
 import { activeFilterCount, useStore } from '../lib/store';
@@ -53,7 +53,14 @@ function Chip({
   );
 }
 
-export function FilterSidebar({ data, visible }: { data: Dataset; visible: OptionRow[] }) {
+export function FilterSidebar({
+  data, visible, onClose,
+}: {
+  data: Dataset;
+  visible: OptionRow[];
+  /** Set when the sidebar is rendered as a drawer, which is the case below `md`. */
+  onClose?: () => void;
+}) {
   const { filters, patchFilters, toggleIn, toggleVersion, resetFilters, theme, pivot, setPivot } = useStore();
   const { manifest, profiles } = data;
   const active = activeFilterCount(filters);
@@ -68,12 +75,12 @@ export function FilterSidebar({ data, visible }: { data: Dataset; visible: Optio
   }
 
   return (
-    <aside className="flex h-full w-72 shrink-0 flex-col border-r border-line bg-bg-alt">
-      <div className="flex h-11 shrink-0 items-center justify-between border-b border-line px-3">
+    <aside className="flex h-full w-72 max-w-[86vw] shrink-0 flex-col border-r border-line bg-bg-alt">
+      <div className="flex h-11 shrink-0 items-center gap-1 border-b border-line px-3">
         <span className="text-[12px] font-semibold uppercase tracking-[0.07em] text-faint">Filters</span>
         <AnimatePresence>
           {active > 0 && (
-            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}>
+            <motion.div className="ml-auto" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}>
               <Button size="sm" variant="ghost" onClick={resetFilters} className="text-danger">
                 <FilterX className="size-3" />
                 Reset {active}
@@ -81,6 +88,11 @@ export function FilterSidebar({ data, visible }: { data: Dataset; visible: Optio
             </motion.div>
           )}
         </AnimatePresence>
+        {onClose && (
+          <Button size="sm" variant="ghost" className="ml-auto" onClick={onClose} aria-label="Close filters">
+            <X className="size-4" />
+          </Button>
+        )}
       </div>
 
       <div className="min-h-0 flex-1 space-y-5 overflow-y-auto p-3">
