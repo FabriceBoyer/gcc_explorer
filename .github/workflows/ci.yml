@@ -1,0 +1,109 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Lint, typecheck and build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npx tsc -b
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          retention-days: 7
+
+  dataset:
+    name: Dataset is in sync with data/raw
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # The dataset is generated locally with Docker and committed. CI never
+      # runs a compiler; it only re-derives the JSON from the committed raw
+      # dumps and checks that nothing drifted.
+      - name: Rebuild the dataset from data/raw
+        run: SOURCE_DATE_EPOCH=0 node tools/build-dataset.mjs
+
+      - name: Fail if the committed dataset differs
+        run: |
+          if ! git diff --quiet -- public/data/options.json public/data/docs.json public/data/profiles.json; then
+            echo "::error::public/data is out of sync with data/raw. Run 'npm run data:build' and commit the result."
+            git diff --stat -- public/data
+            exit 1
+          fi
+          echo "Dataset matches the raw dumps."
+
+  shell:
+    name: Shell scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: shellcheck
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq shellcheck
+          shellcheck --severity=warning tools/extract/*.sh
+
+  docker:
+    name: Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build the runtime image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          target: runtime
+          push: false
+          load: true
+          tags: gcc-explorer:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Smoke test the container
+        run: |
+          docker run -d --name gccx -p 8080:8080 gcc-explorer:ci
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:8080/healthz >/dev/null; then break; fi
+            sleep 1
+          done
+          curl -fsS http://localhost:8080/ | grep -q "GCC Explorer"
+          curl -fsS http://localhost:8080/data/manifest.json | head -c 120
+          docker rm -f gccx

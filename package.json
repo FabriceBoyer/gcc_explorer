@@ -1,0 +1,50 @@
+{
+  "name": "gcc-explorer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Explore, compare and export every GCC compile and link option, from GCC 8 to GCC 15.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "typecheck": "tsc -b --noEmit false --emitDeclarationOnly false",
+    "data:collect": "./tools/extract/collect.sh",
+    "data:build": "node tools/build-dataset.mjs",
+    "data:all": "npm run data:collect && npm run data:build"
+  },
+  "dependencies": {
+    "@tanstack/react-table": "^8.21.3",
+    "@tanstack/react-virtual": "^3.13.12",
+    "clsx": "^2.1.1",
+    "dompurify": "^3.2.7",
+    "framer-motion": "^12.23.24",
+    "lucide-react": "^0.545.0",
+    "marked": "^16.4.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.9.4",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.37.0",
+    "@tailwindcss/vite": "^4.1.14",
+    "@types/node": "^26.4.1",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.1",
+    "@vitejs/plugin-react": "^5.0.4",
+    "eslint": "^9.37.0",
+    "eslint-plugin-react-hooks": "^7.0.0",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.4.0",
+    "tailwindcss": "^4.1.14",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.0",
+    "vite": "^7.1.9"
+  }
+}

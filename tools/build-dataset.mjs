@@ -43,13 +43,26 @@ export function splitName(token) {
   return [token.slice(0, m.index).trim(), token.slice(m.index).trim()];
 }
 
-/** Normalises a `-Q --help` value. */
+const LANG_ALIASES = { ObjC: 'Objective-C', 'ObjC++': 'Objective-C++' };
+
+/**
+ * Normalises a `-Q --help` value.
+ *
+ * `[available in C++, ObjC++]` means "this driver's front end does not accept
+ * the option at all"; it is turned into `n/a:<languages>` so the UI can show
+ * that instead of a bogus default.
+ */
 function normValue(v) {
   if (v === undefined || v === null) return null;
   const s = v.trim();
   if (s === '[enabled]') return 'enabled';
   if (s === '[disabled]') return 'disabled';
   if (s === '') return '';
+  const avail = /^\[available in (.+)\]$/.exec(s);
+  if (avail) {
+    const langs = avail[1].split(/,\s*/).map((l) => LANG_ALIASES[l] ?? l);
+    return `n/a:${langs.join(',')}`;
+  }
   return s;
 }
 
@@ -111,8 +124,6 @@ if (!versions.length) {
 }
 
 const bitOf = new Map(versions.map((v, i) => [v, 1 << i]));
-const maskAll = versions.reduce((m, v) => m | bitOf.get(v), 0);
-
 /** Turns a bit mask back into a list of versions (used for the summary log). */
 const maskToVersions = (m) => versions.filter((v) => m & bitOf.get(v));
 
@@ -284,9 +295,15 @@ for (const v of versions) {
 
     const gv = state.gcc?.get(name);
     if (gv !== undefined) o.def[v] = gv;
+    if (typeof gv === 'string' && gv.startsWith('n/a:')) {
+      for (const l of gv.slice(4).split(',')) o.langs.add(l);
+    }
     const cv = state['g++']?.get(name);
     if (cv !== undefined) o.defCxx[v] = cv;
     if (typeof gv === 'string' && gv.startsWith('-')) o.alias = gv;
+    // GCC also spells aliases out in the description ("Same as -Wall.").
+    const sameAs = /^Same as (-\S+?)\.(\s|$)/.exec(e.desc || '');
+    if (sameAs && !o.alias) o.alias = sameAs[1];
 
     const b = paramBounds.get(name);
     if (b) o.params = b;
@@ -475,9 +492,15 @@ for (const o of options.values()) {
 const categories = {};
 for (const r of optionRecords) categories[r.c] = (categories[r.c] || 0) + 1;
 
+// Honour SOURCE_DATE_EPOCH so CI can rebuild the dataset and diff it against
+// what is committed, byte for byte.
+const now = process.env.SOURCE_DATE_EPOCH
+  ? new Date(Number(process.env.SOURCE_DATE_EPOCH) * 1000)
+  : new Date();
+
 const manifest = {
   schema: 2,
-  generatedAt: new Date().toISOString(),
+  generatedAt: now.toISOString(),
   versions,
   releases,
   packs: [...packList.values()].sort((a, b) => a.flags.localeCompare(b.flags)),
