@@ -1,0 +1,4 @@
+Wcast-qual.c: In function 'unconst':
+Wcast-qual.c:3:12: warning: cast discards 'const' qualifier from pointer target type [-Wcast-qual]
+     return (char *) s;
+            ^

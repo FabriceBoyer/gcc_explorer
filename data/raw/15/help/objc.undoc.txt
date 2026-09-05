@@ -1,0 +1,7 @@
+The following options are supported by the language ObjC:
+  --preprocess                This option lacks documentation.
+  -E                          This option lacks documentation.
+  -Wimport                    This option lacks documentation.
+  -fbuilding-libgcc           This option lacks documentation.
+  -fcilkplus                  Removed in GCC 8.  This switch has no effect.
+

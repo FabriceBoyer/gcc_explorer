@@ -1,0 +1,5 @@
+version=15.3.0
+fullversion=15.3.0
+banner=gcc (GCC) 15.3.0
+target=x86_64-linux-gnu
+date=2026-09-05T10:48:00Z

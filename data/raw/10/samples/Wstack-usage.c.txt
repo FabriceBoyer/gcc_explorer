@@ -1,0 +1,7 @@
+Wstack-usage.c: In function 'big_frame':
+Wstack-usage.c:2:5: warning: stack usage is 3992 bytes [-Wstack-usage=]
+    2 | int big_frame(void) {
+      |     ^~~~~~~~~
+Wstack-usage.c:6:1: warning: the frame size of 4096 bytes is larger than 128 bytes [-Wframe-larger-than=]
+    6 | }
+      | ^

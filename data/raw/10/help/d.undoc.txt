@@ -1,0 +1,4 @@
+The following options are supported by the language D:
+  -Wpsabi                     This option lacks documentation.
+  -fbuilding-libphobos-tests  This option lacks documentation.
+

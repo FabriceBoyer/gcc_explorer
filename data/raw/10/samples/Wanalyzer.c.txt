@@ -1,0 +1,23 @@
+Wanalyzer.c: In function 'use_after_free':
+Wanalyzer.c:6:12: warning: use after 'free' of 'p' [CWE-416] [-Wanalyzer-use-after-free]
+    6 |     return *p;
+      |            ^~
+  'use_after_free': event 1
+    |
+    |
+Wanalyzer.c:6:12: warning: use after 'free' of 'p' [CWE-416] [-Wanalyzer-use-after-free]
+  'use_after_free': events 1-3
+    |
+    |    4 |     int *p = (int *) malloc(sizeof(int));
+    |      |                      ^~~~~~~~~~~~~~~~~~~
+    |      |                      |
+    |      |                      (1) allocated here
+    |    5 |     free(p);
+    |      |     ~~~~~~~           
+    |      |     |
+    |      |     (2) freed here
+    |    6 |     return *p;
+    |      |            ~~         
+    |      |            |
+    |      |            (3) use after 'free' of 'p'; freed at (2)
+    |

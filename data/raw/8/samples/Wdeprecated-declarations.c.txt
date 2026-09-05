@@ -1,0 +1,7 @@
+Wdeprecated-declarations.c: In function 'call':
+Wdeprecated-declarations.c:6:5: warning: 'old_api' is deprecated: use new_api instead [-Wdeprecated-declarations]
+     return old_api();
+     ^~~~~~
+Wdeprecated-declarations.c:3:5: note: declared here
+ int old_api(void);
+     ^~~~~~~

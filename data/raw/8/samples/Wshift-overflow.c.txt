@@ -1,0 +1,4 @@
+Wshift-overflow.c: In function 'shifted':
+Wshift-overflow.c:3:14: warning: left shift count >= width of type [-Wshift-count-overflow]
+     return 1 << 40;
+              ^~

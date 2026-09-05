@@ -1,0 +1,8 @@
+Wformat.c: In function 'report':
+Wformat.c:4:14: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long int' [-Wformat=]
+     printf("%d\n", value);
+             ~^     ~~~~~
+             %ld
+Wformat.c:5:5: warning: format not a string literal and no format arguments [-Wformat-security]
+     printf(user_fmt);
+     ^~~~~~

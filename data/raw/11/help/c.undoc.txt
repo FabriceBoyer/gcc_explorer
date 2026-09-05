@@ -1,0 +1,9 @@
+The following options are supported by the language C:
+  --preprocess                This option lacks documentation.
+  -E                          This option lacks documentation.
+  -Wimport                    This option lacks documentation.
+  -Wpsabi                     This option lacks documentation.
+  -fbuilding-libgcc           This option lacks documentation.
+  -fcilkplus                  Removed in GCC 8.  This switch has no effect.
+  -lang-asm                   This option lacks documentation.
+

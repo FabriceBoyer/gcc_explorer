@@ -1,0 +1,18 @@
+The following options are supported by the language ObjC++:
+  --preprocess                This option lacks documentation.
+  -E                          This option lacks documentation.
+  -Wc++0x-compat              Same as -Wc++11-compat.
+  -Wc++1z-compat              Same as -Wc++17-compat.
+  -Wc++2a-compat              Same as -Wc++20-compat.
+  -Wimport                    This option lacks documentation.
+  -Wpsabi                     This option lacks documentation.
+  -fbuilding-libgcc           This option lacks documentation.
+  -fcilkplus                  Removed in GCC 8.  This switch has no effect.
+  -ftemplate-depth-           Same as -ftemplate-depth=.
+  -std=c++0x                  Deprecated in favor of -std=c++11.  Same as -std=c++11.
+  -std=c++1y                  Deprecated in favor of -std=c++14.  Same as -std=c++14.
+  -std=c++1z                  Deprecated in favor of -std=c++17.  Same as -std=c++17.
+  -std=gnu++0x                Deprecated in favor of -std=gnu++11.  Same as -std=gnu++11.
+  -std=gnu++1y                Deprecated in favor of -std=gnu++14.  Same as -std=gnu++14.
+  -std=gnu++1z                Deprecated in favor of -std=gnu++17.  Same as -std=gnu++17.
+

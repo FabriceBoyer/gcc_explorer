@@ -1,0 +1,7 @@
+Wshadow.c: In function 'tally':
+Wshadow.c:5:9: warning: declaration of 'count' shadows a global declaration [-Wshadow]
+     int count = n;   /* shadows the global */
+         ^~~~~
+Wshadow.c:2:5: note: shadowed declaration is here
+ int count = 0;
+     ^~~~~

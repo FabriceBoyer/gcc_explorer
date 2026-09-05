@@ -1,0 +1,4 @@
+Wfloat-equal.c: In function 'same':
+Wfloat-equal.c:3:14: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
+    3 |     return a == b;
+      |              ^~

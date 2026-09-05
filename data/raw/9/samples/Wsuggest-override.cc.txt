@@ -1,0 +1,9 @@
+Wsuggest-override.cc:8:10: warning: 'virtual void Derived::run()' can be marked override [-Wsuggest-override]
+    8 |     void run();
+      |          ^~~
+Wsuggest-override.cc:5:18: warning: 'virtual void Base::run(int)' was hidden [-Woverloaded-virtual]
+    5 |     virtual void run(int);
+      |                  ^~~
+Wsuggest-override.cc:8:10: warning:   by 'virtual void Derived::run()' [-Woverloaded-virtual]
+    8 |     void run();
+      |          ^~~

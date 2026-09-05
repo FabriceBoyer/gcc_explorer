@@ -1,0 +1,10 @@
+The following options are language-independent:
+  --completion=               Provide bash completion for options starting with provided string.
+  -Wlarger-than-              Same as -Wlarger-than=.
+  -Wshadow-compatible-local   Same as -Wshadow=compatible-local.
+  -Wshadow-local              Same as -Wshadow=local.
+  -fgnat-encodings=[all|gdb|minimal] Select the balance between GNAT encodings and standard DWARF emitted in the debug information.
+  -fkeep-gc-roots-live        This option lacks documentation.
+  -fself-test=                Run self-tests, using the given path to locate test files.
+  -fuse-linker-plugin         This option lacks documentation.
+

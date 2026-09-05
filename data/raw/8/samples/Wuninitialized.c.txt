@@ -1,0 +1,4 @@
+Wuninitialized.c: In function 'compute':
+Wuninitialized.c:6:12: warning: 'value' may be used uninitialized in this function [-Wmaybe-uninitialized]
+     return value;
+            ^~~~~

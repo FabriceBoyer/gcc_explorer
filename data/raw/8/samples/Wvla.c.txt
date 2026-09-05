@@ -1,0 +1,4 @@
+Wvla.c: In function 'sum':
+Wvla.c:3:5: warning: ISO C90 forbids variable length array 'buf' [-Wvla]
+     int buf[n];
+     ^~~

@@ -1,0 +1,7 @@
+Using built-in specs.
+COLLECT_GCC=gcc
+COLLECT_LTO_WRAPPER=/usr/local/libexec/gcc/x86_64-linux-gnu/9.5.0/lto-wrapper
+Target: x86_64-linux-gnu
+Configured with: /usr/src/gcc/configure --build=x86_64-linux-gnu --disable-multilib --enable-languages=c,c++,fortran,go
+Thread model: posix
+gcc version 9.5.0 (GCC) 

@@ -1,0 +1,7 @@
+Warray-bounds.c: In function 'fetch':
+Warray-bounds.c:4:17: warning: array subscript 7 is above array bounds of 'int[4]' [-Warray-bounds]
+    4 |     return table[7];
+      |            ~~~~~^~~
+Warray-bounds.c:2:5: note: while referencing 'table'
+    2 | int table[4];
+      |     ^~~~~

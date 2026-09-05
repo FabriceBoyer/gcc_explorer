@@ -1,0 +1,4 @@
+The following options control optimizations:
+  -fkeep-gc-roots-live        This option lacks documentation.
+  -funroll-completely-grow-size This option lacks documentation.
+

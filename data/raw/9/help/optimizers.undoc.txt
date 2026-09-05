@@ -1,0 +1,3 @@
+The following options control optimizations:
+  -fkeep-gc-roots-live        This option lacks documentation.
+

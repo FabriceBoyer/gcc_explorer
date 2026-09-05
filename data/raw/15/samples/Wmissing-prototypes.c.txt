@@ -1,0 +1,3 @@
+Wmissing-prototypes.c:2:5: warning: no previous prototype for 'helper' [-Wmissing-prototypes]
+    2 | int helper() {
+      |     ^~~~~~

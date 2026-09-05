@@ -1,0 +1,40 @@
+The following options are not documented:
+  --preprocess                This option lacks documentation.
+  -E                          This option lacks documentation.
+  -Wc++0x-compat              Same as -Wc++11-compat.  Use the latter option instead.
+  -Wc++1z-compat              Same as -Wc++17-compat.  Use the latter option instead.
+  -Wimport                    This option lacks documentation.
+  -Wlarger-than-              Same as -Wlarger-than=.  Use the latter option instead.
+  -Wpsabi                     This option lacks documentation.
+  -Wshadow-compatible-local   Same as -Wshadow=compatible-local.  Use the latter option instead.
+  -Wshadow-local              Same as -Wshadow=local.  Use the latter option instead.
+  -cpp=                       This option lacks documentation.
+  -fallow-leading-underscore  This option lacks documentation.
+  -fbuilding-libgcc           This option lacks documentation.
+  -fbuiltin-printf            Ignored.
+  -fcilkplus                  Deprecated in GCC 8.  This switch has no effect.
+  -fgnat-encodings=[all|gdb|minimal] Select the balance between GNAT encodings and standard DWARF emitted in the debug information
+  -fkeep-gc-roots-live        This option lacks documentation.
+  -fself-test=                Run self-tests, using the given path to locate test files.
+  -ftemplate-depth-           Same as -ftemplate-depth=.  Use the latter option instead.
+  -fuse-linker-plugin         This option lacks documentation.
+  -gant                       Catch typos.
+  -gno-                       This option lacks documentation.
+  -lang-asm                   This option lacks documentation.
+  -mcet-switch                Turn on CET instrumentation for switch statements that use a jump table and an indirect jump.
+  -mcpu=                      Same as -mtune=.  Use the latter option instead.  Uses of this option are diagnosed.
+  -mfused-madd                Same as -ffp-contract=.  Use the latter option instead.  Uses of this option are diagnosed.
+  -mintel-syntax              Same as -masm=.  Use the latter option instead.  Uses of this option are diagnosed.
+  -mno-align-stringops        This option lacks documentation.
+  -mno-fancy-math-387         This option lacks documentation.
+  -mno-push-args              This option lacks documentation.
+  -mno-red-zone               This option lacks documentation.
+  -mpcommit                   This option lacks documentation.  Uses of this option are diagnosed.
+  -msse5                      Same as -mavx.  Use the latter option instead.  Uses of this option are diagnosed.
+  -std=c++0x                  Deprecated in favor of -std=c++11.  Same as -std=c++11.
+  -std=c++1y                  Deprecated in favor of -std=c++14.  Same as -std=c++14.
+  -std=c++1z                  Deprecated in favor of -std=c++17.  Same as -std=c++17.
+  -std=gnu++0x                Deprecated in favor of -std=gnu++11.  Same as -std=gnu++11.
+  -std=gnu++1y                Deprecated in favor of -std=gnu++14.  Same as -std=gnu++14.
+  -std=gnu++1z                Deprecated in favor of -std=gnu++17.  Same as -std=gnu++17.
+

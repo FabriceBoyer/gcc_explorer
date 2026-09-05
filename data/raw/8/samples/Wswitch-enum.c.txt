@@ -1,0 +1,5 @@
+Wswitch-enum.c: In function 'name_of':
+Wswitch-enum.c:4:5: warning: switch missing default case [-Wswitch-default]
+     switch (c) {
+     ^~~~~~
+Wswitch-enum.c:4:5: warning: enumeration value 'BLUE' not handled in switch [-Wswitch-enum]

@@ -1,0 +1,678 @@
+The following options are language-independent:
+  --completion=               Provide bash completion for options starting with provided string.
+  --debug                     Same as -g.
+  --dumpbase                  Same as -dumpbase.
+  --dumpbase-ext              Same as -dumpbase-ext.
+  --dumpdir                   Same as -dumpdir.
+  --extra-warnings            Same as -Wextra.
+  --help                      Display this information.
+  --help=<class>              Display descriptions of a specific class of options.  <class> is one or more of optimizers, target, warnings, undocumented, params.
+  --optimize                  Same as -O.
+  --output                    Same as -o.
+  --output=                   Same as -o.
+  --pedantic-errors           Same as -pedantic-errors.
+  --profile                   Same as -p.
+  --target-help               Display target specific command line options (including assembler and linker options).
+  --verbose                   Same as -v.
+  --version                   This option lacks documentation.
+  -O<number>                  Set optimization level to <number>.
+  -Ofast                      Optimize for speed disregarding exact standards compliance.
+  -Og                         Optimize for debugging experience rather than speed or size.
+  -Os                         Optimize for space rather than speed.
+  -Oz                         Optimize for space aggressively rather than speed.
+  -W                          This switch is deprecated; use -Wextra instead.  Same as -Wextra.
+  -Waggregate-return          Warn about returning structures, unions or arrays.
+  -Waggressive-loop-optimizations Warn if a loop with constant number of iterations triggers undefined behavior.
+  -Wanalyzer-allocation-size  Warn about code paths in which a pointer to a buffer is assigned to an incompatible type.
+  -Wanalyzer-deref-before-check Warn about code paths in which a pointer is checked for NULL after it has already been dereferenced.
+  -Wanalyzer-double-fclose    Warn about code paths in which a stdio FILE can be closed more than once.
+  -Wanalyzer-double-free      Warn about code paths in which a pointer can be freed more than once.
+  -Wanalyzer-exposure-through-output-file Warn about code paths in which sensitive data is written to a file.
+  -Wanalyzer-exposure-through-uninit-copy Warn about code paths in which sensitive data is copied across a security boundary.
+  -Wanalyzer-fd-access-mode-mismatch Warn about code paths in which read on a write-only file descriptor is attempted, or vice versa.
+  -Wanalyzer-fd-double-close  Warn about code paths in which a file descriptor can be closed more than once.
+  -Wanalyzer-fd-leak          Warn about code paths in which a file descriptor is not closed.
+  -Wanalyzer-fd-phase-mismatch Warn about code paths in which an operation is attempted in the wrong phase of a file descriptor's lifetime.
+  -Wanalyzer-fd-type-mismatch Warn about code paths in which an operation is attempted on the wrong type of file descriptor.
+  -Wanalyzer-fd-use-after-close Warn about code paths in which a read or write is performed on a closed file descriptor.
+  -Wanalyzer-fd-use-without-check Warn about code paths in which a file descriptor is used without being checked for validity.
+  -Wanalyzer-file-leak        Warn about code paths in which a stdio FILE is not closed.
+  -Wanalyzer-free-of-non-heap Warn about code paths in which a non-heap pointer is freed.
+  -Wanalyzer-imprecise-fp-arithmetic Warn about code paths in which floating-point arithmetic is used in locations where precise computation is needed.
+  -Wanalyzer-infinite-recursion Warn about code paths which appear to lead to infinite recursion.
+  -Wanalyzer-jump-through-null Warn about code paths in which a NULL function pointer is called.
+  -Wanalyzer-malloc-leak      Warn about code paths in which a heap-allocated pointer leaks.
+  -Wanalyzer-mismatching-deallocation Warn about code paths in which the wrong deallocation function is called.
+  -Wanalyzer-null-argument    Warn about code paths in which NULL is passed to a must-not-be-NULL function argument.
+  -Wanalyzer-null-dereference Warn about code paths in which a NULL pointer is dereferenced.
+  -Wanalyzer-out-of-bounds    Warn about code paths in which a write or read to a buffer is out-of-bounds.
+  -Wanalyzer-possible-null-argument Warn about code paths in which a possibly-NULL value is passed to a must-not-be-NULL function argument.
+  -Wanalyzer-possible-null-dereference Warn about code paths in which a possibly-NULL pointer is dereferenced.
+  -Wanalyzer-putenv-of-auto-var Warn about code paths in which an on-stack buffer is passed to putenv.
+  -Wanalyzer-shift-count-negative Warn about code paths in which a shift with negative count is attempted.
+  -Wanalyzer-shift-count-overflow Warn about code paths in which a shift with count >= width of type is attempted.
+  -Wanalyzer-stale-setjmp-buffer Warn about code paths in which a longjmp rewinds to a jmp_buf saved in a stack frame that has returned.
+  -Wanalyzer-tainted-allocation-size Warn about code paths in which an unsanitized value is used as an allocation size.
+  -Wanalyzer-tainted-array-index Warn about code paths in which an unsanitized value is used as an array index.
+  -Wanalyzer-tainted-assertion Warn about code paths in which an 'assert()' is made involving an unsanitized value.
+  -Wanalyzer-tainted-divisor  Warn about code paths in which an unsanitized value is used as a divisor.
+  -Wanalyzer-tainted-offset   Warn about code paths in which an unsanitized value is used as a pointer offset.
+  -Wanalyzer-tainted-size     Warn about code paths in which an unsanitized value is used as a size.
+  -Wanalyzer-too-complex      Warn if the code is too complicated for the analyzer to fully explore.
+  -Wanalyzer-unsafe-call-within-signal-handler Warn about code paths in which an async-signal-unsafe function is called from a signal handler.
+  -Wanalyzer-use-after-free   Warn about code paths in which a freed value is used.
+  -Wanalyzer-use-of-pointer-in-stale-stack-frame Warn about code paths in which a pointer to a stale stack frame is used.
+  -Wanalyzer-use-of-uninitialized-value Warn about code paths in which an uninitialized value is used.
+  -Wanalyzer-va-arg-type-mismatch Warn about code paths in which va_arg uses the wrong type.
+  -Wanalyzer-va-list-exhausted Warn about code paths in which va_arg is used too many times on a va_list.
+  -Wanalyzer-va-list-leak     Warn about code paths in which va_start or va_copy is used without a corresponding va_end.
+  -Wanalyzer-va-list-use-after-va-end Warn about code paths in which a va_list is used after va_end.
+  -Wanalyzer-write-to-const   Warn about code paths which attempt to write to a const object.
+  -Wanalyzer-write-to-string-literal Warn about code paths which attempt to write to a string literal.
+  -Warray-bounds              Same as -Warray-bounds=1 (or, in negated form, -Warray-bounds=0).
+  -Warray-bounds=<0,2>        Warn if an array is accessed out of bounds.
+  -Wattribute-alias           Warn about type safety and similar errors and mismatches in declarations with alias attributes.  Same as -Wattribute-alias=.
+  -Wattribute-alias=<0,2>     Warn about type safety and similar errors and mismatches in declarations with alias attributes.
+  -Wattribute-warning         Warn about uses of __attribute__((warning)) declarations.
+  -Wattributes                Warn about inappropriate attribute usage.
+  -Wattributes=               Do not warn about specified attributes.
+  -Wcannot-profile            Warn when profiling instrumentation was requested, but could not be applied to a certain function.
+  -Wcast-align                Warn about pointer casts which increase alignment.
+  -Wcast-align=strict         Warn about pointer casts which increase alignment.
+  -Wcomplain-wrong-lang       Complain when a command-line option is valid, but not applicable to the current front end.
+  -Wcoverage-invalid-line-number Warn in case a function ends earlier than it begins due to an invalid linenum macros.
+  -Wcoverage-mismatch         Warn in case profiles in -fprofile-use do not match.
+  -Wdeprecated-declarations   Warn about uses of __attribute__((deprecated)) declarations.
+  -Wdisabled-optimization     Warn when an optimization pass is disabled.
+  -Werror=                    Treat specified warning as error.
+  -Wfatal-errors              Exit on the first error occurred.
+  -Wframe-larger-than=<byte-size> Warn if a function's stack frame requires in excess of <byte-size>.
+  -Wfree-nonheap-object       Warn when attempting to free a non-heap object.
+  -Whsa                       Does nothing.  Preserved for backward compatibility.
+  -Wimplicit-fallthrough      Same as -Wimplicit-fallthrough=3 (or, in negated form, -Wimplicit-fallthrough=0).
+  -Wimplicit-fallthrough=<0,5> Warn when a switch case falls through.
+  -Winline                    Warn when an inlined function cannot be inlined.
+  -Winvalid-memory-model      Warn when an atomic memory model parameter is known to be outside the valid range.
+  -Wlarger-than-              Same as -Wlarger-than=.
+  -Wlarger-than=<byte-size>   Warn if an object's size exceeds <byte-size>.
+  -Wlto-type-mismatch         During link time optimization warn about mismatched types of global declarations.
+  -Wmissing-noreturn          Same as -Wsuggest-attribute=noreturn.
+  -Wmissing-profile           Warn in case profiles in -fprofile-use do not exist.
+  -Wno-frame-larger-than      Disable -Wframe-larger-than= warning.  Equivalent to -Wframe-larger-than=<SIZE_MAX> or larger.  Same as -Wframe-larger-than=.
+  -Wno-larger-than            Disable -Wlarger-than= warning.  Equivalent to -Wlarger-than=<SIZE_MAX> or larger.  Same as -Wlarger-than=.
+  -Wno-stack-usage            Disable Wstack-usage= warning.  Equivalent to Wstack-usage=<SIZE_MAX> or larger.  Same as -Wstack-usage=.
+  -Wnull-dereference          Warn if dereferencing a NULL pointer may lead to erroneous or undefined behavior.
+  -Wodr                       Warn about some C++ One Definition Rule violations during link time optimization.
+  -Woverflow                  Warn about overflow in arithmetic expressions.
+  -Wpacked                    Warn when the packed attribute has no effect on struct layout.
+  -Wpadded                    Warn when padding is required to align structure members.
+  -Wreturn-local-addr         Warn about returning a pointer/reference to a local or temporary variable.
+  -Wshadow                    Warn when one variable shadows another.  Same as -Wshadow=global.
+  -Wshadow-compatible-local   Same as -Wshadow=compatible-local.
+  -Wshadow-local              Same as -Wshadow=local.
+  -Wshadow=compatible-local   Warn when one local variable shadows another local variable or parameter of compatible type.
+  -Wshadow=global             Warn when one variable shadows another (globally).  Same as -Wshadow.
+  -Wshadow=local              Warn when one local variable shadows another local variable or parameter.
+  -Wstack-protector           Warn when not issuing stack smashing protection for some reason.
+  -Wstack-usage=<byte-size>   Warn if stack usage might exceed <byte-size>.
+  -Wstrict-aliasing           Warn about code which might break strict aliasing rules.
+  -Wstrict-overflow           Warn about optimizations that assume that signed overflow is undefined.
+  -Wsuggest-attribute=cold    Warn about functions which might be candidates for __attribute__((cold)).
+  -Wsuggest-attribute=const   Warn about functions which might be candidates for __attribute__((const)).
+  -Wsuggest-attribute=malloc  Warn about functions which might be candidates for __attribute__((malloc)).
+  -Wsuggest-attribute=noreturn Warn about functions which might be candidates for __attribute__((noreturn)).
+  -Wsuggest-attribute=pure    Warn about functions which might be candidates for __attribute__((pure)).
+  -Wsuggest-final-methods     Warn about C++ virtual methods where adding final keyword would improve code quality.
+  -Wsuggest-final-types       Warn about C++ polymorphic types where adding final keyword would improve code quality.
+  -Wswitch-unreachable        Warn about statements between switch's controlling expression and the first case.
+  -Wtrampolines               Warn whenever a trampoline is generated.
+  -Wtrivial-auto-var-init     Warn about cases where -ftrivial-auto-var-init cannot initialize an auto variable.
+  -Wtsan                      Warn about unsupported features in ThreadSanitizer.
+  -Wtype-limits               Warn if a comparison is always true or always false due to the limited range of the data type.
+  -Wunreachable-code          Does nothing. Preserved for backward compatibility.
+  -Wunsafe-loop-optimizations Does nothing. Preserved for backward compatibility.
+  -Wunused-but-set-parameter  Warn when a function parameter is only set, otherwise unused.
+  -Wunused-but-set-variable   Warn when a variable is only set, otherwise unused.
+  -Wunused-function           Warn when a function is unused.
+  -Wunused-label              Warn when a label is unused.
+  -Wunused-value              Warn when an expression value is unused.
+  -Wuse-after-free            Warn for uses of pointers to deallocated storage.
+  -Wuse-after-free=<0,3>      Warn for uses of pointers to deallocated storage.
+  -Wvector-operation-performance Warn when a vector operation is compiled outside the SIMD.
+  -aux-info <file>            Emit declaration information into <file>.
+  -aux-info=                  Same as -aux-info.
+  -dumpbase <file>            Set the file basename to be used for dumps.
+  -dumpbase-ext               -dumpbase-ext .<ext>    Drop a trailing .<ext> from the dump basename to name auxiliary output files.
+  -dumpdir <dir>              Set the directory name to be used for dumps.
+  -fPIC                       Generate position-independent code if possible (large mode).
+  -fPIE                       Generate position-independent code for executables if possible (large mode).
+  -fabi-version=              The version of the C++ ABI in use.
+  -faggressive-loop-optimizations Aggressively optimize loops using language constraints.
+  -falign-functions           Align the start of functions.
+  -falign-functions=          This option lacks documentation.
+  -falign-jumps               Align labels which are only reached by jumping.
+  -falign-jumps=              This option lacks documentation.
+  -falign-labels              Align all labels.
+  -falign-labels=             This option lacks documentation.
+  -falign-loops               Align the start of loops.
+  -falign-loops=              This option lacks documentation.
+  -fallocation-dce            Tell DCE to remove unused C++ allocations.
+  -fallow-store-data-races    Allow the compiler to introduce new data races on stores.
+  -fanalyzer                  Enable static analysis pass.
+  -fanalyzer-call-summaries   Approximate the effect of function calls to simplify analysis.
+  -fanalyzer-checker=         Restrict the analyzer to run just the named checker.
+  -fanalyzer-feasibility      Verify that paths are feasible when emitting diagnostics.
+  -fanalyzer-fine-grained     Avoid combining multiple statements into one exploded edge.
+  -fanalyzer-show-duplicate-count Issue a note when diagnostics are deduplicated.
+  -fanalyzer-state-merge      Merge similar-enough states during analysis.
+  -fanalyzer-state-purge      Purge unneeded state during analysis.
+  -fanalyzer-suppress-followups Stop exploring an execution path after certain diagnostics.
+  -fanalyzer-transitivity     Enable transitivity of constraints during analysis.
+  -fanalyzer-undo-inlining    Try to reconstruct function calls and returns after inlining.
+  -fanalyzer-verbose-edges    Emit more verbose descriptions of control flow in diagnostics.
+  -fanalyzer-verbose-state-changes Emit more verbose descriptions of state changes in diagnostics.
+  -fanalyzer-verbosity=       Control which events are displayed in diagnostic paths.
+  -fargument-alias            Does nothing. Preserved for backward compatibility.
+  -fargument-noalias          Does nothing. Preserved for backward compatibility.
+  -fargument-noalias-anything Does nothing. Preserved for backward compatibility.
+  -fargument-noalias-global   Does nothing. Preserved for backward compatibility.
+  -fasan-shadow-offset=<number> Use custom shadow memory offset.
+  -fassociative-math          Allow optimization for floating-point arithmetic which may change the result of the operation due to rounding.
+  -fasynchronous-unwind-tables Generate unwind tables that are exact at each instruction boundary.
+  -fauto-inc-dec              Generate auto-inc/dec instructions.
+  -fauto-profile              Use sample profile information for call graph node weights. The default profile file is fbdata.afdo in 'pwd'.
+  -fauto-profile=             Use sample profile information for call graph node weights. The profile file is specified in the argument.
+  -fbit-tests                 Use bit tests for sufficiently large switch statements.
+  -fbranch-count-reg          Replace add, compare, branch with branch on count register.
+  -fbranch-probabilities      Use profiling information for branch probabilities.
+  -fbranch-target-load-optimize Does nothing.  Preserved for backward compatibility.
+  -fbranch-target-load-optimize2 Does nothing.  Preserved for backward compatibility.
+  -fbtr-bb-exclusive          Does nothing.  Preserved for backward compatibility.
+  -fcall-saved-<register>     Mark <register> as being preserved across functions.
+  -fcall-used-<register>      Mark <register> as being corrupted by function calls.
+  -fcaller-saves              Save registers around function calls.
+  -fcallgraph-info            Output callgraph information on a per-file basis.
+  -fcallgraph-info=           Output callgraph information on a per-file basis with decorations.
+  -fcanon-prefix-map          For -f*-prefix-map= options compare canonicalized pathnames rather than just strings.
+  -fcf-protection             Same as -fcf-protection=full.
+  -fcf-protection=[full|branch|return|none|check] Instrument functions with checks to verify jump/call/return control-flow transfer instructions have valid targets.
+  -fcheck-data-deps           This switch is deprecated; do not use.
+  -fcheck-new                 Check the return value of new in C++.
+  -fchecking                  Perform internal consistency checkings.
+  -fchecking=                 Perform internal consistency checkings.
+  -fcode-hoisting             Enable code hoisting.
+  -fcombine-stack-adjustments Looks for opportunities to reduce stack adjustments and stack references.
+  -fcommon                    Put uninitialized globals in the common section.
+  -fcompare-debug-second      Run only the second compilation of -fcompare-debug.
+  -fcompare-debug[=<opts>]    Compile with and without e.g. -gtoggle, and compare the final-insns dump.
+  -fcompare-elim              Perform comparison elimination after register allocation has finished.
+  -fconserve-stack            Do not perform optimizations increasing noticeably stack usage.
+  -fcprop-registers           Perform a register copy-propagation optimization pass.
+  -fcrossjumping              Perform cross-jumping optimization.
+  -fcse-follow-jumps          When running CSE, follow jumps to their targets.
+  -fcse-skip-blocks           Does nothing.  Preserved for backward compatibility.
+  -fcx-fortran-rules          Complex multiplication and division follow Fortran rules.
+  -fcx-limited-range          Omit range reduction step when performing complex division.
+  -fdata-sections             Place data items into their own section.
+  -fdbg-cnt-list              List all available debugging counters with their limits and counts.
+  -fdbg-cnt=<counter>[:<lower_limit1>-]<upper_limit1>[:<lower_limit2>-<upper_limit2>:...][,<counter>:...] Set the debug counter limit.
+  -fdce                       Use the RTL dead code elimination pass.
+  -fdebug-prefix-map=<old>=<new> Map one directory name to another in debug information.
+  -fdebug-types-section       Output .debug_types section when using DWARF v4 debuginfo.
+  -fdefer-pop                 Defer popping functions args from stack until later.
+  -fdelayed-branch            Attempt to fill delay slots of branch instructions.
+  -fdelete-dead-exceptions    Delete dead instructions that may throw exceptions.
+  -fdelete-null-pointer-checks Delete useless null pointer checks.
+  -fdevirtualize              Try to convert virtual calls to direct ones.
+  -fdevirtualize-at-ltrans    Stream extra data to support more aggressive devirtualization in LTO local transformation mode.
+  -fdevirtualize-speculatively Perform speculative devirtualization.
+  -fdiagnostics-color         Same as -fdiagnostics-color=always (or, in negated form, -fdiagnostics-color=never).
+  -fdiagnostics-color=[never|always|auto] Colorize diagnostics.
+  -fdiagnostics-column-origin=<number> Set the number of the first column.  The default is 1-based as per GNU style, but some utilities may expect 0-based, for example.
+  -fdiagnostics-column-unit=[display|byte] Select whether column numbers are output as display columns (default) or raw bytes.
+  -fdiagnostics-escape-format=[unicode|bytes] Select how to escape non-printable-ASCII bytes in the source for diagnostics that suggest it.
+  -fdiagnostics-format=[text|sarif-stderr|sarif-file|json|json-stderr|json-file] Select output format.
+  -fdiagnostics-generate-patch Print fix-it hints to stderr in unified diff format.
+  -fdiagnostics-minimum-margin-width= Set minimum width of left margin of source code when showing source.
+  -fdiagnostics-parseable-fixits Print fix-it hints in machine-readable form.
+  -fdiagnostics-path-format=  Specify how to print any control-flow path associated with a diagnostic.
+  -fdiagnostics-plain-output  Turn off any diagnostics features that complicate the output, such as line numbers, color, and warning URLs.
+  -fdiagnostics-show-caret    Show the source line with a caret indicating the column.
+  -fdiagnostics-show-cwe      Print CWE identifiers for diagnostic messages, where available.
+  -fdiagnostics-show-labels   Show labels annotating ranges of source code when showing source.
+  -fdiagnostics-show-line-numbers Show line numbers in the left margin when showing source.
+  -fdiagnostics-show-location=[once|every-line] How often to emit source location at the beginning of line-wrapped diagnostics.
+  -fdiagnostics-show-option   Amend appropriate diagnostic messages with the command line option that controls them.
+  -fdiagnostics-show-path-depths Show stack depths of events in paths.
+  -fdiagnostics-show-rules    Print any rules associated with diagnostic messages.
+  -fdiagnostics-urls=[never|always|auto] Embed URLs in diagnostics.
+  -fdisable-[tree|rtl|ipa]-<pass>=range1+range2 Disable an optimization pass.
+  -fdse                       Use the RTL dead store elimination pass.
+  -fdump-<type>               Dump various compiler internals to a file.
+  -fdump-analyzer             Dump various analyzer internals to SRCFILE.analyzer.txt.
+  -fdump-analyzer-callgraph   Dump analyzer-specific call graph information to a SRCFILE.callgraph.dot file.
+  -fdump-analyzer-exploded-graph Dump the analyzer exploded graph to a SRCFILE.eg.dot file.
+  -fdump-analyzer-exploded-nodes Emit diagnostics showing the location of nodes in the exploded graph.
+  -fdump-analyzer-exploded-nodes-2 Dump a textual representation of the exploded graph to SRCFILE.eg.txt.
+  -fdump-analyzer-exploded-nodes-3 Dump a textual representation of the exploded graph to SRCFILE.eg-ID.txt.
+  -fdump-analyzer-exploded-paths Dump a textual representation of each diagnostic's exploded path to SRCFILE.IDX.KIND.epath.txt.
+  -fdump-analyzer-feasibility Dump various analyzer internals to SRCFILE.*.fg.dot and SRCFILE.*.tg.dot.
+  -fdump-analyzer-json        Dump analyzer-specific data to a SRCFILE.analyzer.json.gz file.
+  -fdump-analyzer-state-purge Dump state-purging information to a SRCFILE.state-purge.dot file.
+  -fdump-analyzer-stderr      Dump various analyzer internals to stderr.
+  -fdump-analyzer-supergraph  Dump the analyzer supergraph to a SRCFILE.supergraph.dot file.
+  -fdump-analyzer-untracked   Emit custom warnings with internal details intended for analyzer developers.
+  -fdump-final-insns=filename Dump to filename the insns at the end of translation.
+  -fdump-go-spec=filename     Write all declarations to file as Go code.
+  -fdump-internal-locations   Dump detailed information on GCC's internal representation of source code locations.
+  -fdump-noaddr               Suppress output of addresses in debugging dumps.
+  -fdump-passes               Dump optimization passes.
+  -fdump-unnumbered           Suppress output of instruction numbers, line number notes and addresses in debugging dumps.
+  -fdump-unnumbered-links     Suppress output of previous and next insn numbers in debugging dumps.
+  -fdwarf2-cfi-asm            Enable CFI tables via GAS assembler directives.
+  -fearly-inlining            Perform early inlining.
+  -feliminate-dwarf2-dups     Does nothing.  Preserved for backward compatibility.
+  -feliminate-unused-debug-symbols Perform unused symbol elimination in debug info.
+  -feliminate-unused-debug-types Perform unused type elimination in debug info.
+  -femit-class-debug-always   Do not suppress C++ class debug information.
+  -fenable-[tree|rtl|ipa]-<pass>=range1+range2 Enable an optimization pass.
+  -fexcess-precision=[fast|standard|16] Specify handling of excess floating-point precision.
+  -fexpensive-optimizations   Perform a number of minor, expensive optimizations.
+  -ffast-math                 This option lacks documentation.
+  -ffat-lto-objects           Output lto objects containing both the intermediate language and binary output.
+  -ffile-prefix-map=<old>=<new> Map one directory name to another in compilation result.
+  -ffinite-loops              Assume that loops with an exit will terminate and not loop indefinitely.
+  -ffinite-math-only          Assume no NaNs or infinities are generated.
+  -ffixed-<register>          Mark <register> as being unavailable to the compiler.
+  -ffloat-store               Don't allocate floats and doubles in extended-precision registers.
+  -fforce-addr                Does nothing.  Preserved for backward compatibility.
+  -fforward-propagate         Perform a forward propagation pass on RTL.
+  -ffp-contract=[off|on|fast] Perform floating-point expression contraction.
+  -ffp-int-builtin-inexact    Allow built-in functions ceil, floor, round, trunc to raise "inexact" exceptions.
+  -ffunction-cse              Allow function addresses to be held in registers.
+  -ffunction-sections         Place each function into its own section.
+  -fgcse                      Perform global common subexpression elimination.
+  -fgcse-after-reload         Perform global common subexpression elimination after register allocation has finished.
+  -fgcse-las                  Perform redundant load after store elimination in global common subexpression elimination.
+  -fgcse-lm                   Perform enhanced load motion during global common subexpression elimination.
+  -fgcse-sm                   Perform store motion after global common subexpression elimination.
+  -fgnat-encodings=[all|gdb|minimal] Select the balance between GNAT encodings and standard DWARF emitted in the debug information.
+  -fgnu-tm                    Enable support for GNU transactional memory.
+  -fgnu-unique                Use STB_GNU_UNIQUE if supported by the assembler.
+  -fgraphite                  Enable in and out of Graphite representation.
+  -fgraphite-identity         Enable Graphite Identity transformation.
+  -fguess-branch-probability  Enable guessing of branch probabilities.
+  -fharden-compares           Harden conditionals not used in branches, checking reversed conditions.
+  -fharden-conditional-branches Harden conditional branches by checking reversed conditions.
+  -fhelp                      Same as --help.
+  -fhelp=                     Same as --help=.
+  -fhoist-adjacent-loads      Enable hoisting adjacent loads to encourage generating conditional move instructions.
+  -fident                     Process #ident directives.
+  -fif-conversion             Perform conversion of conditional jumps to branchless equivalents.
+  -fif-conversion2            Perform conversion of conditional jumps to conditional execution.
+  -findirect-inlining         Perform indirect inlining.
+  -finhibit-size-directive    Do not generate .size directives.
+  -finline                    Enable inlining of function declared "inline", disabling disables all inlining.
+  -finline-atomics            Inline __atomic operations when a lock free instruction sequence is available.
+  -finline-functions          Integrate functions not declared "inline" into their callers when profitable.
+  -finline-functions-called-once Integrate functions only required by their single caller.
+  -finline-limit-             Same as -finline-limit=.
+  -finline-limit=<number>     Limit the size of inlined functions to <number>.
+  -finline-small-functions    Integrate functions into their callers when code size is known not to grow.
+  -finstrument-functions      Instrument function entry and exit with profiling calls.
+  -finstrument-functions-exclude-file-list=filename,... Do not instrument functions listed in files.
+  -finstrument-functions-exclude-function-list=name,... Do not instrument listed functions.
+  -finstrument-functions-once Instrument function entry and exit with profiling calls invoked once.
+  -fipa-bit-cp                Perform interprocedural bitwise constant propagation.
+  -fipa-cp                    Perform interprocedural constant propagation.
+  -fipa-cp-alignment          Does nothing.  Preserved for backward compatibility.
+  -fipa-cp-clone              Perform cloning to make Interprocedural constant propagation stronger.
+  -fipa-icf                   Perform Identical Code Folding for functions and read-only variables.
+  -fipa-icf-functions         Perform Identical Code Folding for functions.
+  -fipa-icf-variables         Perform Identical Code Folding for variables.
+  -fipa-matrix-reorg          Does nothing. Preserved for backward compatibility.
+  -fipa-modref                Perform interprocedural modref analysis.
+  -fipa-profile               Perform interprocedural profile propagation.
+  -fipa-pta                   Perform interprocedural points-to analysis.
+  -fipa-pure-const            Discover pure and const functions.
+  -fipa-ra                    Use caller save register across calls if possible.
+  -fipa-reference             Discover read-only and non addressable static variables.
+  -fipa-reference-addressable Discover read-only, write-only and non-addressable static variables.
+  -fipa-sra                   Perform interprocedural reduction of aggregates.
+  -fipa-stack-alignment       Reduce stack alignment on call sites if possible.
+  -fipa-strict-aliasing       Assume strict aliasing rules apply across (uninlined) function boundaries.
+  -fipa-struct-reorg          Does nothing. Preserved for backward compatibility.
+  -fipa-vrp                   Perform IPA Value Range Propagation.
+  -fira-algorithm=[CB|priority] Set the used IRA algorithm.
+  -fira-hoist-pressure        Use IRA based register pressure calculation in RTL hoist optimizations.
+  -fira-loop-pressure         Use IRA based register pressure calculation in RTL loop optimizations.
+  -fira-region=[one|all|mixed] Set regions for IRA.
+  -fira-share-save-slots      Share slots for saving different hard registers.
+  -fira-share-spill-slots     Share stack slots for spilled pseudo-registers.
+  -fira-verbose=<number>      Control IRA's level of diagnostic messages.
+  -fisolate-erroneous-paths-attribute Detect paths that trigger erroneous or undefined behavior due to a null value being used in a way forbidden by a returns_nonnull or nonnull attribute.  Isolate those paths from the main control flow and turn the statement with erroneous or undefined behavior into a trap.
+  -fisolate-erroneous-paths-dereference Detect paths that trigger erroneous or undefined behavior due to dereferencing a null pointer.  Isolate those paths from the main control flow and turn the statement with erroneous or undefined behavior into a trap.
+  -fivopts                    Optimize induction variables on trees.
+  -fjump-tables               Use jump tables for sufficiently large switch statements.
+  -fkeep-gc-roots-live        This option lacks documentation.
+  -fkeep-inline-functions     Generate code for functions even if they are fully inlined.
+  -fkeep-static-consts        Emit static const variables even if they are not used.
+  -fkeep-static-functions     Generate code for static functions even if they are never called.
+  -flarge-source-files        Improve GCC's ability to track column numbers in large source files, at the expense of slower compilation.
+  -fleading-underscore        Give external symbols a leading underscore.
+  -flifetime-dse              Tell DSE that the storage for a C++ object is dead when the constructor starts and when the destructor finishes.
+  -flifetime-dse=<0,2>        This option lacks documentation.
+  -flimit-function-alignment  This option lacks documentation.
+  -flive-patching             Same as -flive-patching=inline-clone.
+  -flive-patching=[inline-only-static|inline-clone] Control IPA optimizations to provide a safe compilation for live-patching.  At the same time, provides multiple-level control on the enabled IPA optimizations.
+  -flive-range-shrinkage      Relief of register pressure through live range shrinkage.
+  -floop-block                Enable loop nest transforms.  Same as -floop-nest-optimize.  Same as -floop-nest-optimize.
+  -floop-flatten              Does nothing. Preserved for backward compatibility.
+  -floop-interchange          Enable loop interchange on trees.
+  -floop-nest-optimize        Enable the loop nest optimizer.
+  -floop-optimize             Does nothing.  Preserved for backward compatibility.
+  -floop-parallelize-all      Mark all loops as parallel.
+  -floop-strip-mine           Enable loop nest transforms.  Same as -floop-nest-optimize.  Same as -floop-nest-optimize.
+  -floop-unroll-and-jam       Perform unroll-and-jam on loops.
+  -flra-remat                 Do CFG-sensitive rematerialization in LRA.
+  -flto                       Enable link-time optimization.
+  -flto-compression-level=<0,19> Use zlib/zstd compression level <number> for IL.
+  -flto-odr-type-merging      Does nothing.  Preserved for backward compatibility.
+  -flto-partition=            Specify the algorithm to partition symbols and vars at linktime.
+  -flto-report                Report various link-time optimization statistics.
+  -flto-report-wpa            Report various link-time optimization statistics for WPA only.
+  -flto=                      Link-time optimization with number of parallel jobs or jobserver.
+  -fmath-errno                Set errno after built-in math functions.
+  -fmax-errors=<number>       Maximum number of errors to report.
+  -fmem-report                Report on permanent memory allocation.
+  -fmem-report-wpa            Report on permanent memory allocation in WPA only.
+  -fmerge-all-constants       Attempt to merge identical constants and constant variables.
+  -fmerge-constants           Attempt to merge identical constants across compilation units.
+  -fmerge-debug-strings       Attempt to merge identical debug strings across compilation units.
+  -fmessage-length=<number>   Limit diagnostics to <number> characters per line.  0 suppresses line-wrapping.
+  -fmodulo-sched              Perform SMS based modulo scheduling before the first scheduling pass.
+  -fmodulo-sched-allow-regmoves Perform SMS based modulo scheduling with register moves allowed.
+  -fmove-loop-invariants      Move loop invariant computations out of loops.
+  -fmove-loop-stores          Move stores out of loops.
+  -fmultiflags                Building block for specs-based multilib-aware TFLAGS.
+  -fnon-call-exceptions       Support synchronous non-call exceptions.
+  -foffload-abi=[lp64|ilp32]  Set the ABI to use in an offload compiler.
+  -foffload-options=<targets>=<options> Specify options for the offloading targets.
+  -fomit-frame-pointer        When possible do not generate stack frames.
+  -fopenmp-target-simd-clone  Same as -fopenmp-target-simd-clone=any (or, in negated form, -fopenmp-target-simd-clone=none).
+  -fopenmp-target-simd-clone= Generate SIMD clones for functions with the OpenMP declare target directive.
+  -fopt-info                  Enable all optimization info dumps on stderr.
+  -fopt-info[-<type>=filename] Dump compiler optimization details.
+  -foptimize-register-move    Does nothing. Preserved for backward compatibility.
+  -foptimize-sibling-calls    Optimize sibling and tail recursive calls.
+  -foptimize-strlen           Enable string length optimizations on trees.
+  -fpack-struct               Pack structure members together without holes.
+  -fpack-struct=<number>      Set initial maximum structure member alignment.
+  -fpartial-inlining          Perform partial inlining.
+  -fpatchable-function-entry= Insert NOP instructions at each function entry.
+  -fpcc-struct-return         Return small aggregates in memory, not registers.
+  -fpeel-loops                Perform loop peeling.
+  -fpeephole                  Enable machine specific peephole optimizations.
+  -fpeephole2                 Enable an RTL peephole pass before sched2.
+  -fpermitted-flt-eval-methods=[c11|ts-18661] Specify which values of FLT_EVAL_METHOD are permitted.
+  -fpic                       Generate position-independent code if possible (small mode).
+  -fpie                       Generate position-independent code for executables if possible (small mode).
+  -fplt                       Use PLT for PIC calls (-fno-plt: load the address from GOT at call site).
+  -fplugin-arg-<name>-<key>[=<value>] Specify argument <key>=<value> for plugin <name>.
+  -fplugin=                   Specify a plugin to load.
+  -fpost-ipa-mem-report       Report on memory allocation before interprocedural optimization.
+  -fpre-ipa-mem-report        Report on memory allocation before interprocedural optimization.
+  -fpredictive-commoning      Run predictive commoning optimization.
+  -fprefetch-loop-arrays      Generate prefetch instructions, if available, for arrays in loops.
+  -fprofile                   Enable basic program profiling code.
+  -fprofile-abs-path          Generate absolute source path names for gcov.
+  -fprofile-arcs              Insert arc-based program profiling code.
+  -fprofile-correction        Enable correction of flow inconsistent profile data input.
+  -fprofile-dir=              Set the top-level directory for storing the profile data. The default is 'pwd'.
+  -fprofile-exclude-files=    Instrument only functions from files whose name does not match any of the regular expressions (separated by semi-colons).
+  -fprofile-filter-files=     Instrument only functions from files whose name matches any of the regular expressions (separated by semi-colons).
+  -fprofile-generate          Enable common options for generating profile info for profile feedback directed optimizations.
+  -fprofile-generate=         Enable common options for generating profile info for profile feedback directed optimizations, and set -fprofile-dir=.
+  -fprofile-info-section      Register the profile information in the .gcov_info section instead of using a constructor/destructor.
+  -fprofile-info-section=     Register the profile information in the specified section instead of using a constructor/destructor.
+  -fprofile-note=             Select the name for storing the profile note file.
+  -fprofile-partial-training  Do not assume that functions never executed during the train run are cold.
+  -fprofile-prefix-map=<old>=<new> Map one directory name to another in GCOV coverage result.
+  -fprofile-prefix-path=      Remove prefix from absolute path before mangling name for -fprofile-generate= and -fprofile-use=.
+  -fprofile-reorder-functions Enable function reordering that improves code placement.
+  -fprofile-report            Report on consistency of profile.
+  -fprofile-reproducible=[serial|parallel-runs|multithreaded] Control level of reproducibility of profile gathered by -fprofile-generate.
+  -fprofile-update=[single|atomic|prefer-atomic] Set the profile update method.
+  -fprofile-use               Enable common options for performing profile feedback directed optimizations.
+  -fprofile-use=              Enable common options for performing profile feedback directed optimizations, and set -fprofile-dir=.
+  -fprofile-values            Insert code to profile values of expressions.
+  -frandom-seed               This option lacks documentation.
+  -frandom-seed=<string>      Make compile reproducible using <string>.
+  -freciprocal-math           Same as -fassociative-math for expressions which include division.
+  -frecord-gcc-switches       Record gcc command line switches in the object file.
+  -free                       Turn on Redundant Extensions Elimination pass.
+  -freg-struct-return         Return small aggregates in registers.
+  -fregmove                   Does nothing. Preserved for backward compatibility.
+  -frename-registers          Perform a register renaming optimization pass.
+  -freorder-blocks            Reorder basic blocks to improve code placement.
+  -freorder-blocks-algorithm=[simple|stc] Set the used basic block reordering algorithm.
+  -freorder-blocks-and-partition Reorder basic blocks and partition into hot and cold sections.
+  -freorder-functions         Reorder functions to improve code placement.
+  -freport-bug                Collect and dump debug information into temporary file if ICE in C/C++ compiler occurred.
+  -frerun-cse-after-loop      Add a common subexpression elimination pass after loop optimizations.
+  -frerun-loop-opt            Does nothing.  Preserved for backward compatibility.
+  -freschedule-modulo-scheduled-loops Enable/Disable the traditional scheduling in loops that already passed modulo scheduling.
+  -frounding-math             Disable optimizations that assume default FP rounding behavior.
+  -fsanitize-address-use-after-scope This option lacks documentation.
+  -fsanitize-coverage=        Select type of coverage sanitization.
+  -fsanitize-recover          This switch is deprecated; use -fsanitize-recover= instead.
+  -fsanitize-recover=         After diagnosing undefined behavior attempt to continue execution.
+  -fsanitize-sections=<sec1,sec2,...> Sanitize global variables in user-defined sections.
+  -fsanitize-trap             This option lacks documentation.
+  -fsanitize-trap=            Use traps instead of diagnostics of undefined behavior sanitizers.
+  -fsanitize-undefined-trap-on-error This switch is deprecated; use -fsanitize-trap= instead.
+  -fsanitize=                 Select what to sanitize.
+  -fsave-optimization-record  Write a SRCFILE.opt-record.json file detailing what optimizations were performed.
+  -fsched-critical-path-heuristic Enable the critical path heuristic in the scheduler.
+  -fsched-dep-count-heuristic Enable the dependent count heuristic in the scheduler.
+  -fsched-group-heuristic     Enable the group heuristic in the scheduler.
+  -fsched-interblock          Enable scheduling across basic blocks.
+  -fsched-last-insn-heuristic Enable the last instruction heuristic in the scheduler.
+  -fsched-pressure            Enable register pressure sensitive insn scheduling.
+  -fsched-rank-heuristic      Enable the rank heuristic in the scheduler.
+  -fsched-spec                Allow speculative motion of non-loads.
+  -fsched-spec-insn-heuristic Enable the speculative instruction heuristic in the scheduler.
+  -fsched-spec-load           Allow speculative motion of some loads.
+  -fsched-spec-load-dangerous Allow speculative motion of more loads.
+  -fsched-stalled-insns       Allow premature scheduling of queued insns.
+  -fsched-stalled-insns-dep   Set dependence distance checking in premature scheduling of queued insns.
+  -fsched-stalled-insns-dep=<number> Set dependence distance checking in premature scheduling of queued insns.
+  -fsched-stalled-insns=<number> Set number of queued insns that can be prematurely scheduled.
+  -fsched-verbose=<number>    Set the verbosity level of the scheduler.
+  -fsched2-use-superblocks    If scheduling post reload, do superblock scheduling.
+  -fsched2-use-traces         Does nothing.  Preserved for backward compatibility.
+  -fschedule-fusion           Perform a target dependent instruction fusion optimization pass.
+  -fschedule-insns            Reschedule instructions before register allocation.
+  -fschedule-insns2           Reschedule instructions after register allocation.
+  -fsection-anchors           Access data in the same section from shared anchor points.
+  -fsee                       Does nothing.  Preserved for backward compatibility.
+  -fsel-sched-pipelining      Perform software pipelining of inner loops during selective scheduling.
+  -fsel-sched-pipelining-outer-loops Perform software pipelining of outer loops during selective scheduling.
+  -fsel-sched-reschedule-pipelined Reschedule pipelined regions without pipelining.
+  -fselective-scheduling      Schedule instructions using selective scheduling algorithm.
+  -fselective-scheduling2     Run selective scheduling after reload.
+  -fself-test=                Run self-tests, using the given path to locate test files.
+  -fsemantic-interposition    Allow interposing function (or variables) by ones with different semantics (or initializer) respectively by dynamic linker.
+  -fshow-column               Show column numbers in diagnostics, when available.  Default on.
+  -fshrink-wrap               Emit function prologues only before parts of the function that need it, rather than at the top of the function.
+  -fshrink-wrap-separate      Shrink-wrap parts of the prologue and epilogue separately.
+  -fsignaling-nans            Disable optimizations observable by IEEE signaling NaNs.
+  -fsigned-zeros              Disable floating point optimizations that ignore the IEEE signedness of zero.
+  -fsimd-cost-model=[unlimited|dynamic|cheap|very-cheap] Specifies the vectorization cost model for code marked with a simd directive.
+  -fsingle-precision-constant Convert floating point constants to single precision constants.
+  -fsplit-ivs-in-unroller     Split lifetimes of induction variables when loops are unrolled.
+  -fsplit-loops               Perform loop splitting.
+  -fsplit-paths               Split paths leading to loop backedges.
+  -fsplit-stack               Generate discontiguous stack frames.
+  -fsplit-wide-types          Split wide types into independent registers.
+  -fsplit-wide-types-early    Split wide types into independent registers earlier.
+  -fssa-backprop              Enable backward propagation of use properties at the SSA level.
+  -fssa-phiopt                Optimize conditional patterns using SSA PHI nodes.
+  -fstack-check               Insert stack checking code into the program.  Same as -fstack-check=specific.  Same as -fstack-check=.
+  -fstack-check=[no|generic|specific] Insert stack checking code into the program.
+  -fstack-clash-protection    Insert code to probe each page of stack space as it is allocated to protect from stack-clash style attacks.
+  -fstack-limit               This option lacks documentation.
+  -fstack-limit-register=<register> Trap if the stack goes past <register>.
+  -fstack-limit-symbol=<name> Trap if the stack goes past symbol <name>.
+  -fstack-protector           Use propolice as a stack protection method.
+  -fstack-protector-all       Use a stack protection method for every function.
+  -fstack-protector-explicit  Use stack protection method only for functions with the stack_protect attribute.
+  -fstack-protector-strong    Use a smart stack protection method for certain functions.
+  -fstack-reuse=[all|named_vars|none] Set stack reuse level for local variables.
+  -fstack-usage               Output stack usage information on a per-function basis.
+  -fstdarg-opt                Optimize amount of stdarg registers saved to stack at start of function.
+  -fstore-merging             Merge adjacent stores.
+  -fstrength-reduce           Does nothing.  Preserved for backward compatibility.
+  -fstrict-aliasing           Assume strict aliasing rules apply.
+  -fstrict-overflow           Treat signed overflow as undefined.  Negated as -fwrapv -fwrapv-pointer.
+  -fstrict-volatile-bitfields Force bitfield accesses to match their type width.
+  -fsync-libcalls             Implement __atomic operations via libcalls to legacy __sync functions.
+  -fsyntax-only               Check for syntax errors, then stop.
+  -ftabstop=                  -ftabstop=<number>      Distance between tab stops for column reporting.
+  -ftarget-help               Same as --target-help.
+  -ftest-coverage             Create data files needed by "gcov".
+  -fthread-jumps              Perform jump threading optimizations.
+  -ftime-report               Report the time taken by each compiler pass.
+  -ftime-report-details       Record times taken by sub-phases separately.
+  -ftls-model=[global-dynamic|local-dynamic|initial-exec|local-exec] Set the default thread-local storage code generation model.
+  -ftoplevel-reorder          Reorder top level functions, variables, and asms.
+  -ftracer                    Perform superblock formation via tail duplication.
+  -ftrampolines               For targets that normally need trampolines for nested functions, always generate them instead of using descriptors.
+  -ftrapping-math             Assume floating-point operations can trap.
+  -ftrapv                     Trap for signed overflow in addition, subtraction and multiplication.
+  -ftree-bit-ccp              Enable SSA-BIT-CCP optimization on trees.
+  -ftree-builtin-call-dce     Enable conditional dead code elimination for builtin calls.
+  -ftree-ccp                  Enable SSA-CCP optimization on trees.
+  -ftree-ch                   Enable loop header copying on trees.
+  -ftree-coalesce-inlined-vars Does nothing.  Preserved for backward compatibility.
+  -ftree-coalesce-vars        Enable SSA coalescing of user variables.
+  -ftree-copy-prop            Enable copy propagation on trees.
+  -ftree-copyrename           Does nothing.  Preserved for backward compatibility.
+  -ftree-cselim               Transform condition stores into unconditional ones.
+  -ftree-dce                  Enable SSA dead code elimination optimization on trees.
+  -ftree-dominator-opts       Enable dominator optimizations.
+  -ftree-dse                  Enable dead store elimination.
+  -ftree-forwprop             Enable forward propagation on trees.
+  -ftree-fre                  Enable Full Redundancy Elimination (FRE) on trees.
+  -ftree-loop-distribute-patterns Enable loop distribution for patterns transformed into a library call.
+  -ftree-loop-distribution    Enable loop distribution on trees.
+  -ftree-loop-if-convert      Convert conditional jumps in innermost loops to branchless equivalents.
+  -ftree-loop-if-convert-stores Does nothing. Preserved for backward compatibility.
+  -ftree-loop-im              Enable loop invariant motion on trees.
+  -ftree-loop-ivcanon         Create canonical induction variables in loops.
+  -ftree-loop-linear          Enable loop nest transforms.  Same as -floop-nest-optimize.  Same as -floop-nest-optimize.
+  -ftree-loop-optimize        Enable loop optimizations on tree level.
+  -ftree-loop-vectorize       Enable loop vectorization on trees.
+  -ftree-lrs                  Perform live range splitting during the SSA->normal pass.
+  -ftree-parallelize-loops=<number> Enable automatic parallelization of loops.
+  -ftree-partial-pre          In SSA-PRE optimization on trees, enable partial-partial redundancy elimination.
+  -ftree-phiprop              Enable hoisting loads from conditional pointers.
+  -ftree-pre                  Enable SSA-PRE optimization on trees.
+  -ftree-pta                  Perform function-local points-to analysis on trees.
+  -ftree-reassoc              Enable reassociation on tree level.
+  -ftree-salias               Does nothing.  Preserved for backward compatibility.
+  -ftree-scev-cprop           Enable copy propagation of scalar-evolution information.
+  -ftree-sink                 Enable SSA code sinking on trees.
+  -ftree-slp-vectorize        Enable basic block vectorization (SLP) on trees.
+  -ftree-slsr                 Perform straight-line strength reduction.
+  -ftree-sra                  Perform scalar replacement of aggregates.
+  -ftree-store-ccp            Does nothing.  Preserved for backward compatibility.
+  -ftree-store-copy-prop      Does nothing.  Preserved for backward compatibility.
+  -ftree-switch-conversion    Perform conversions of switch initializations.
+  -ftree-tail-merge           Enable tail merging on trees.
+  -ftree-ter                  Replace temporary expressions in the SSA->normal pass.
+  -ftree-vect-loop-version    Does nothing. Preserved for backward compatibility.
+  -ftree-vectorize            Enable vectorization on trees.
+  -ftree-vectorizer-verbose=  Does nothing.  Preserved for backward compatibility.
+  -ftree-vrp                  Perform Value Range Propagation on trees.
+  -ftrivial-auto-var-init=[uninitialized|pattern|zero] Add initializations to automatic variables.
+  -funconstrained-commons     Assume common declarations may be overridden with ones with a larger trailing array.
+  -funit-at-a-time            Compile whole compilation unit at a time.
+  -funreachable-traps         Trap on __builtin_unreachable instead of using it for optimization.
+  -funroll-all-loops          Perform loop unrolling for all loops.
+  -funroll-loops              Perform loop unrolling when iteration count is known.
+  -funsafe-loop-optimizations Does nothing.  Preserved for backward compatibility.
+  -funsafe-math-optimizations Allow math optimizations that may violate IEEE or ISO standards.
+  -funswitch-loops            Perform loop unswitching.
+  -funwind-tables             Just generate unwind tables for exception handling.
+  -fuse-ld=bfd                Use the bfd linker instead of the default linker.
+  -fuse-ld=gold               Use the gold linker instead of the default linker.
+  -fuse-ld=lld                Use the lld LLVM linker instead of the default linker.
+  -fuse-ld=mold               Use the Modern linker (MOLD) linker instead of the default linker.
+  -fuse-linker-plugin         This option lacks documentation.
+  -fvar-tracking              Perform variable tracking.
+  -fvar-tracking-assignments  Perform variable tracking by annotating assignments.
+  -fvar-tracking-assignments-toggle Toggle -fvar-tracking-assignments.
+  -fvar-tracking-uninit       Perform variable tracking and also tag variables that are uninitialized.
+  -fvariable-expansion-in-unroller Apply variable expansion when loops are unrolled.
+  -fvect-cost-model           Enables the dynamic vectorizer cost model.  Preserved for backward compatibility.  Same as -fvect-cost-model=.
+  -fvect-cost-model=[unlimited|dynamic|cheap|very-cheap] Specifies the cost model for vectorization.
+  -fverbose-asm               Add extra commentary to assembler output.
+  -fversion                   This option lacks documentation.
+  -fversion-loops-for-strides Version loops based on whether indices have a stride of one.
+  -fvisibility=[default|internal|hidden|protected] Set the default symbol visibility.
+  -fvpt                       Use expression value profiles in optimizations.
+  -fvtable-verify=            Validate vtable pointers before using them.
+  -fvtv-counts                Output vtable verification counters.
+  -fvtv-debug                 Output vtable verification pointer sets information.
+  -fweb                       Construct webs and split unrelated uses of single variable.
+  -fwhole-program             Perform whole program optimizations.
+  -fwrapv                     Assume signed arithmetic overflow wraps around.
+  -fwrapv-pointer             Assume pointer overflow wraps around.
+  -fzee                       Does nothing.  Preserved for backward compatibility.
+  -fzero-call-used-regs=      Clear call-used registers upon function return.
+  -fzero-initialized-in-bss   Put zero initialized data in the bss section.
+  -g                          Generate debug information in default format.
+  -gas-loc-support            Assume assembler support for (DWARF2+) .loc directives.
+  -gas-locview-support        Assume assembler support for view in (DWARF2+) .loc directives.
+  -gbtf                       Generate BTF debug information at default level.
+  -gcoff                      Does nothing.  Preserved for backward compatibility.
+  -gcoff1                     Does nothing.  Preserved for backward compatibility.
+  -gcoff2                     Does nothing.  Preserved for backward compatibility.
+  -gcoff3                     Does nothing.  Preserved for backward compatibility.
+  -gcolumn-info               Record DW_AT_decl_column and DW_AT_call_column in DWARF.
+  -gctf                       Generate CTF debug information at default level.
+  -gdescribe-dies             Add description attributes to some DWARF DIEs that have no name attribute.
+  -gdwarf                     Generate debug information in default version of DWARF format.
+  -gdwarf-                    Generate debug information in DWARF v2 (or later) format.
+  -gdwarf32                   Use 32-bit DWARF format when emitting DWARF debug information.
+  -gdwarf64                   Use 64-bit DWARF format when emitting DWARF debug information.
+  -ggdb                       Generate debug information in default extended format.
+  -ggnu-pubnames              Generate DWARF pubnames and pubtypes sections with GNU extensions.
+  -ginline-points             Generate extended entry point information for inlined functions.
+  -ginternal-reset-location-views Compute locview reset points based on insn length estimates.
+  -gno-pubnames               Don't generate DWARF pubnames and pubtypes sections.
+  -gpubnames                  Generate DWARF pubnames and pubtypes sections.
+  -grecord-gcc-switches       Record gcc command line switches in DWARF DW_AT_producer.
+  -gsplit-dwarf               Generate debug information in separate .dwo files.
+  -gstabs                     Does nothing.  Preserved for backward compatibility.
+  -gstabs+                    Does nothing.  Preserved for backward compatibility.
+  -gstatement-frontiers       Emit progressive recommended breakpoint locations.
+  -gstrict-dwarf              Don't emit DWARF additions beyond selected version.
+  -gtoggle                    Toggle debug information generation.
+  -gvariable-location-views   Augment variable location lists with progressive views.
+  -gvariable-location-views=incompat5 This option lacks documentation.
+  -gvms                       Generate debug information in VMS format.
+  -gxcoff                     Does nothing.  Preserved for backward compatibility.
+  -gxcoff+                    Does nothing.  Preserved for backward compatibility.
+  -gz                         Generate compressed debug sections.
+  -gz=<format>                Generate compressed debug sections in format <format>.
+  -imultiarch <dir>           Set <dir> to be the multiarch include subdirectory.
+  -iplugindir=<dir>           Set <dir> to be the default plugin directory.
+  -o <file>                   Place output into <file>.
+  -p                          Enable function profiling.
+  -pedantic-errors            Like -pedantic but issue them as errors.
+  -quiet                      Do not display functions compiled or elapsed time.
+  -v                          Enable verbose output.
+  -version                    Display the compiler's version.
+

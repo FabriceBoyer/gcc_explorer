@@ -1,0 +1,7 @@
+Wimplicit-fallthrough.c: In function 'classify':
+Wimplicit-fallthrough.c:6:11: warning: this statement may fall through [-Wimplicit-fallthrough=]
+         r = 10;
+         ~~^~~~
+Wimplicit-fallthrough.c:7:5: note: here
+     case 2:
+     ^~~~

@@ -1,0 +1,22 @@
+The following options are supported by the language Ada:
+  --all-warnings              Same as -Wall.
+  --include-barrier           Same as -I-.
+  --include-directory         Same as -I.
+  --include-directory=        Same as -I.
+  --no-standard-includes      Same as -nostdinc.
+  --no-standard-libraries     Same as -nostdlib.
+  -I <dir>                    Add <dir> to the end of the main include path.
+  -Wall                       Enable most warning messages.
+  -fRTS=                      Select the runtime.
+  -fbuiltin-printf            Ignored.
+  -fdump-scos                 Dump Source Coverage Obligations.
+  -fopenacc                   Enable OpenACC.
+  -fshort-enums               Use the narrowest integer type possible for enumeration types.
+  -fsigned-char               Make "char" signed by default.
+  -funsigned-char             Make "char" unsigned by default.
+  -gant                       Catch typos.
+  -gnat<options>              Specify options to GNAT.
+  -gnatO                      Set name of output ALI file (internal switch).
+  -nostdinc                   Do not search standard system include directories (those specified with -isystem will still be used).
+  -nostdlib                   Do not look for object files in standard path.
+

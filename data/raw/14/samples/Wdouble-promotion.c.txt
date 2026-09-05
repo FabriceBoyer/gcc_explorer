@@ -1,0 +1,4 @@
+Wdouble-promotion.c: In function 'scale':
+Wdouble-promotion.c:3:14: warning: implicit conversion from 'float' to 'double' to match other operand of binary expression [-Wdouble-promotion]
+    3 |     return x * 1.5;
+      |              ^

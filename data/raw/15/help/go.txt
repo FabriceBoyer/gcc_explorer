@@ -1,0 +1,21 @@
+The following options are supported by the language Go:
+  -I <dir>                    Add <dir> to the end of the main include path.
+  -L                          This option lacks documentation.
+  -Wall                       Enable most warning messages.
+  -fgo-c-header=<file>        Write Go struct definitions to file as C code.
+  -fgo-check-divide-overflow  Add explicit checks for division overflow in INT_MIN / -1.
+  -fgo-check-divide-zero      Add explicit checks for division by zero.
+  -fgo-compiling-runtime      Apply special rules for compiling runtime package.
+  -fgo-debug-escape           Emit debugging information related to the escape analysis pass when run with -fgo-optimize-allocs.
+  -fgo-debug-escape-hash=<string> Hash value to debug escape analysis.
+  -fgo-debug-optimization     Emit optimization diagnostics.
+  -fgo-dump-<type>            Dump Go frontend internal information.
+  -fgo-embedcfg=<file>        List embedded files via go:embed.
+  -fgo-importcfg=<file>       Provide file that tells where to find imports.
+  -fgo-optimize-<type>        Turn on optimization passes in the frontend.
+  -fgo-pkgpath=<string>       Set Go package path.
+  -fgo-prefix=<string>        Set package-specific prefix for exported Go names.
+  -fgo-relative-import-path=<path> Treat a relative import as relative to path.
+  -frequire-return-statement  Functions which return values must end with return statements.
+  -o <file>                   Place output into <file>.
+

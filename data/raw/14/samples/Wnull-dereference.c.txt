@@ -1,0 +1,4 @@
+Wnull-dereference.c: In function 'deref':
+Wnull-dereference.c:4:16: warning: null pointer dereference [-Wnull-dereference]
+    4 |         return *p;
+      |                ^~

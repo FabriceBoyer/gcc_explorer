@@ -1,0 +1,346 @@
+The following options are supported by the language C:
+  --all-warnings              Same as -Wall.  Use the latter option instead.
+  --ansi                      Same as -ansi.  Use the latter option instead.
+  --assert                    Same as -A.  Use the latter option instead.
+  --assert=                   Same as -A.  Use the latter option instead.
+  --comments                  Same as -C.  Use the latter option instead.
+  --comments-in-macros        Same as -CC.  Use the latter option instead.
+  --define-macro              Same as -D.  Use the latter option instead.
+  --define-macro=             Same as -D.  Use the latter option instead.
+  --dependencies              Same as -M.  Use the latter option instead.
+  --dump                      Same as -d.  Use the latter option instead.
+  --dump=                     Same as -d.  Use the latter option instead.
+  --imacros                   Same as -imacros.  Use the latter option instead.
+  --imacros=                  Same as -imacros.  Use the latter option instead.
+  --include                   Same as -include.  Use the latter option instead.
+  --include-barrier           Same as -I.  Use the latter option instead.
+  --include-directory         Same as -I.  Use the latter option instead.
+  --include-directory-after   Same as -idirafter.  Use the latter option instead.
+  --include-directory-after=  Same as -idirafter.  Use the latter option instead.
+  --include-directory=        Same as -I.  Use the latter option instead.
+  --include-prefix            Same as -iprefix.  Use the latter option instead.
+  --include-prefix=           Same as -iprefix.  Use the latter option instead.
+  --include-with-prefix       Same as -iwithprefix.  Use the latter option instead.
+  --include-with-prefix-after Same as -iwithprefix.  Use the latter option instead.
+  --include-with-prefix-after= Same as -iwithprefix.  Use the latter option instead.
+  --include-with-prefix-before Same as -iwithprefixbefore.  Use the latter option instead.
+  --include-with-prefix-before= Same as -iwithprefixbefore.  Use the latter option instead.
+  --include-with-prefix=      Same as -iwithprefix.  Use the latter option instead.
+  --include=                  Same as -include.  Use the latter option instead.
+  --no-line-commands          Same as -P.  Use the latter option instead.
+  --no-standard-includes      Same as -nostdinc.  Use the latter option instead.
+  --no-warnings               Same as -w.  Use the latter option instead.
+  --output                    Same as -o.  Use the latter option instead.
+  --output-pch=               This option lacks documentation.
+  --output=                   Same as -o.  Use the latter option instead.
+  --pedantic                  Same as -Wpedantic.  Use the latter option instead.
+  --preprocess                This option lacks documentation.
+  --print-missing-file-dependencies Same as -MG.  Use the latter option instead.
+  --trace-includes            Same as -H.  Use the latter option instead.
+  --traditional-cpp           Same as -traditional-cpp.  Use the latter option instead.
+  --trigraphs                 Same as -trigraphs.  Use the latter option instead.
+  --undefine-macro            Same as -U.  Use the latter option instead.
+  --undefine-macro=           Same as -U.  Use the latter option instead.
+  --user-dependencies         Same as -MM.  Use the latter option instead.
+  --verbose                   Same as -v.  Use the latter option instead.
+  --write-dependencies        Same as -MD.  Use the latter option instead.
+  --write-user-dependencies   Same as -MMD.  Use the latter option instead.
+  -A<question>=<answer>       Assert the <answer> to <question>.  Putting '-' before <question> disables the <answer> to <question>.
+  -C                          Do not discard comments.
+  -CC                         Do not discard comments in macro expansions.
+  -D<macro>[=<val>]           Define a <macro> with <val> as its value.  If just <macro> is given, <val> is taken to be 1.
+  -E                          This option lacks documentation.
+  -F <dir>                    Add <dir> to the end of the main framework include path.
+  -H                          Print the name of header files as they are used.
+  -I <dir>                    Add <dir> to the end of the main include path.
+  -M                          Generate make dependencies.
+  -MD                         Generate make dependencies and compile.
+  -MF <file>                  Write dependency output to the given file.
+  -MG                         Treat missing header files as generated files.
+  -MM                         Like -M but ignore system header files.
+  -MMD                        Like -MD but ignore system header files.
+  -MP                         Generate phony targets for all headers.
+  -MQ <target>                Add a MAKE-quoted target.
+  -MT <target>                Add an unquoted target.
+  -P                          Do not generate #line directives.
+  -U<macro>                   Undefine <macro>.
+  -Wabi                       Warn about things that will change when compiling with an ABI-compliant compiler.
+  -Wabi=                      Warn about things that change between the current -fabi-version and the specified version.
+  -Waddress                   Warn about suspicious uses of memory addresses.
+  -Wall                       Enable most warning messages.
+  -Walloc-size-larger-than=   -Walloc-size-larger-than=<bytes> Warn for calls to allocation functions that attempt to allocate objects larger than the specified number of bytes.
+  -Walloc-zero                -Walloc-zero Warn for calls to allocation functions that specify zero bytes.
+  -Walloca                    Warn on any use of alloca.
+  -Walloca-larger-than=<number> Warn on unbounded uses of alloca, and on bounded uses of alloca whose bound can be larger than <number> bytes.
+  -Wbad-function-cast         Warn about casting functions to incompatible types.
+  -Wbool-compare              Warn about boolean expression compared with an integer value different from true/false.
+  -Wbool-operation            Warn about certain operations on boolean expressions.
+  -Wbuiltin-declaration-mismatch Warn when a built-in function is declared with the wrong signature.
+  -Wbuiltin-macro-redefined   Warn when a built-in preprocessor macro is undefined or redefined.
+  -Wc++-compat                Warn about C constructs that are not in the common subset of C and C++.
+  -Wc90-c99-compat            Warn about features not present in ISO C90, but present in ISO C99.
+  -Wc99-c11-compat            Warn about features not present in ISO C99, but present in ISO C11.
+  -Wcast-function-type        Warn about casts between incompatible function types.
+  -Wcast-qual                 Warn about casts which discard qualifiers.
+  -Wchar-subscripts           Warn about subscripts whose type is "char".
+  -Wchkp                      Warn about memory access errors found by Pointer Bounds Checker.
+  -Wclobbered                 Warn about variables that might be changed by "longjmp" or "vfork".
+  -Wcomment                   Warn about possibly nested block comments, and C++ comments spanning more than one physical line.
+  -Wcomments                  Synonym for -Wcomment.  Same as -Wcomment.
+  -Wconversion                Warn for implicit type conversions that may change a value.
+  -Wcpp                       Warn when a #warning directive is encountered.
+  -Wdangling-else             Warn about dangling else.
+  -Wdate-time                 Warn about __TIME__, __DATE__ and __TIMESTAMP__ usage.
+  -Wdeclaration-after-statement Warn when a declaration is found after a statement.
+  -Wdeprecated                Warn if a deprecated compiler feature, class, method, or field is used.
+  -Wdesignated-init           Warn about positional initialization of structs requiring designated initializers.
+  -Wdiscarded-array-qualifiers Warn if qualifiers on arrays which are pointer targets are discarded.
+  -Wdiscarded-qualifiers      Warn if type qualifiers on pointers are discarded.
+  -Wdiv-by-zero               Warn about compile-time integer division by zero.
+  -Wdouble-promotion          Warn about implicit conversions from "float" to "double".
+  -Wduplicate-decl-specifier  Warn when a declaration has duplicate const, volatile, restrict or _Atomic specifier.
+  -Wduplicated-branches       Warn about duplicated branches in if-else statements.
+  -Wduplicated-cond           Warn about duplicated conditions in an if-else-if chain.
+  -Wempty-body                Warn about an empty body in an if or else statement.
+  -Wendif-labels              Warn about stray tokens after #else and #endif.
+  -Wenum-compare              Warn about comparison of different enum types.
+  -Werror                     Treat all warnings as errors.
+  -Werror-implicit-function-declaration This switch is deprecated; use -Werror=implicit-function-declaration instead.  Same as -Werror=.
+  -Wexpansion-to-defined      Warn if "defined" is used outside #if.
+  -Wextra                     Print extra (possibly unwanted) warnings.
+  -Wfloat-conversion          Warn for implicit type conversions that cause loss of floating point precision.
+  -Wfloat-equal               Warn if testing floating point numbers for equality.
+  -Wformat                    Warn about printf/scanf/strftime/strfmon format string anomalies.  Same as -Wformat=.
+  -Wformat-contains-nul       Warn about format strings that contain NUL bytes.
+  -Wformat-extra-args         Warn if passing too many arguments to a function for its format string.
+  -Wformat-nonliteral         Warn about format strings that are not literals.
+  -Wformat-overflow<0,2>      Warn about function calls with format strings that write past the end of the destination region.  Same as -Wformat-overflow=1.  Same as -Wformat-overflow=.
+  -Wformat-overflow=<0,2>     Warn about function calls with format strings that write past the end of the destination region.
+  -Wformat-security           Warn about possible security problems with format functions.
+  -Wformat-signedness         Warn about sign differences with format functions.
+  -Wformat-truncation         Warn about calls to snprintf and similar functions that truncate output. Same as -Wformat-truncation=1.  Same as -Wformat-truncation=.
+  -Wformat-truncation=<0,2>   Warn about calls to snprintf and similar functions that truncate output.
+  -Wformat-y2k                Warn about strftime formats yielding 2-digit years.
+  -Wformat-zero-length        Warn about zero-length formats.
+  -Wformat=<0,2>              Warn about printf/scanf/strftime/strfmon format string anomalies.
+  -Wframe-address             Warn when __builtin_frame_address or __builtin_return_address is used unsafely.
+  -Wif-not-aligned            Warn when the field in a struct is not aligned.
+  -Wignored-attributes        Warn whenever attributes are ignored.
+  -Wignored-qualifiers        Warn whenever type qualifiers are ignored.
+  -Wimplicit                  Warn about implicit declarations.
+  -Wimplicit-function-declaration Warn about implicit function declarations.
+  -Wimplicit-int              Warn when a declaration does not specify a type.
+  -Wimport                    This option lacks documentation.
+  -Wincompatible-pointer-types Warn when there is a conversion between pointers that have incompatible types.
+  -Winit-self                 Warn about variables which are initialized to themselves.
+  -Wint-conversion            Warn about incompatible integer to pointer and pointer to integer conversions.
+  -Wint-in-bool-context       Warn for suspicious integer expressions in boolean context.
+  -Wint-to-pointer-cast       Warn when there is a cast to a pointer from an integer of a different size.
+  -Winvalid-pch               Warn about PCH files that are found but not used.
+  -Wjump-misses-init          Warn when a jump misses a variable initialization.
+  -Wlogical-not-parentheses   Warn when logical not is used on the left hand side operand of a comparison.
+  -Wlogical-op                Warn when a logical operator is suspiciously always evaluating to true or false.
+  -Wlong-long                 Do not warn about using "long long" when -pedantic.
+  -Wmain                      Warn about suspicious declarations of "main".
+  -Wmaybe-uninitialized       Warn about maybe uninitialized automatic variables.
+  -Wmemset-elt-size           Warn about suspicious calls to memset where the third argument contains the number of elements not multiplied by the element size.
+  -Wmemset-transposed-args    Warn about suspicious calls to memset where the third argument is constant literal zero and the second is not.
+  -Wmisleading-indentation    Warn when the indentation of the code does not reflect the block structure.
+  -Wmissing-attributes        Warn about declarations of entities that may be missing attributes that related entities have been declared with it.
+  -Wmissing-braces            Warn about possibly missing braces around initializers.
+  -Wmissing-declarations      Warn about global functions without previous declarations.
+  -Wmissing-field-initializers Warn about missing fields in struct initializers.
+  -Wmissing-format-attribute  Same as -Wsuggest-attribute=format.  Use the latter option instead.
+  -Wmissing-include-dirs      Warn about user-specified include directories that do not exist.
+  -Wmissing-parameter-type    Warn about function parameters declared without a type specifier in K&R-style functions.
+  -Wmissing-prototypes        Warn about global functions without prototypes.
+  -Wmudflap                   This option lacks documentation.  Uses of this option are diagnosed.
+  -Wmultichar                 Warn about use of multi-character character constants.
+  -Wmultistatement-macros     Warn about unsafe macros expanding to multiple statements used as a body of a clause such as if, else, while, switch, or for.
+  -Wnarrowing                 Warn about narrowing conversions within { } that are ill-formed in C++11.
+  -Wnested-externs            Warn about "extern" declarations not at file scope.
+  -Wnonnull                   Warn about NULL being passed to argument slots marked as requiring non-NULL.
+  -Wnonnull-compare           Warn if comparing pointer parameter with nonnull attribute with NULL.
+  -Wnormalized                Same as -Wnormalized=.  Use the latter option instead.
+  -Wnormalized=[none|id|nfc|nfkc] Warn about non-normalized Unicode strings.
+  -Wold-style-declaration     Warn for obsolescent usage in a declaration.
+  -Wold-style-definition      Warn if an old-style parameter definition is used.
+  -Wopenmp-simd               Warn if a simd directive is overridden by the vectorizer cost model.
+  -Woverlength-strings        Warn if a string is longer than the maximum portable length specified by the standard.
+  -Woverride-init             Warn about overriding initializers without side effects.
+  -Woverride-init-side-effects Warn about overriding initializers with side effects.
+  -Wpacked-bitfield-compat    Warn about packed bit-fields whose offset changed in GCC 4.4.
+  -Wpacked-not-aligned        Warn when fields in a struct with the packed attribute are misaligned.
+  -Wparentheses               Warn about possibly missing parentheses.
+  -Wpedantic                  Issue warnings needed for strict compliance to the standard.
+  -Wpointer-arith             Warn about function pointer arithmetic.
+  -Wpointer-compare           Warn when a pointer is compared with a zero character constant.
+  -Wpointer-sign              Warn when a pointer differs in signedness in an assignment.
+  -Wpointer-to-int-cast       Warn when a pointer is cast to an integer of a different size.
+  -Wpragmas                   Warn about misuses of pragmas.
+  -Wpsabi                     This option lacks documentation.
+  -Wredundant-decls           Warn about multiple declarations of the same object.
+  -Wrestrict                  Warn when an argument passed to a restrict-qualified parameter aliases with another argument.
+  -Wreturn-type               Warn whenever a function's return type defaults to "int" (C), or about inconsistent return types (C++).
+  -Wscalar-storage-order      Warn on suspicious constructs involving reverse scalar storage order.
+  -Wsequence-point            Warn about possible violations of sequence point rules.
+  -Wshift-count-negative      Warn if shift count is negative.
+  -Wshift-count-overflow      Warn if shift count >= width of type.
+  -Wshift-negative-value      Warn if left shifting a negative value.
+  -Wshift-overflow            Warn if left shift of a signed value overflows.  Same as -Wshift-overflow=.
+  -Wshift-overflow=<0,2>      Warn if left shift of a signed value overflows.
+  -Wsign-compare              Warn about signed-unsigned comparisons.
+  -Wsign-conversion           Warn for implicit type conversions between signed and unsigned integers.
+  -Wsizeof-array-argument     Warn when sizeof is applied on a parameter declared as an array.
+  -Wsizeof-pointer-div        Warn about suspicious divisions of two sizeof expressions that don't work correctly with pointers.
+  -Wsizeof-pointer-memaccess  Warn about suspicious length parameters to certain string functions if the argument uses sizeof.
+  -Wstrict-aliasing=<0,3>     Warn about code which might break strict aliasing rules.
+  -Wstrict-overflow=<0,5>     Warn about optimizations that assume that signed overflow is undefined.
+  -Wstrict-prototypes         Warn about unprototyped function declarations.
+  -Wstringop-overflow         Warn about buffer overflow in string manipulation functions like memcpy and strcpy.  Same as -Wstringop-overflow=.
+  -Wstringop-overflow=<0,4>   Under the control of Object Size type, warn about buffer overflow in string manipulation functions like memcpy and strcpy.
+  -Wstringop-truncation       Warn about truncation in string manipulation functions like strncat and strncpy.
+  -Wsuggest-attribute=format  Warn about functions which might be candidates for format attributes.
+  -Wswitch                    Warn about enumerated switches, with no default, missing a case.
+  -Wswitch-bool               Warn about switches with boolean controlling expression.
+  -Wswitch-default            Warn about enumerated switches missing a "default:" statement.
+  -Wswitch-enum               Warn about all enumerated switches missing a specific case.
+  -Wsync-nand                 Warn when __sync_fetch_and_nand and __sync_nand_and_fetch built-in functions are used.
+  -Wsystem-headers            Do not suppress warnings from system headers.
+  -Wtautological-compare      Warn if a comparison always evaluates to true or false.
+  -Wtraditional               Warn about features not present in traditional C.
+  -Wtraditional-conversion    Warn of prototypes causing type conversions different from what would happen in the absence of prototype.
+  -Wtrigraphs                 Warn if trigraphs are encountered that might affect the meaning of the program.
+  -Wundef                     Warn if an undefined macro is used in an #if directive.
+  -Wuninitialized             Warn about uninitialized automatic variables.
+  -Wunknown-pragmas           Warn about unrecognized pragmas.
+  -Wunsuffixed-float-constants Warn about unsuffixed float constants.
+  -Wunused                    Enable all -Wunused- warnings.
+  -Wunused-const-variable     Warn when a const variable is unused.  Same as -Wunused-const-variable=.
+  -Wunused-const-variable=<0,2> Warn when a const variable is unused.
+  -Wunused-local-typedefs     Warn when typedefs locally defined in a function are not used.
+  -Wunused-macros             Warn about macros defined in the main file that are not used.
+  -Wunused-result             Warn if a caller of a function, marked with attribute warn_unused_result, does not use its return value.
+  -Wunused-variable           Warn when a variable is unused.
+  -Wvarargs                   Warn about questionable usage of the macros used to retrieve variable arguments.
+  -Wvariadic-macros           Warn about using variadic macros.
+  -Wvla                       Warn if a variable length array is used.
+  -Wvla-larger-than=<number>  Warn on unbounded uses of variable-length arrays, and on bounded uses of variable-length arrays whose bound can be larger than <number> bytes.
+  -Wvolatile-register-var     Warn when a register variable is declared volatile.
+  -Wwrite-strings             In C++, nonzero means warn about deprecated conversion from string literals to 'char *'.  In C, similar warning, except that the conversion is of course not deprecated by the ISO C standard.
+  -ansi                       A synonym for -std=c89 (for C) or -std=c++98 (for C++).
+  -d<letters>                 Enable dumps from specific passes of the compiler.
+  -fada-spec-parent=          -fada-spec-parent=unit  Dump Ada specs as child units of given parent.
+  -fallow-parameterless-variadic-functions Allow variadic functions without named parameter.
+  -fasm                       Recognize the "asm" keyword.
+  -fbuilding-libgcc           This option lacks documentation.
+  -fbuiltin                   Recognize built-in functions.
+  -fbuiltin-                  This option lacks documentation.
+  -fcanonical-system-headers  Where shorter, use canonicalized paths to systems headers.
+  -fcheck-pointer-bounds      Add Pointer Bounds Checker instrumentation.  fchkp-* flags are used to control instrumentation.  Currently available for C, C++ and ObjC.
+  -fchkp-check-incomplete-type Generate pointer bounds checks for variables with incomplete type.
+  -fchkp-check-read           Generate checks for all read accesses to memory.
+  -fchkp-check-write          Generate checks for all write accesses to memory.
+  -fchkp-first-field-has-own-bounds Forces Pointer Bounds Checker to use narrowed bounds for address of the first field in the structure.  By default pointer to the first field has the same bounds as pointer to the whole structure.
+  -fchkp-flexible-struct-trailing-arrays Forces Pointer Bounds Checker to treat all trailing arrays in structures as possibly flexible.  By default only arrays fields with zero length or that are marked with attribute bnd_variable_size are treated as flexible.
+  -fchkp-instrument-calls     Generate bounds passing for calls.
+  -fchkp-instrument-marked-only Instrument only functions marked with bnd_instrument attribute.
+  -fchkp-narrow-bounds        Control how Pointer Bounds Checker handle pointers to object fields.  When narrowing is on, field bounds are used.  Otherwise full object bounds are used.
+  -fchkp-narrow-to-innermost-array Forces Pointer Bounds Checker to use bounds of the innermost arrays in case of nested static arrays access.  By default outermost array is used.
+  -fchkp-optimize             Allow Pointer Bounds Checker optimizations.  By default allowed on optimization levels >0.
+  -fchkp-store-bounds         Generate bounds stores for pointer writes.
+  -fchkp-treat-zero-dynamic-size-as-infinite With this option zero size obtained dynamically for objects with incomplete type will be treated as infinite.
+  -fchkp-use-fast-string-functions Allow to use *_nobnd versions of string functions by Pointer Bounds Checker.
+  -fchkp-use-nochk-string-functions Allow to use *_nochk versions of string functions by Pointer Bounds Checker.
+  -fchkp-use-static-bounds    Use statically initialized variable for vars bounds instead of generating them each time it is required.
+  -fchkp-use-static-const-bounds Use statically initialized variable for constant bounds instead of generating them each time it is required.
+  -fchkp-use-wrappers         Transform instrumented builtin calls into calls to wrappers.
+  -fchkp-zero-input-bounds-for-main Use zero bounds for all incoming arguments in 'main' function.  It helps when instrumented binaries are used with legacy libs.
+  -fcilkplus                  Deprecated in GCC 8.  This switch has no effect.
+  -fcond-mismatch             Allow the arguments of the '?' operator to have different types.
+  -fdebug-cpp                 Emit debug annotations during preprocessing.
+  -fdirectives-only           Preprocess directives only.
+  -fdollars-in-identifiers    Permit '$' as an identifier character.
+  -fdump-ada-spec             Write all declarations as Ada code transitively.
+  -fdump-ada-spec-slim        Write all declarations as Ada code for the given file only.
+  -femit-struct-debug-baseonly Aggressive reduced debug info for structs.
+  -femit-struct-debug-detailed=<spec-list> Detailed reduced debug info for structs.
+  -femit-struct-debug-reduced Conservative reduced debug info for structs.
+  -fexec-charset=<cset>       Convert all strings and character constants to character set <cset>.
+  -fextended-identifiers      Permit universal character names (\u and \U) in identifiers.
+  -ffreestanding              Do not assume that standard C libraries and "main" exist.
+  -fgimple                    Enable parsing GIMPLE.
+  -fgnu89-inline              Use traditional GNU semantics for inline functions.
+  -fhosted                    Assume normal C execution environment.
+  -finput-charset=<cset>      Specify the default character set for source files.
+  -flax-vector-conversions    Allow implicit conversions between vectors with differing numbers of subparts and/or differing element types.
+  -fmacro-prefix-map=         -fmacro-prefix-map=<old>=<new> Map one directory name to another in __FILE__, __BASE_FILE__, and __builtin_FILE().
+  -fms-extensions             Don't warn about uses of Microsoft extensions.
+  -fmudflap                   This option lacks documentation.  Uses of this option are diagnosed.
+  -fmudflapir                 This option lacks documentation.  Uses of this option are diagnosed.
+  -fmudflapth                 This option lacks documentation.  Uses of this option are diagnosed.
+  -fopenacc                   Enable OpenACC.
+  -fopenacc-dim=              Specify default OpenACC compute dimensions.
+  -fopenmp                    Enable OpenMP (implies -frecursive in Fortran).
+  -fopenmp-simd               Enable OpenMP's SIMD directives.
+  -fpch-deps                  This option lacks documentation.
+  -fpch-preprocess            Look for and use PCH files even when preprocessing.
+  -fplan9-extensions          Enable Plan 9 language extensions.
+  -fpreprocessed              Treat the input file as already preprocessed.
+  -fprintf-return-value       Treat known sprintf return values as constants.
+  -fshort-enums               Use the narrowest integer type possible for enumeration types.
+  -fshort-wchar               Force the underlying type for "wchar_t" to be "unsigned short".
+  -fsigned-bitfields          When "signed" or "unsigned" is not given make the bitfield signed.
+  -fsigned-char               Make "char" signed by default.
+  -fsso-struct=[big-endian|little-endian|native] Set the default scalar storage order.
+  -ftabstop=<number>          Distance between tab stops for column reporting.
+  -ftrack-macro-expansion     This option lacks documentation.
+  -ftrack-macro-expansion=    -ftrack-macro-expansion=<0|1|2>  Track locations of tokens coming from macro expansion and display them in error messages.
+  -funsigned-bitfields        When "signed" or "unsigned" is not given make the bitfield unsigned.
+  -funsigned-char             Make "char" unsigned by default.
+  -fwide-exec-charset=<cset>  Convert all wide strings and character constants to character set <cset>.
+  -fworking-directory         Generate a #line directive pointing at the current working directory.
+  -idirafter <dir>            Add <dir> to the end of the system include path.
+  -imacros <file>             Accept definition of macros in <file>.
+  -imultilib <dir>            Set <dir> to be the multilib include subdirectory.
+  -include <file>             Include the contents of <file> before other files.
+  -iprefix <path>             Specify <path> as a prefix for next two options.
+  -iquote <dir>               Add <dir> to the end of the quote include path.
+  -isysroot <dir>             Set <dir> to be the system root directory.
+  -isystem <dir>              Add <dir> to the start of the system include path.
+  -iwithprefix <dir>          Add <dir> to the end of the system include path.
+  -iwithprefixbefore <dir>    Add <dir> to the end of the main include path.
+  -lang-asm                   This option lacks documentation.
+  -nostdinc                   Do not search standard system include directories (those specified with -isystem will still be used).
+  -o <file>                   Place output into <file>.
+  -pedantic                   Same as -Wpedantic.  Use the latter option instead.
+  -remap                      Remap file names when including files.
+  -std=c11                    Conform to the ISO 2011 C standard.
+  -std=c17                    Conform to the ISO 2017 C standard (expected to be published in 2018).
+  -std=c18                    Conform to the ISO 2017 C standard (expected to be published in 2018).  Same as -std=c17.
+  -std=c1x                    Deprecated in favor of -std=c11.  Same as -std=c11.
+  -std=c89                    Conform to the ISO 1990 C standard.  Same as -std=c90.
+  -std=c90                    Conform to the ISO 1990 C standard.
+  -std=c99                    Conform to the ISO 1999 C standard.
+  -std=c9x                    Deprecated in favor of -std=c99.  Same as -std=c99.
+  -std=gnu11                  Conform to the ISO 2011 C standard with GNU extensions.
+  -std=gnu17                  Conform to the ISO 2017 C standard (expected to be published in 2018) with GNU extensions.
+  -std=gnu18                  Conform to the ISO 2017 C standard (expected to be published in 2018) with GNU extensions.  Same as -std=gnu17.
+  -std=gnu1x                  Deprecated in favor of -std=gnu11.  Same as -std=gnu11.
+  -std=gnu89                  Conform to the ISO 1990 C standard with GNU extensions.  Same as -std=gnu90.
+  -std=gnu90                  Conform to the ISO 1990 C standard with GNU extensions.
+  -std=gnu99                  Conform to the ISO 1999 C standard with GNU extensions.
+  -std=gnu9x                  Deprecated in favor of -std=gnu99.  Same as -std=gnu99.
+  -std=iso9899:1990           Conform to the ISO 1990 C standard.  Same as -std=c90.
+  -std=iso9899:199409         Conform to the ISO 1990 C standard as amended in 1994.
+  -std=iso9899:1999           Conform to the ISO 1999 C standard.  Same as -std=c99.
+  -std=iso9899:199x           Deprecated in favor of -std=iso9899:1999.  Same as -std=c99.
+  -std=iso9899:2011           Conform to the ISO 2011 C standard.  Same as -std=c11.
+  -std=iso9899:2017           Conform to the ISO 2017 C standard (expected to be published in 2018).  Same as -std=c17.
+  -std=iso9899:2018           Conform to the ISO 2017 C standard (expected to be published in 2018).  Same as -std=c17.
+  -traditional-cpp            Enable traditional preprocessing.
+  -trigraphs                  Support ISO C trigraphs.
+  -undef                      Do not predefine system-specific and GCC-specific macros.
+  -v                          Enable verbose output.
+  -w                          Suppress warnings.
+

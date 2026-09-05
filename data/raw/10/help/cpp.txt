@@ -1,0 +1,449 @@
+The following options are supported by the language C++:
+  --all-warnings              Same as -Wall.
+  --ansi                      Same as -ansi.
+  --assert                    Same as -A.
+  --assert=                   Same as -A.
+  --comments                  Same as -C.
+  --comments-in-macros        Same as -CC.
+  --define-macro              Same as -D.
+  --define-macro=             Same as -D.
+  --dependencies              Same as -M.
+  --dump                      Same as -d.
+  --dump=                     Same as -d.
+  --imacros                   Same as -imacros.
+  --imacros=                  Same as -imacros.
+  --include                   Same as -include.
+  --include-barrier           Same as -I-.
+  --include-directory         Same as -I.
+  --include-directory-after   Same as -idirafter.
+  --include-directory-after=  Same as -idirafter.
+  --include-directory=        Same as -I.
+  --include-prefix            Same as -iprefix.
+  --include-prefix=           Same as -iprefix.
+  --include-with-prefix       Same as -iwithprefix.
+  --include-with-prefix-after Same as -iwithprefix.
+  --include-with-prefix-after= Same as -iwithprefix.
+  --include-with-prefix-before Same as -iwithprefixbefore.
+  --include-with-prefix-before= Same as -iwithprefixbefore.
+  --include-with-prefix=      Same as -iwithprefix.
+  --include=                  Same as -include.
+  --no-line-commands          Same as -P.
+  --no-standard-includes      Same as -nostdinc.
+  --no-warnings               Same as -w.
+  --output                    Same as -o.
+  --output-pch=               This option lacks documentation.
+  --output=                   Same as -o.
+  --pedantic                  Same as -Wpedantic.
+  --preprocess                This option lacks documentation.
+  --print-missing-file-dependencies Same as -MG.
+  --trace-includes            Same as -H.
+  --traditional-cpp           Same as -traditional-cpp.
+  --trigraphs                 Same as -trigraphs.
+  --undefine-macro            Same as -U.
+  --undefine-macro=           Same as -U.
+  --user-dependencies         Same as -MM.
+  --verbose                   Same as -v.
+  --write-dependencies        Same as -MD.
+  --write-user-dependencies   Same as -MMD.
+  -A<question>=<answer>       Assert the <answer> to <question>.  Putting '-' before <question> disables the <answer> to <question>.
+  -C                          Do not discard comments.
+  -CC                         Do not discard comments in macro expansions.
+  -D<macro>[=<val>]           Define a <macro> with <val> as its value.  If just <macro> is given, <val> is taken to be 1.
+  -E                          This option lacks documentation.
+  -F <dir>                    Add <dir> to the end of the main framework include path.
+  -H                          Print the name of header files as they are used.
+  -I <dir>                    Add <dir> to the end of the main include path.
+  -M                          Generate make dependencies.
+  -MD                         Generate make dependencies and compile.
+  -MF <file>                  Write dependency output to the given file.
+  -MG                         Treat missing header files as generated files.
+  -MM                         Like -M but ignore system header files.
+  -MMD                        Like -MD but ignore system header files.
+  -MP                         Generate phony targets for all headers.
+  -MQ <target>                Add a MAKE-quoted target.
+  -MT <target>                Add an unquoted target.
+  -P                          Do not generate #line directives.
+  -U<macro>                   Undefine <macro>.
+  -Wabi                       Warn about things that will change when compiling with an ABI-compliant compiler.
+  -Wabi-tag                   Warn if a subobject has an abi_tag attribute that the complete object type does not have.
+  -Wabi=                      Warn about things that change between the current -fabi-version and the specified version.
+  -Waddress                   Warn about suspicious uses of memory addresses.
+  -Waddress-of-packed-member  Warn when the address of packed member of struct or union is taken.
+  -Waligned-new               Warn about 'new' of type with extended alignment without -faligned-new.  Same as -Waligned-new=.
+  -Waligned-new=[none|global|all] Warn even if 'new' uses a class member allocation function.
+  -Wall                       Enable most warning messages.
+  -Walloc-size-larger-than=<bytes> Warn for calls to allocation functions that attempt to allocate objects larger than the specified number of bytes.
+  -Walloc-zero                Warn for calls to allocation functions that specify zero bytes.
+  -Walloca                    Warn on any use of alloca.
+  -Walloca-larger-than=<number> Warn on unbounded uses of alloca, and on bounded uses of alloca whose bound can be larger than <number> bytes.
+  -Warith-conversion          Warn if conversion of the result of arithmetic might change the value even though converting the operands cannot.
+  -Wbool-compare              Warn about boolean expression compared with an integer value different from true/false.
+  -Wbool-operation            Warn about certain operations on boolean expressions.
+  -Wbuiltin-declaration-mismatch Warn when a built-in function is declared with the wrong signature.
+  -Wbuiltin-macro-redefined   Warn when a built-in preprocessor macro is undefined or redefined.
+  -Wc++0x-compat              Same as -Wc++11-compat.
+  -Wc++11-compat              Warn about C++ constructs whose meaning differs between ISO C++ 1998 and ISO C++ 2011.
+  -Wc++14-compat              Warn about C++ constructs whose meaning differs between ISO C++ 2011 and ISO C++ 2014.
+  -Wc++17-compat              Warn about C++ constructs whose meaning differs between ISO C++ 2014 and ISO C++ 2017.
+  -Wc++1z-compat              Same as -Wc++17-compat.
+  -Wc++20-compat              Warn about C++ constructs whose meaning differs between ISO C++ 2017 and ISO C++ 2020.
+  -Wc++2a-compat              Same as -Wc++20-compat.
+  -Wcast-function-type        Warn about casts between incompatible function types.
+  -Wcast-qual                 Warn about casts which discard qualifiers.
+  -Wcatch-value               Warn about catch handlers of non-reference type.  Same as -Wcatch-value=.
+  -Wcatch-value=<0,3>         Warn about catch handlers of non-reference type.
+  -Wchar-subscripts           Warn about subscripts whose type is "char".
+  -Wchkp                      Removed in GCC 9.  This switch has no effect.
+  -Wclass-conversion          Warn when a conversion function will never be called due to the type it converts to.
+  -Wclass-memaccess           Warn for unsafe raw memory writes to objects of class types.
+  -Wclobbered                 Warn about variables that might be changed by "longjmp" or "vfork".
+  -Wcomma-subscript           Warn about uses of a comma operator within a subscripting expression.
+  -Wcomment                   Warn about possibly nested block comments, and C++ comments spanning more than one physical line.
+  -Wcomments                  Synonym for -Wcomment.  Same as -Wcomment.
+  -Wconditionally-supported   Warn for conditionally-supported constructs.
+  -Wconversion                Warn for implicit type conversions that may change a value.
+  -Wconversion-null           Warn for converting NULL from/to a non-pointer type.
+  -Wcpp                       Warn when a #warning directive is encountered.
+  -Wctor-dtor-privacy         Warn when all constructors and destructors are private.
+  -Wdangling-else             Warn about dangling else.
+  -Wdate-time                 Warn about __TIME__, __DATE__ and __TIMESTAMP__ usage.
+  -Wdelete-incomplete         Warn when deleting a pointer to incomplete type.
+  -Wdelete-non-virtual-dtor   Warn about deleting polymorphic objects with non-virtual destructors.
+  -Wdeprecated                Warn if a deprecated compiler feature, class, method, or field is used.
+  -Wdeprecated-copy           Mark implicitly-declared copy operations as deprecated if the class has a user-provided copy operation.
+  -Wdeprecated-copy-dtor      Mark implicitly-declared copy operations as deprecated if the class has a user-provided copy operation or destructor.
+  -Wdiv-by-zero               Warn about compile-time integer division by zero.
+  -Wdouble-promotion          Warn about implicit conversions from "float" to "double".
+  -Wduplicated-branches       Warn about duplicated branches in if-else statements.
+  -Wduplicated-cond           Warn about duplicated conditions in an if-else-if chain.
+  -Weffc++                    Warn about violations of Effective C++ style rules.
+  -Wempty-body                Warn about an empty body in an if or else statement.
+  -Wendif-labels              Warn about stray tokens after #else and #endif.
+  -Wenum-compare              Warn about comparison of different enum types.
+  -Werror                     Treat all warnings as errors.
+  -Wexpansion-to-defined      Warn if "defined" is used outside #if.
+  -Wextra                     Print extra (possibly unwanted) warnings.
+  -Wextra-semi                Warn about semicolon after in-class function definition.
+  -Wfloat-conversion          Warn for implicit type conversions that cause loss of floating point precision.
+  -Wfloat-equal               Warn if testing floating point numbers for equality.
+  -Wformat                    Warn about printf/scanf/strftime/strfmon format string anomalies.  Same as -Wformat=.
+  -Wformat-contains-nul       Warn about format strings that contain NUL bytes.
+  -Wformat-diag               Warn about GCC format strings with strings unsuitable for diagnostics.
+  -Wformat-extra-args         Warn if passing too many arguments to a function for its format string.
+  -Wformat-nonliteral         Warn about format strings that are not literals.
+  -Wformat-overflow<0,2>      Warn about function calls with format strings that write past the end of the destination region.  Same as -Wformat-overflow=1.  Same as -Wformat-overflow=.
+  -Wformat-overflow=<0,2>     Warn about function calls with format strings that write past the end of the destination region.
+  -Wformat-security           Warn about possible security problems with format functions.
+  -Wformat-signedness         Warn about sign differences with format functions.
+  -Wformat-truncation         Warn about calls to snprintf and similar functions that truncate output. Same as -Wformat-truncation=1.  Same as -Wformat-truncation=.
+  -Wformat-truncation=<0,2>   Warn about calls to snprintf and similar functions that truncate output.
+  -Wformat-y2k                Warn about strftime formats yielding 2-digit years.
+  -Wformat-zero-length        Warn about zero-length formats.
+  -Wformat=<0,2>              Warn about printf/scanf/strftime/strfmon format string anomalies.
+  -Wframe-address             Warn when __builtin_frame_address or __builtin_return_address is used unsafely.
+  -Wif-not-aligned            Warn when the field in a struct is not aligned.
+  -Wignored-attributes        Warn whenever attributes are ignored.
+  -Wignored-qualifiers        Warn whenever type qualifiers are ignored.
+  -Wimport                    This option lacks documentation.
+  -Winaccessible-base         Warn when a base is inaccessible in derived due to ambiguity.
+  -Winherited-variadic-ctor   Warn about C++11 inheriting constructors when the base has a variadic constructor.
+  -Winit-list-lifetime        Warn about uses of std::initializer_list that can result in dangling pointers.
+  -Winit-self                 Warn about variables which are initialized to themselves.
+  -Wint-in-bool-context       Warn for suspicious integer expressions in boolean context.
+  -Wint-to-pointer-cast       Warn when there is a cast to a pointer from an integer of a different size.
+  -Winvalid-offsetof          Warn about invalid uses of the "offsetof" macro.
+  -Winvalid-pch               Warn about PCH files that are found but not used.
+  -Wliteral-suffix            Warn when a string or character literal is followed by a ud-suffix which does not begin with an underscore.
+  -Wlogical-not-parentheses   Warn when logical not is used on the left hand side operand of a comparison.
+  -Wlogical-op                Warn when a logical operator is suspiciously always evaluating to true or false.
+  -Wlong-long                 Do not warn about using "long long" when -pedantic.
+  -Wmain                      Warn about suspicious declarations of "main".
+  -Wmaybe-uninitialized       Warn about maybe uninitialized automatic variables.
+  -Wmemset-elt-size           Warn about suspicious calls to memset where the third argument contains the number of elements not multiplied by the element size.
+  -Wmemset-transposed-args    Warn about suspicious calls to memset where the third argument is constant literal zero and the second is not.
+  -Wmisleading-indentation    Warn when the indentation of the code does not reflect the block structure.
+  -Wmismatched-tags           Warn when a class is redeclared or referenced using a mismatched class-key.
+  -Wmissing-attributes        Warn about declarations of entities that may be missing attributes that related entities have been declared with.
+  -Wmissing-braces            Warn about possibly missing braces around initializers.
+  -Wmissing-declarations      Warn about global functions without previous declarations.
+  -Wmissing-field-initializers Warn about missing fields in struct initializers.
+  -Wmissing-format-attribute  Same as -Wsuggest-attribute=format.
+  -Wmissing-include-dirs      Warn about user-specified include directories that do not exist.
+  -Wmudflap                   This option lacks documentation.
+  -Wmultichar                 Warn about use of multi-character character constants.
+  -Wmultiple-inheritance      Warn on direct multiple inheritance.
+  -Wmultistatement-macros     Warn about unsafe macros expanding to multiple statements used as a body of a clause such as if, else, while, switch, or for.
+  -Wnamespaces                Warn on namespace definition.
+  -Wnarrowing                 Warn about narrowing conversions within { } that are ill-formed in C++11.
+  -Wno-alloc-size-larger-than Disable Walloc-size-larger-than= warning.  Equivalent to Walloc-size-larger-than=<SIZE_MAX> or larger.  Same as -Walloc-size-larger-than=.
+  -Wno-alloca-larger-than     Disable Walloca-larger-than= warning.  Equivalent to Walloca-larger-than=<SIZE_MAX> or larger.  Same as -Walloca-larger-than=.
+  -Wno-vla-larger-than        Disable Wvla-larger-than= warning.  Equivalent to Wvla-larger-than=<SIZE_MAX> or larger.  Same as -Wvla-larger-than=.
+  -Wnoexcept                  Warn when a noexcept expression evaluates to false even though the expression can't actually throw.
+  -Wnoexcept-type             Warn if C++17 noexcept function type will change the mangled name of a symbol.
+  -Wnon-template-friend       Warn when non-templatized friend functions are declared within a template.
+  -Wnon-virtual-dtor          Warn about non-virtual destructors.
+  -Wnonnull                   Warn about NULL being passed to argument slots marked as requiring non-NULL.
+  -Wnonnull-compare           Warn if comparing pointer parameter with nonnull attribute with NULL.
+  -Wnormalized                Same as -Wnormalized=nfc (or, in negated form, -Wnormalized=none).
+  -Wnormalized=[none|id|nfc|nfkc] Warn about non-normalized Unicode strings.
+  -Wold-style-cast            Warn if a C-style cast is used in a program.
+  -Wopenmp-simd               Warn if a simd directive is overridden by the vectorizer cost model.
+  -Woverlength-strings        Warn if a string is longer than the maximum portable length specified by the standard.
+  -Woverloaded-virtual        Warn about overloaded virtual function names.
+  -Wpacked-bitfield-compat    Warn about packed bit-fields whose offset changed in GCC 4.4.
+  -Wpacked-not-aligned        Warn when fields in a struct with the packed attribute are misaligned.
+  -Wparentheses               Warn about possibly missing parentheses.
+  -Wpedantic                  Issue warnings needed for strict compliance to the standard.
+  -Wpessimizing-move          Warn about calling std::move on a local object in a return statement preventing copy elision.
+  -Wplacement-new             Warn for placement new expressions with undefined behavior.  Same as -Wplacement-new=.
+  -Wplacement-new=<0,2>       Warn for placement new expressions with undefined behavior.
+  -Wpmf-conversions           Warn when converting the type of pointers to member functions.
+  -Wpointer-arith             Warn about function pointer arithmetic.
+  -Wpointer-compare           Warn when a pointer is compared with a zero character constant.
+  -Wpragmas                   Warn about misuses of pragmas.
+  -Wprio-ctor-dtor            Warn if constructor or destructors with priorities from 0 to 100 are used.
+  -Wpsabi                     This option lacks documentation.
+  -Wredundant-decls           Warn about multiple declarations of the same object.
+  -Wredundant-move            Warn about redundant calls to std::move.
+  -Wredundant-tags            Warn when a class or enumerated type is referenced using a redundant class-key.
+  -Wregister                  Warn about uses of register storage specifier.
+  -Wreorder                   Warn when the compiler reorders code.
+  -Wrestrict                  Warn when an argument passed to a restrict-qualified parameter aliases with another argument.
+  -Wreturn-type               Warn whenever a function's return type defaults to "int" (C), or about inconsistent return types (C++).
+  -Wscalar-storage-order      Warn on suspicious constructs involving reverse scalar storage order.
+  -Wsequence-point            Warn about possible violations of sequence point rules.
+  -Wshift-count-negative      Warn if shift count is negative.
+  -Wshift-count-overflow      Warn if shift count >= width of type.
+  -Wshift-negative-value      Warn if left shifting a negative value.
+  -Wshift-overflow            Warn if left shift of a signed value overflows.  Same as -Wshift-overflow=.
+  -Wshift-overflow=<0,2>      Warn if left shift of a signed value overflows.
+  -Wsign-compare              Warn about signed-unsigned comparisons.
+  -Wsign-conversion           Warn for implicit type conversions between signed and unsigned integers.
+  -Wsign-promo                Warn when overload promotes from unsigned to signed.
+  -Wsized-deallocation        Warn about missing sized deallocation functions.
+  -Wsizeof-array-argument     Warn when sizeof is applied on a parameter declared as an array.
+  -Wsizeof-pointer-div        Warn about suspicious divisions of two sizeof expressions that don't work correctly with pointers.
+  -Wsizeof-pointer-memaccess  Warn about suspicious length parameters to certain string functions if the argument uses sizeof.
+  -Wstrict-aliasing=<0,3>     Warn about code which might break strict aliasing rules.
+  -Wstrict-null-sentinel      Warn about uncasted NULL used as sentinel.
+  -Wstrict-overflow=<0,5>     Warn about optimizations that assume that signed overflow is undefined.
+  -Wstring-compare            Warn about calls to strcmp and strncmp used in equality expressions that are necessarily true or false due to the length of one and size of the other argument.
+  -Wstringop-overflow         Warn about buffer overflow in string manipulation functions like memcpy and strcpy.  Same as -Wstringop-overflow=.
+  -Wstringop-overflow=<0,4>   Under the control of Object Size type, warn about buffer overflow in string manipulation functions like memcpy and strcpy.
+  -Wstringop-truncation       Warn about truncation in string manipulation functions like strncat and strncpy.
+  -Wsubobject-linkage         Warn if a class type has a base or a field whose type uses the anonymous namespace or depends on a type with no linkage.
+  -Wsuggest-attribute=format  Warn about functions which might be candidates for format attributes.
+  -Wsuggest-override          Suggest that the override keyword be used when the declaration of a virtual function overrides another.
+  -Wswitch                    Warn about enumerated switches, with no default, missing a case.
+  -Wswitch-bool               Warn about switches with boolean controlling expression.
+  -Wswitch-default            Warn about enumerated switches missing a "default:" statement.
+  -Wswitch-enum               Warn about all enumerated switches missing a specific case.
+  -Wswitch-outside-range      Warn about switch values that are outside of the switch's type range.
+  -Wsync-nand                 Warn when __sync_fetch_and_nand and __sync_nand_and_fetch built-in functions are used.
+  -Wsynth                     Deprecated.  This switch has no effect.
+  -Wsystem-headers            Do not suppress warnings from system headers.
+  -Wtautological-compare      Warn if a comparison always evaluates to true or false.
+  -Wtemplates                 Warn on primary template declaration.
+  -Wterminate                 Warn if a throw expression will always result in a call to terminate().
+  -Wtrigraphs                 Warn if trigraphs are encountered that might affect the meaning of the program.
+  -Wundef                     Warn if an undefined macro is used in an #if directive.
+  -Wuninitialized             Warn about uninitialized automatic variables.
+  -Wunknown-pragmas           Warn about unrecognized pragmas.
+  -Wunused                    Enable all -Wunused- warnings.
+  -Wunused-const-variable     Warn when a const variable is unused.  Same as -Wunused-const-variable=.
+  -Wunused-const-variable=<0,2> Warn when a const variable is unused.
+  -Wunused-local-typedefs     Warn when typedefs locally defined in a function are not used.
+  -Wunused-macros             Warn about macros defined in the main file that are not used.
+  -Wunused-result             Warn if a caller of a function, marked with attribute warn_unused_result, does not use its return value.
+  -Wunused-variable           Warn when a variable is unused.
+  -Wuseless-cast              Warn about useless casts.
+  -Wvarargs                   Warn about questionable usage of the macros used to retrieve variable arguments.
+  -Wvariadic-macros           Warn about using variadic macros.
+  -Wvirtual-inheritance       Warn on direct virtual inheritance.
+  -Wvirtual-move-assign       Warn if a virtual base has a non-trivial move assignment operator.
+  -Wvla                       Warn if a variable length array is used.
+  -Wvla-larger-than=<number>  Warn on unbounded uses of variable-length arrays, and on bounded uses of variable-length arrays whose bound can be larger than <number> bytes. <number> bytes.
+  -Wvolatile                  Warn about deprecated uses of volatile qualifier.
+  -Wvolatile-register-var     Warn when a register variable is declared volatile.
+  -Wwrite-strings             In C++, nonzero means warn about deprecated conversion from string literals to 'char *'.  In C, similar warning, except that the conversion is of course not deprecated by the ISO C standard.
+  -Wzero-as-null-pointer-constant Warn when a literal '0' is used as null pointer.
+  -Wzero-length-bounds        Warn about accesses to interior zero-length array members.
+  -ansi                       A synonym for -std=c89 (for C) or -std=c++98 (for C++).
+  -d<letters>                 Enable dumps from specific passes of the compiler.
+  -fabi-compat-version=       The version of the C++ ABI used for -Wabi warnings and link compatibility aliases.
+  -faccess-control            Enforce class member access control semantics.
+  -fada-spec-parent=unit      Dump Ada specs as child units of given parent.
+  -faligned-new               Support C++17 allocation of over-aligned types.  Same as -faligned-new=.
+  -faligned-new=<N>           Use C++17 over-aligned type allocation for alignments greater than N.
+  -fall-virtual               This option lacks documentation.
+  -falt-external-templates    No longer supported.
+  -fasm                       Recognize the "asm" keyword.
+  -fbuilding-libgcc           This option lacks documentation.
+  -fbuiltin                   Recognize built-in functions.
+  -fbuiltin-                  This option lacks documentation.
+  -fcanonical-system-headers  Where shorter, use canonicalized paths to systems headers.
+  -fchar8_t                   Enable the char8_t fundamental type and use it as the type for UTF-8 string and character literals.
+  -fcheck-pointer-bounds      Removed in GCC 9.  This switch has no effect.
+  -fchkp-check-incomplete-type Removed in GCC 9.  This switch has no effect.
+  -fchkp-check-read           Removed in GCC 9.  This switch has no effect.
+  -fchkp-check-write          Removed in GCC 9.  This switch has no effect.
+  -fchkp-first-field-has-own-bounds Removed in GCC 9.  This switch has no effect.
+  -fchkp-flexible-struct-trailing-arrays Removed in GCC 9.  This switch has no effect.
+  -fchkp-instrument-calls     Removed in GCC 9.  This switch has no effect.
+  -fchkp-instrument-marked-only Removed in GCC 9.  This switch has no effect.
+  -fchkp-narrow-bounds        Removed in GCC 9.  This switch has no effect.
+  -fchkp-narrow-to-innermost-array Removed in GCC 9.  This switch has no effect.
+  -fchkp-optimize             This option lacks documentation.
+  -fchkp-store-bounds         Removed in GCC 9.  This switch has no effect.
+  -fchkp-treat-zero-dynamic-size-as-infinite Removed in GCC 9.  This switch has no effect.
+  -fchkp-use-fast-string-functions Removed in GCC 9.  This switch has no effect.
+  -fchkp-use-nochk-string-functions Removed in GCC 9.  This switch has no effect.
+  -fchkp-use-static-bounds    Removed in GCC 9.  This switch has no effect.
+  -fchkp-use-static-const-bounds Removed in GCC 9.  This switch has no effect.
+  -fchkp-use-wrappers         Removed in GCC 9.  This switch has no effect.
+  -fchkp-zero-input-bounds-for-main Removed in GCC 9.  This switch has no effect.
+  -fcilkplus                  Removed in GCC 8.  This switch has no effect.
+  -fconcepts                  Enable support for C++ concepts.
+  -fconcepts-diagnostics-depth= Specify maximum error replay depth during recursive diagnosis of a constraint satisfaction failure.
+  -fconcepts-ts               Enable certain features present in the Concepts TS.
+  -fcond-mismatch             Allow the arguments of the '?' operator to have different types.
+  -fconserve-space            Does nothing.  Preserved for backward compatibility.
+  -fconstexpr-cache-depth=<number> Specify maximum constexpr recursion cache depth.
+  -fconstexpr-depth=<number>  Specify maximum constexpr recursion depth.
+  -fconstexpr-loop-limit=<number> Specify maximum constexpr loop iteration count.
+  -fconstexpr-ops-limit=<number> Specify maximum number of constexpr operations during a single constexpr evaluation.
+  -fcoroutines                Enable C++ coroutines (experimental).
+  -fdebug-cpp                 Emit debug annotations during preprocessing.
+  -fdeclone-ctor-dtor         Factor complex constructors and destructors to favor space over speed.
+  -fdeduce-init-list          Does nothing.  Preserved for backward compatibility.
+  -fdefault-inline            Does nothing.  Preserved for backward compatibility.
+  -fdiagnostics-show-template-tree Print hierarchical comparisons when template types are mismatched.
+  -fdirectives-only           Preprocess directives only.
+  -fdollars-in-identifiers    Permit '$' as an identifier character.
+  -fdump-ada-spec             Write all declarations as Ada code transitively.
+  -fdump-ada-spec-slim        Write all declarations as Ada code for the given file only.
+  -felide-constructors        This option lacks documentation.
+  -felide-type                Do not elide common elements in template comparisons.
+  -femit-struct-debug-baseonly Aggressive reduced debug info for structs.
+  -femit-struct-debug-detailed=<spec-list> Detailed reduced debug info for structs.
+  -femit-struct-debug-reduced Conservative reduced debug info for structs.
+  -fenforce-eh-specs          Generate code to check exception specifications.
+  -fenum-int-equiv            This option lacks documentation.
+  -fexec-charset=<cset>       Convert all strings and character constants to character set <cset>.
+  -fext-numeric-literals      Interpret imaginary, fixed-point, or other gnu number suffix as the corresponding number literal rather than a user-defined number literal.
+  -fextended-identifiers      Permit universal character names (\u and \U) in identifiers.
+  -fextern-tls-init           Support dynamic initialization of thread-local variables in a different translation unit.
+  -fexternal-templates        This option lacks documentation.
+  -ffor-scope                 This option lacks documentation.
+  -ffreestanding              Do not assume that standard C libraries and "main" exist.
+  -ffriend-injection          This option lacks documentation.
+  -fgnu-keywords              Recognize GNU-defined keywords.
+  -fguiding-decls             This option lacks documentation.
+  -fhandle-exceptions         Same as -fexceptions.  Uses of this option are diagnosed.
+  -fhonor-std                 This option lacks documentation.
+  -fhuge-objects              No longer supported.
+  -fimplement-inlines         Export functions even if they can be inlined.
+  -fimplicit-inline-templates Emit implicit instantiations of inline templates.
+  -fimplicit-templates        Emit implicit instantiations of templates.
+  -finput-charset=<cset>      Specify the default character set for source files.
+  -flabels-ok                 This option lacks documentation.
+  -flax-vector-conversions    Allow implicit conversions between vectors with differing numbers of subparts and/or differing element types.
+  -fmacro-prefix-map=<old>=<new> Map one directory name to another in __FILE__, __BASE_FILE__, and __builtin_FILE().
+  -fmax-include-depth=        fmax-include-depth=<number> Set the maximum depth of the nested #include.
+  -fms-extensions             Don't warn about uses of Microsoft extensions.
+  -fmudflap                   This option lacks documentation.
+  -fmudflapir                 This option lacks documentation.
+  -fmudflapth                 This option lacks documentation.
+  -fname-mangling-version-    This option lacks documentation.
+  -fnew-abi                   This option lacks documentation.
+  -fnew-inheriting-ctors      Implement C++17 inheriting constructor semantics.
+  -fnew-ttp-matching          Implement resolution of DR 150 for matching of template template arguments.
+  -fnonansi-builtins          This option lacks documentation.
+  -fnonnull-objects           This option lacks documentation.
+  -fnothrow-opt               Treat a throw() exception specification as noexcept to improve code size.
+  -fopenacc                   Enable OpenACC.
+  -fopenacc-dim=              Specify default OpenACC compute dimensions.
+  -fopenmp                    Enable OpenMP (implies -frecursive in Fortran).
+  -fopenmp-simd               Enable OpenMP's SIMD directives.
+  -foperator-names            Recognize C++ keywords like "compl" and "xor".
+  -foptional-diags            Does nothing.  Preserved for backward compatibility.
+  -fpch-deps                  This option lacks documentation.
+  -fpch-preprocess            Look for and use PCH files even when preprocessing.
+  -fpermissive                Downgrade conformance errors to warnings.
+  -fpreprocessed              Treat the input file as already preprocessed.
+  -fpretty-templates          Do not pretty-print template specializations as the template signature followed by the arguments.
+  -fprintf-return-value       Treat known sprintf return values as constants.
+  -frepo                      Removed in GCC 10.  This switch has no effect.
+  -frtti                      Generate run time type descriptor information.
+  -fshort-enums               Use the narrowest integer type possible for enumeration types.
+  -fshort-wchar               Force the underlying type for "wchar_t" to be "unsigned short".
+  -fsigned-bitfields          When "signed" or "unsigned" is not given make the bitfield signed.
+  -fsigned-char               Make "char" signed by default.
+  -fsized-deallocation        Enable C++14 sized deallocation support.
+  -fsquangle                  This option lacks documentation.
+  -fstats                     Display statistics accumulated during compilation.
+  -fstrict-enums              Assume that values of enumeration type are always within the minimum range of that type.
+  -fstrict-prototype          This option lacks documentation.
+  -fstrong-eval-order         Follow the C++17 evaluation order requirements for assignment expressions, shift, member function calls, etc.  Same as -fstrong-eval-order=.
+  -fstrong-eval-order=        Follow the C++17 evaluation order requirements for assignment expressions, shift, member function calls, etc.
+  -ftabstop=<number>          Distance between tab stops for column reporting.
+  -ftemplate-backtrace-limit= Set the maximum number of template instantiation notes for a single warning or error.
+  -ftemplate-depth-           Same as -ftemplate-depth=.
+  -ftemplate-depth=<number>   Specify maximum template instantiation depth.
+  -fthis-is-variable          This option lacks documentation.
+  -fno-threadsafe-statics     Do not generate thread-safe code for initializing local statics.
+  -ftrack-macro-expansion     This option lacks documentation.
+  -ftrack-macro-expansion=<0|1|2> Track locations of tokens coming from macro expansion and display them in error messages.
+  -funsigned-bitfields        When "signed" or "unsigned" is not given make the bitfield unsigned.
+  -funsigned-char             Make "char" unsigned by default.
+  -fuse-cxa-atexit            Use __cxa_atexit to register destructors.
+  -fuse-cxa-get-exception-ptr Use __cxa_get_exception_ptr in exception handling.
+  -fvisibility-inlines-hidden Marks all inlined functions and methods as having hidden visibility.
+  -fvisibility-ms-compat      Changes visibility to match Microsoft Visual Studio by default.
+  -fvtable-gc                 No longer supported.
+  -fvtable-thunks             No longer supported.
+  -fweak                      Emit common-like symbols as weak symbols.
+  -fwide-exec-charset=<cset>  Convert all wide strings and character constants to character set <cset>.
+  -fworking-directory         Generate a #line directive pointing at the current working directory.
+  -fxref                      No longer supported.
+  -idirafter <dir>            Add <dir> to the end of the system include path.
+  -imacros <file>             Accept definition of macros in <file>.
+  -imultilib <dir>            Set <dir> to be the multilib include subdirectory.
+  -include <file>             Include the contents of <file> before other files.
+  -iprefix <path>             Specify <path> as a prefix for next two options.
+  -iquote <dir>               Add <dir> to the end of the quote include path.
+  -isysroot <dir>             Set <dir> to be the system root directory.
+  -isystem <dir>              Add <dir> to the start of the system include path.
+  -iwithprefix <dir>          Add <dir> to the end of the system include path.
+  -iwithprefixbefore <dir>    Add <dir> to the end of the main include path.
+  -nostdinc                   Do not search standard system include directories (those specified with -isystem will still be used).
+  -nostdinc++                 Do not search standard system include directories for C++.
+  -o <file>                   Place output into <file>.
+  -pedantic                   Same as -Wpedantic.
+  -remap                      Remap file names when including files.
+  -std=c++03                  Conform to the ISO 1998 C++ standard revised by the 2003 technical corrigendum.  Same as -std=c++98.
+  -std=c++0x                  Deprecated in favor of -std=c++11.  Same as -std=c++11.
+  -std=c++11                  Conform to the ISO 2011 C++ standard.
+  -std=c++14                  Conform to the ISO 2014 C++ standard.
+  -std=c++17                  Conform to the ISO 2017 C++ standard.
+  -std=c++1y                  Deprecated in favor of -std=c++14.  Same as -std=c++14.
+  -std=c++1z                  Deprecated in favor of -std=c++17.  Same as -std=c++17.
+  -std=c++20                  Conform to the ISO 2020 C++ draft standard (experimental and incomplete support).  Same as -std=c++2a.
+  -std=c++2a                  Conform to the ISO 2020 C++ draft standard (experimental and incomplete support).
+  -std=c++98                  Conform to the ISO 1998 C++ standard revised by the 2003 technical corrigendum.
+  -std=gnu++03                Conform to the ISO 1998 C++ standard revised by the 2003 technical corrigendum with GNU extensions.  Same as -std=gnu++98.
+  -std=gnu++0x                Deprecated in favor of -std=gnu++11.  Same as -std=gnu++11.
+  -std=gnu++11                Conform to the ISO 2011 C++ standard with GNU extensions.
+  -std=gnu++14                Conform to the ISO 2014 C++ standard with GNU extensions.
+  -std=gnu++17                Conform to the ISO 2017 C++ standard with GNU extensions.
+  -std=gnu++1y                Deprecated in favor of -std=gnu++14.  Same as -std=gnu++14.
+  -std=gnu++1z                Deprecated in favor of -std=gnu++17.  Same as -std=gnu++17.
+  -std=gnu++20                Conform to the ISO 2020 C++ draft standard with GNU extensions (experimental and incomplete support).  Same as -std=gnu++2a.
+  -std=gnu++2a                Conform to the ISO 2020 C++ draft standard with GNU extensions (experimental and incomplete support).
+  -std=gnu++98                Conform to the ISO 1998 C++ standard revised by the 2003 technical corrigendum with GNU extensions.
+  -traditional-cpp            Enable traditional preprocessing.
+  -trigraphs                  Support ISO C trigraphs.
+  -undef                      Do not predefine system-specific and GCC-specific macros.
+  -v                          Enable verbose output.
+  -w                          Suppress warnings.
+

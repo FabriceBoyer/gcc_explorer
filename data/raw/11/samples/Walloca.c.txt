@@ -1,0 +1,5 @@
+In file included from Walloca.c:2:
+Walloca.c: In function 'grab':
+Walloca.c:4:12: warning: use of 'alloca' [-Walloca]
+    4 |     return alloca(n);
+      |            ^~~~~~

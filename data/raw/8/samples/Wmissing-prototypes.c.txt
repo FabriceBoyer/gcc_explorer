@@ -1,0 +1,5 @@
+Wmissing-prototypes.c:2:5: warning: function declaration isn't a prototype [-Wstrict-prototypes]
+ int helper() {
+     ^~~~~~
+Wmissing-prototypes.c: In function 'helper':
+Wmissing-prototypes.c:2:5: warning: old-style function definition [-Wold-style-definition]

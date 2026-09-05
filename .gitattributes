@@ -1,0 +1,2 @@
+data/raw/** linguist-generated=true -diff
+public/data/*.json linguist-generated=true -diff

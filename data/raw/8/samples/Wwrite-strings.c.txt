@@ -1,0 +1,4 @@
+Wwrite-strings.c: In function 'label':
+Wwrite-strings.c:3:15: warning: initialization discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     char *s = "constant";
+               ^~~~~~~~~~

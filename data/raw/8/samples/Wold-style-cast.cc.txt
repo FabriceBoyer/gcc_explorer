@@ -1,0 +1,6 @@
+Wold-style-cast.cc: In function 'int convert(double)':
+Wold-style-cast.cc:3:18: warning: use of old-style cast to 'int' [-Wold-style-cast]
+     return (int) d;
+                  ^
+            -------
+            static_cast<int> ( d)

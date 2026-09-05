@@ -1,0 +1,4 @@
+Wsign-compare.c: In function 'in_range':
+Wsign-compare.c:3:14: warning: comparison of integer expressions of different signedness: 'int' and 'unsigned int' [-Wsign-compare]
+     return i < n;
+              ^

@@ -1,0 +1,10 @@
+Wjump-misses-init.c: In function 'leap':
+Wjump-misses-init.c:3:12: warning: jump skips variable initialization [-Wjump-misses-init]
+    3 |     if (n) goto done;
+      |            ^~~~
+Wjump-misses-init.c:6:1: note: label 'done' defined here
+    6 | done:
+      | ^~~~
+Wjump-misses-init.c:4:9: note: 'local' declared here
+    4 |     int local = 3;
+      |         ^~~~~

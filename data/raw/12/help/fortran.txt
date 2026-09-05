@@ -1,0 +1,215 @@
+The following options are supported by the language Fortran:
+  --all-warnings              Same as -Wall.
+  --assert                    Same as -A.
+  --assert=                   Same as -A.
+  --comments                  Same as -C.
+  --comments-in-macros        Same as -CC.
+  --define-macro              Same as -D.
+  --define-macro=             Same as -D.
+  --dependencies              Same as -M.
+  --dump                      Same as -d.
+  --dump=                     Same as -d.
+  --include-barrier           Same as -I-.
+  --include-directory         Same as -I.
+  --include-directory-after   Same as -idirafter.
+  --include-directory-after=  Same as -idirafter.
+  --include-directory=        Same as -I.
+  --include-prefix            Same as -iprefix.
+  --include-prefix=           Same as -iprefix.
+  --no-line-commands          Same as -P.
+  --no-standard-includes      Same as -nostdinc.
+  --output                    Same as -o.
+  --output=                   Same as -o.
+  --preprocess                This option lacks documentation.
+  --print-missing-file-dependencies Same as -MG.
+  --trace-includes            Same as -H.
+  --undefine-macro            Same as -U.
+  --undefine-macro=           Same as -U.
+  --user-dependencies         Same as -MM.
+  --verbose                   Same as -v.
+  --write-dependencies        Same as -MD.
+  --write-user-dependencies   Same as -MMD.
+  -A<question>=<answer>       Assert the <answer> to <question>.  Putting '-' before <question> disables the <answer> to <question>.
+  -C                          Do not discard comments.
+  -CC                         Do not discard comments in macro expansions.
+  -D<macro>[=<val>]           Define a <macro> with <val> as its value.  If just <macro> is given, <val> is taken to be 1.
+  -E                          This option lacks documentation.
+  -H                          Print the name of header files as they are used.
+  -I <dir>                    Add <dir> to the end of the main include path.
+  -J<directory>               Put MODULE files in 'directory'.
+  -M                          Generate make dependencies.
+  -MD                         Generate make dependencies and compile.
+  -MF <file>                  Write dependency output to the given file.
+  -MG                         Treat missing header files as generated files.
+  -MM                         Like -M but ignore system header files.
+  -MMD                        Like -MD but ignore system header files.
+  -MP                         Generate phony targets for all headers.
+  -MQ <target>                Add a target that may require quoting.
+  -MT <target>                Add a target that does not require quoting.
+  -P                          Do not generate #line directives.
+  -U<macro>                   Undefine <macro>.
+  -Waliasing                  Warn about possible aliasing of dummy arguments.
+  -Walign-commons             Warn about alignment of COMMON blocks.
+  -Wall                       Enable most warning messages.
+  -Wampersand                 Warn about missing ampersand in continued character constants.
+  -Wargument-mismatch         Does nothing. Preserved for backward compatibility.
+  -Warray-temporaries         Warn about creation of array temporaries.
+  -Wc-binding-type            Warn if the type of a variable might be not interoperable with C.
+  -Wcharacter-truncation      Warn about truncated character expressions.
+  -Wcompare-reals             Warn about equality comparisons involving REAL or COMPLEX expressions.
+  -Wconversion                Warn for implicit type conversions that may change a value.
+  -Wconversion-extra          Warn about most implicit conversions.
+  -Wdate-time                 Warn about __TIME__, __DATE__ and __TIMESTAMP__ usage.
+  -Wdo-subscript              Warn about possibly incorrect subscripts in do loops.
+  -Wextra                     Print extra (possibly unwanted) warnings.
+  -Wfrontend-loop-interchange Warn if loops have been interchanged.
+  -Wfunction-elimination      Warn about function call elimination.
+  -Wimplicit-interface        Warn about calls with implicit interface.
+  -Wimplicit-procedure        Warn about called procedures not explicitly declared.
+  -Winteger-division          Warn about constant integer divisions with truncated results.
+  -Wintrinsic-shadow          Warn if a user-procedure has the same name as an intrinsic.
+  -Wintrinsics-std            Warn on intrinsics not part of the selected standard.
+  -Wline-truncation           Warn about truncated source lines.
+  -Wmaybe-uninitialized       Warn about maybe uninitialized automatic variables.
+  -Wmissing-include-dirs      Warn about user-specified include directories that do not exist.
+  -Wopenacc-parallelism       Warn about potentially suboptimal choices related to OpenACC parallelism.
+  -Wopenmp-simd               Warn if a simd directive is overridden by the vectorizer cost model.
+  -Woverwrite-recursive       Warn that -fno-automatic may break recursion.
+  -Wpedantic                  Issue warnings needed for strict compliance to the standard.
+  -Wreal-q-constant           Warn about real-literal-constants with 'q' exponent-letter.
+  -Wrealloc-lhs               Warn when a left-hand-side array variable is reallocated.
+  -Wrealloc-lhs-all           Warn when a left-hand-side variable is reallocated.
+  -Wreturn-type               Warn whenever a function's return type defaults to "int" (C), or about inconsistent return types (C++).
+  -Wsurprising                Warn about "suspicious" constructs.
+  -Wtabs                      Permit nonconforming uses of the tab character.
+  -Wtarget-lifetime           Warn if the pointer in a pointer assignment might outlive its target.
+  -Wundefined-do-loop         Warn about an invalid DO loop.
+  -Wunderflow                 Warn about underflow of numerical constant expressions.
+  -Wuninitialized             Warn about uninitialized automatic variables.
+  -Wunused-dummy-argument     Warn about unused dummy arguments.
+  -Wuse-without-only          Warn about USE statements that have no ONLY qualifier.
+  -Wzerotrip                  Warn about zero-trip DO loops.
+  -cpp                        Enable preprocessing.
+  -cpp=                       This option lacks documentation.
+  -d<letters>                 Enable dumps from specific passes of the compiler.
+  -faggressive-function-elimination Eliminate multiple function invocations also for impure functions.
+  -falign-commons             Enable alignment of COMMON blocks.
+  -fall-intrinsics            All intrinsics procedures are available regardless of selected standard.
+  -fallow-argument-mismatch   Accept argument mismatches in procedure calls.
+  -fallow-invalid-boz         Allow a BOZ literal constant to appear in an invalid context and with X instead of Z.
+  -fallow-leading-underscore  This option lacks documentation.
+  -fautomatic                 Do not treat local variables and COMMON blocks as if they were named in SAVE statements.
+  -fbackslash                 Specify that backslash in string introduces an escape character.
+  -fbacktrace                 Produce a backtrace when a runtime error is encountered.
+  -fblas-matmul-limit=<n>     Size of the smallest matrix for which matmul will use BLAS.
+  -fbuilding-libgfortran      This option lacks documentation.
+  -fc-prototypes              Generate C prototypes from BIND(C) declarations.
+  -fc-prototypes-external     Generate C prototypes from non-BIND(C) external procedure definitions.
+  -fcheck-array-temporaries   Produce a warning at runtime if a array temporary has been created for a procedure argument.
+  -fcheck=[...]               Specify which runtime checks are to be performed.
+  -fcoarray=<none|single|lib> Specify which coarray parallelization should be used.
+  -fconvert=<big-endian|little-endian|native|swap|r16_ieee|r16_ibm> The endianness used for unformatted files.
+  -fcray-pointer              Use the Cray Pointer extension.
+  -fd-lines-as-code           Ignore 'D' in column one in fixed form.
+  -fd-lines-as-comments       Treat lines with 'D' in column one as comments.
+  -fdebug-aux-vars            Issue debug information for compiler-generated auxiliary variables.
+  -fdec                       Enable all DEC language extensions.
+  -fdec-blank-format-item     Enable the use of blank format items in format strings.
+  -fdec-char-conversions      Enable the use of character literals in assignments and data statements for non-character variables.
+  -fdec-format-defaults       Enable default widths for i, f and g format specifiers.
+  -fdec-include               Enable legacy parsing of INCLUDE as statement.
+  -fdec-intrinsic-ints        Enable kind-specific variants of integer intrinsic functions.
+  -fdec-math                  Enable legacy math intrinsics for compatibility.
+  -fdec-static                Enable DEC-style STATIC and AUTOMATIC attributes.
+  -fdec-structure             Enable support for DEC STRUCTURE/RECORD.
+  -fdefault-double-8          Set the default double precision kind to an 8 byte wide type.
+  -fdefault-integer-8         Set the default integer kind to an 8 byte wide type.
+  -fdefault-real-10           Set the default real kind to an 10 byte wide type.
+  -fdefault-real-16           Set the default real kind to an 16 byte wide type.
+  -fdefault-real-8            Set the default real kind to an 8 byte wide type.
+  -fdollar-ok                 Allow dollar signs in entity names.
+  -fdump-core                 Does nothing. Preserved for backward compatibility.
+  -fdump-fortran-global       Display the global symbol table after parsing.
+  -fdump-fortran-optimized    Display the code tree after front end optimization.
+  -fdump-fortran-original     Display the code tree after parsing.
+  -fdump-parse-tree           Display the code tree after parsing; deprecated option.  Same as -fdump-fortran-original.
+  -fexternal-blas             Specify that an external BLAS library should be used for matmul calls on large-size arrays.
+  -ff2c                       Use f2c calling convention.
+  -ffixed-form                Assume that the source file is fixed form.
+  -ffixed-line-length-<n>     Use n as character line width in fixed mode.
+  -ffixed-line-length-none    Allow arbitrary character line width in fixed mode.
+  -ffpe-summary=[...]         Print summary of floating point exceptions.
+  -ffpe-trap=[...]            Stop on following floating point exceptions.
+  -ffree-form                 Assume that the source file is free form.
+  -ffree-line-length-<n>      Use n as character line width in free mode.
+  -ffree-line-length-none     Allow arbitrary character line width in free mode.
+  -ffrontend-loop-interchange Try to interchange loops if profitable.
+  -ffrontend-optimize         Enable front end optimization.
+  -fimplicit-none             Specify that no implicit typing is allowed, unless overridden by explicit IMPLICIT statements.
+  -finit-character=<n>        Initialize local character variables to ASCII value n.
+  -finit-derived              Initialize components of derived type variables according to other init flags.
+  -finit-integer=<n>          Initialize local integer variables to n.
+  -finit-local-zero           Initialize local variables to zero (from g77).
+  -finit-logical=<true|false> Initialize local logical variables.
+  -finit-real=<zero|snan|nan|inf|-inf> Initialize local real variables.
+  -finline-arg-packing        Perform argument packing inline.
+  -finline-matmul-limit=<n>   Specify the size of the largest matrix for which matmul will be inlined.
+  -finteger-4-integer-8       Interpret any INTEGER(4) as an INTEGER(8).
+  -fintrinsic-modules-path    Specify where to find the compiled intrinsic modules.
+  -fintrinsic-modules-path=   Specify where to find the compiled intrinsic modules.
+  -fmax-array-constructor=<n> Maximum number of objects in an array constructor.
+  -fmax-identifier-length=<n> Maximum identifier length.
+  -fmax-stack-var-size=<n>    Size in bytes of the largest array that will be put on the stack.
+  -fmax-subrecord-length=<n>  Maximum length for subrecords.
+  -fmodule-private            Set default accessibility of module entities to PRIVATE.
+  -fopenacc                   Enable OpenACC.
+  -fopenacc-dim=              Specify default OpenACC compute dimensions.
+  -fopenmp                    Enable OpenMP (implies -frecursive in Fortran).
+  -fopenmp-simd               Enable OpenMP's SIMD directives.
+  -fpack-derived              Try to lay out derived types as compactly as possible.
+  -fpad-source                Pad shorter fixed form lines to line width with spaces.
+  -fpre-include=              Path to header file that should be pre-included before each compilation unit.
+  -fpreprocessed              Treat the input file as already preprocessed.
+  -fprotect-parens            Protect parentheses in expressions.
+  -frange-check               Enable range checking during compilation.
+  -freal-4-real-10            Interpret any REAL(4) as a REAL(10).
+  -freal-4-real-16            Interpret any REAL(4) as a REAL(16).
+  -freal-4-real-8             Interpret any REAL(4) as a REAL(8).
+  -freal-8-real-10            Interpret any REAL(8) as a REAL(10).
+  -freal-8-real-16            Interpret any REAL(8) as a REAL(16).
+  -freal-8-real-4             Interpret any REAL(8) as a REAL(4).
+  -frealloc-lhs               Reallocate the LHS in assignments.
+  -frecord-marker=4           Use a 4-byte record marker for unformatted files.
+  -frecord-marker=8           Use an 8-byte record marker for unformatted files.
+  -frecursive                 Allocate local variables on the stack to allow indirect recursion.
+  -frepack-arrays             Copy array sections into a contiguous block on procedure entry.
+  -fsecond-underscore         Append a second underscore if the name already contains an underscore.
+  -fshort-enums               Use the narrowest integer type possible for enumeration types.
+  -fsign-zero                 Apply negative sign to zero values.
+  -fstack-arrays              Put all local arrays on stack.
+  -ftail-call-workaround      Same as -ftail-call-workaround=1 (or, in negated form, -ftail-call-workaround=0).
+  -ftail-call-workaround=<0,2> Disallow tail call optimization when a calling routine may have omitted character lengths.
+  -ftest-forall-temp          Force creation of temporary to test infrequently-executed forall code.
+  -funderscoring              Append underscores to externally visible names.
+  -fwhole-file                Does nothing.  Preserved for backward compatibility.
+  -fworking-directory         Generate a #line directive pointing at the current working directory.
+  -idirafter <dir>            Add <dir> to the end of the system include path.
+  -imultilib <dir>            Set <dir> to be the multilib include subdirectory.
+  -iprefix <path>             Specify <path> as a prefix for next two options.
+  -iquote <dir>               Add <dir> to the end of the quote include path.
+  -isysroot <dir>             Set <dir> to be the system root directory.
+  -isystem <dir>              Add <dir> to the start of the system include path.
+  -nocpp                      Disable preprocessing.
+  -nostdinc                   Do not search standard system include directories (those specified with -isystem will still be used).
+  -o <file>                   Place output into <file>.
+  -static-libgfortran         Statically link the GNU Fortran helper library (libgfortran).
+  -std=f2003                  Conform to the ISO Fortran 2003 standard.
+  -std=f2008                  Conform to the ISO Fortran 2008 standard.
+  -std=f2008ts                Conform to the ISO Fortran 2008 standard including TS 29113.
+  -std=f2018                  Conform to the ISO Fortran 2018 standard.
+  -std=f95                    Conform to the ISO Fortran 95 standard.
+  -std=gnu                    Conform to nothing in particular.
+  -std=legacy                 Accept extensions to support legacy code.
+  -undef                      Do not predefine system-specific and GCC-specific macros.
+  -v                          Enable verbose output.
+

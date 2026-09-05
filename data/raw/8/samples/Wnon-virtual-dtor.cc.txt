@@ -1,0 +1,7 @@
+Wnon-virtual-dtor.cc:2:8: warning: 'struct Base' has virtual functions and accessible non-virtual destructor [-Wnon-virtual-dtor]
+ struct Base {
+        ^~~~
+Wnon-virtual-dtor.cc:5:8: warning: base class 'struct Base' has accessible non-virtual destructor [-Wnon-virtual-dtor]
+ struct Derived : Base {
+        ^~~~~~~
+Wnon-virtual-dtor.cc:5:8: warning: 'struct Derived' has virtual functions and accessible non-virtual destructor [-Wnon-virtual-dtor]

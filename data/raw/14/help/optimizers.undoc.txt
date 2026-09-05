@@ -1,0 +1,6 @@
+The following options control optimizations:
+  -finline-stringops          This option lacks documentation.
+  -fkeep-gc-roots-live        This option lacks documentation.
+  -fno-inline-stringops       This option lacks documentation.
+  -funroll-completely-grow-size This option lacks documentation.
+

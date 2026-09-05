@@ -1,0 +1,4 @@
+Wpointer-arith.c: In function 'advance':
+Wpointer-arith.c:3:14: warning: pointer of type 'void *' used in arithmetic [-Wpointer-arith]
+     return p + 1;
+              ^

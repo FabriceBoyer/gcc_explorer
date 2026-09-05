@@ -1,0 +1,4 @@
+Wunused-variable.c: In function 'add':
+Wunused-variable.c:3:9: warning: unused variable 'scratch' [-Wunused-variable]
+     int scratch = 42;
+         ^~~~~~~

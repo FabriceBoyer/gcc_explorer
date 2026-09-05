@@ -1,0 +1,8 @@
+Wconversion.c: In function 'narrow':
+Wconversion.c:3:12: warning: conversion from 'int' to 'unsigned char' may change value [-Wconversion]
+    3 |     return wide;
+      |            ^~~~
+Wconversion.c: In function 'to_unsigned':
+Wconversion.c:6:12: warning: conversion to 'unsigned int' from 'int' may change the sign of the result [-Wsign-conversion]
+    6 |     return i;
+      |            ^

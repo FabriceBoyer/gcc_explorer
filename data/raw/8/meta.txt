@@ -1,0 +1,5 @@
+version=8.5.0
+fullversion=8.5.0
+banner=gcc (GCC) 8.5.0
+target=x86_64-linux-gnu
+date=2026-09-05T10:47:04Z

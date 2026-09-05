@@ -1,0 +1,4 @@
+Wlogical-op.c: In function 'check':
+Wlogical-op.c:3:18: warning: logical 'and' of equal expressions [-Wlogical-op]
+     return a > 0 && a > 0;
+                  ^~

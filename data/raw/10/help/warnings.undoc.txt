@@ -1,0 +1,9 @@
+The following options control compiler warning messages:
+  -Wc++0x-compat              Same as -Wc++11-compat.
+  -Wc++1z-compat              Same as -Wc++17-compat.
+  -Wc++2a-compat              Same as -Wc++20-compat.
+  -Wlarger-than-              Same as -Wlarger-than=.
+  -Wpsabi                     This option lacks documentation.
+  -Wshadow-compatible-local   Same as -Wshadow=compatible-local.
+  -Wshadow-local              Same as -Wshadow=local.
+

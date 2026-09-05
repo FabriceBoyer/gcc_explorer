@@ -1,0 +1,16 @@
+Wall-Wextra.c: In function 'main':
+Wall-Wextra.c:6:14: warning: comparison of integer expressions of different signedness: 'int' and 'unsigned int' [-Wsign-compare]
+    6 |     if (argc < n)
+      |              ^
+Wall-Wextra.c:7:18: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long int' [-Wformat=]
+    7 |         printf("%d\n", (long) argc);
+      |                 ~^     ~~~~~~~~~~~
+      |                  |     |
+      |                  int   long int
+      |                 %ld
+Wall-Wextra.c:4:9: warning: unused variable 'unused' [-Wunused-variable]
+    4 |     int unused;
+      |         ^~~~~~
+Wall-Wextra.c:3:27: warning: unused parameter 'argv' [-Wunused-parameter]
+    3 | int main(int argc, char **argv) {
+      |                    ~~~~~~~^~~~

@@ -1,0 +1,4 @@
+The following options are supported by the language Ada:
+  -fbuiltin-printf            Ignored.
+  -gant                       Catch typos.
+

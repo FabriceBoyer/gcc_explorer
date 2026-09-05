@@ -1,0 +1,78 @@
+The following options are supported by the language D:
+  --dependencies              Same as -M.
+  --print-missing-file-dependencies Same as -MG.
+  --user-dependencies         Same as -MM.
+  --verbose                   Same as -v.
+  --write-dependencies        Same as -MD.
+  --write-user-dependencies   Same as -MMD.
+  -H                          Print the name of header files as they are used.
+  -Hd <dir>                   Write D interface files to directory <dir>.
+  -Hf <file>                  Write D interface to <file>.
+  -I <dir>                    Add <dir> to the end of the main include path.
+  -J<directory>               Put MODULE files in 'directory'.
+  -M                          Generate make dependencies.
+  -MD                         Generate make dependencies and compile.
+  -MF <file>                  Write dependency output to the given file.
+  -MG                         Treat missing header files as generated files.
+  -MM                         Like -M but ignore system header files.
+  -MMD                        Like -MD but ignore system header files.
+  -MP                         Generate phony targets for all headers.
+  -MQ <target>                Add a target that may require quoting.
+  -MT <target>                Add a target that does not require quoting.
+  -Waddress                   Warn about suspicious uses of memory addresses.
+  -Wall                       Enable most warning messages.
+  -Walloca                    Warn on any use of alloca.
+  -Walloca-larger-than=<number> Warn on unbounded uses of alloca, and on bounded uses of alloca whose bound can be larger than <number> bytes.
+  -Wcast-result               Warn about casts that will produce a null result.
+  -Wdeprecated                Warn if a deprecated compiler feature, class, method, or field is used.
+  -Werror                     Treat all warnings as errors.
+  -Wno-alloca-larger-than     Disable Walloca-larger-than= warning.  Equivalent to Walloca-larger-than=<SIZE_MAX> or larger.  Same as -Walloca-larger-than=.
+  -Wpsabi                     This option lacks documentation.
+  -Wspeculative               Warn from speculative compiles such as __traits(compiles).
+  -Wtemplates                 Warn on primary template declaration.
+  -Wunknown-pragmas           Warn about unrecognized pragmas.
+  -Wvarargs                   Warn about questionable usage of the macros used to retrieve variable arguments.
+  -X                          Generate JSON file.
+  -Xf <file>                  Write JSON output to the given <file>.
+  -fall-instantiations        Generate code for all template instantiations.
+  -fassert                    Generate code for assert contracts.
+  -fbounds-check              Generate code to check bounds before indexing arrays.
+  -fbounds-check=[on|safeonly|off] Turn array bounds checks on, in @safe code only, or off.
+  -fbuilding-libphobos-tests  This option lacks documentation.
+  -fbuiltin                   Recognize built-in functions.
+  -fdebug                     Compile in debug code.
+  -fdebug=<level|ident>       Compile in debug code, code <= <level>, or code identified by <ident>.
+  -fdoc                       Generate documentation.
+  -fdoc-dir=<dir>             Write documentation file to directory <dir>.
+  -fdoc-file=<file>           Write documentation to <file>.
+  -fdoc-inc=<file>            Include a Ddoc macro <file>.
+  -fdruntime                  Assume that standard D runtime libraries and "D main" exist.
+  -fdump-d-original           Display the frontend AST after parsing and semantic passes.
+  -fignore-unknown-pragmas    Ignore unsupported pragmas.
+  -finvariants                Generate code for class invariant contracts.
+  -fmain                      Generate a default D main() function when compiling.
+  -fmodule-file=<package.module>=<filespec> use <filespec> as source file for <package.module>.
+  -fmoduleinfo                Generate ModuleInfo struct for output module.
+  -fonly=                     Process all modules specified on the command line, but only generate code for the module specified by the argument.
+  -fpostconditions            Generate code for postcondition contracts.
+  -fpreconditions             Generate code for precondition contracts.
+  -frelease                   Compile release version.
+  -frtti                      Generate run time type descriptor information.
+  -fswitch-errors             Generate code for switches without a default case.
+  -ftransition=all            List information on all language changes.
+  -ftransition=complex        List all usages of complex or imaginary types.
+  -ftransition=dip1000        Implement DIP1000: Scoped pointers (experimental).
+  -ftransition=dip25          Implement DIP25: Sealed references (experimental).
+  -ftransition=field          List all non-mutable fields which occupy an object instance.
+  -ftransition=nogc           List all hidden GC allocations.
+  -ftransition=tls            List all variables going into thread local storage.
+  -funittest                  Compile in unittest code.
+  -fversion=<level|ident>     Compile in version code >= <level> or identified by <ident>.
+  -fweak-templates            Emit template instantiations as weak symbols.
+  -imultilib <dir>            Set <dir> to be the multilib include subdirectory.
+  -iprefix <path>             Specify <path> as a prefix for next two options.
+  -isysroot <dir>             Set <dir> to be the system root directory.
+  -isystem <dir>              Add <dir> to the start of the system include path.
+  -nostdinc                   Do not search standard system include directories (those specified with -isystem will still be used).
+  -v                          Enable verbose output.
+
