@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCheck, Share2, Trash2, X } from 'lucide-react';
 import type { Dataset } from '../lib/dataset';
@@ -46,6 +47,7 @@ export function SelectionBar({ data, onExport }: { data: Dataset; onExport: () =
           </div>
 
           <div className="flex shrink-0 items-center gap-1.5">
+            <Link to="/selection" className="rounded-lg border px-2 py-1 text-xs text-accent-text">Explain</Link>
             <Button
               size="sm"
               className="hidden md:inline-flex"

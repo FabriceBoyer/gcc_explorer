@@ -8,6 +8,7 @@ import { LoadingScreen } from './components/LoadingScreen';
 const HomePage = lazy(() => import('./pages/HomePage'));
 const ExplorerPage = lazy(() => import('./pages/ExplorerPage'));
 const ComparePage = lazy(() => import('./pages/ComparePage'));
+const SelectionPage = lazy(() => import('./pages/SelectionPage'));
 const DocsPage = lazy(() => import('./pages/DocsPage'));
 
 export default function App() {
@@ -31,6 +32,7 @@ export default function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/explorer" element={<ExplorerPage />} />
               <Route path="/compare" element={<ComparePage />} />
+              <Route path="/selection" element={<SelectionPage />} />
               <Route path="/docs" element={<DocsPage />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

@@ -467,3 +467,10 @@ copyright © Free Software Foundation, Inc. GCC is distributed under the GPL v3
 or later with the GCC Runtime Library Exception; the GCC manual is distributed
 under the GNU Free Documentation License v1.3. This project is not affiliated
 with or endorsed by the FSF or the GCC project.
+
+
+## Selection explained
+
+Open **Selection** in the navigation or **Explain** in the selection bar to read a report of your saved flags. Choose GCC 8–15 and C/C++, search the report, and toggle baseline-enabled options, observed umbrella effects, full manual text and diagnostic examples. Explicit unsupported flags remain visible with a warning. Multiple arguments of one option remain separate. Defaults and pack effects are reference observations, not a command-line simulator. The source release of each manual entry is shown; it can differ from the selected GCC version.
+
+Download **HTML** for a standalone, printable document (no external assets or scripts), or **Markdown** for version control and reviews. Both exports include every displayed entry, the compiler context and the current documentation settings. These exports are explanatory reports; build-system snippets remain available in Explorer. Showing baseline or umbrella entries does not add them to the saved selection.

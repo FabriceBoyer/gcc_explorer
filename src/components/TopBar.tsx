@@ -9,6 +9,7 @@ import { Badge } from './ui';
 const LINKS = [
   { to: '/', label: 'Home', icon: Home },
   { to: '/explorer', label: 'Explorer', icon: Table2 },
+  { to: '/selection', label: 'Selection', icon: BookOpen },
   { to: '/compare', label: 'Compare', icon: GitCompareArrows },
   { to: '/docs', label: 'Docs', icon: BookOpen },
 ];
@@ -40,8 +41,10 @@ export function TopBar() {
             <NavLink
               key={to}
               to={to}
+              aria-label={label}
+              title={label}
               className={clsx(
-                'relative flex h-8 items-center gap-1.5 rounded-[9px] px-2.5 text-[13px] font-medium transition-colors sm:px-3',
+                'relative flex h-8 items-center gap-1.5 rounded-[9px] px-1.5 text-[13px] font-medium transition-colors sm:px-3',
                 active ? 'text-ink' : 'text-muted hover:text-ink',
               )}
             >
@@ -61,7 +64,7 @@ export function TopBar() {
 
       <div className="ml-auto flex items-center gap-1.5">
         {count > 0 && (
-          <NavLink to="/explorer" className="hidden sm:block">
+          <NavLink to="/selection" className="hidden sm:block">
             <Badge tone="accent" title={`${count} flags selected`}>
               {count} selected
             </Badge>
