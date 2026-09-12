@@ -13,6 +13,7 @@ import { FilterSidebar } from '../components/FilterSidebar';
 import { OptionsTable } from '../components/OptionsTable';
 import { DetailPanel } from '../components/DetailPanel';
 import { SelectionBar } from '../components/SelectionBar';
+import { ImportDialog } from '../components/ImportDialog';
 import { ExportDialog } from '../components/ExportDialog';
 import { Badge, Button } from '../components/ui';
 
@@ -22,6 +23,7 @@ export default function ExplorerPage() {
     filters, patchFilters, selection, addOptions, removeOptions,
     sidebarOpen, setSidebarOpen, density, setDensity, selected, select,
   } = useStore();
+  const [importing, setImporting] = useState(false);
   const [exporting, setExporting] = useState(false);
   const [query, setQuery] = useState(filters.query);
   // Below `md` there is no room to dock the sidebar, so it becomes a drawer.
@@ -98,6 +100,7 @@ export default function ExplorerPage() {
 
       <div className="flex min-w-0 flex-1 flex-col">
         {/* toolbar */}
+        <div className="flex justify-end border-b border-line px-3 py-1"><Button size="sm" onClick={() => setImporting(true)}>Import flags</Button></div>
         <div className="flex h-12 shrink-0 items-center gap-2 border-b border-line bg-surface px-2.5">
           <Button
             variant="ghost"
@@ -230,6 +233,7 @@ export default function ExplorerPage() {
       </AnimatePresence>
 
       <AnimatePresence>
+        {importing && <ImportDialog data={data} onClose={() => setImporting(false)} />}
         {exporting && <ExportDialog data={data} onClose={() => setExporting(false)} />}
       </AnimatePresence>
 

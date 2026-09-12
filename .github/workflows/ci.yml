@@ -30,6 +30,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Import regression tests
+        run: node --test tools/tests/import.test.mjs
+
       - name: Typecheck
         run: npx tsc -b
 

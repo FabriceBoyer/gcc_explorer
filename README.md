@@ -491,3 +491,25 @@ under `data/raw/<major>/samples/`. Examples intentionally contain problematic
 code: they illustrate diagnostics, not production patterns. Unsupported flags
 are excluded from per-version diagnostic output. Check documentation extraction
 with `node --test tools/tests/documentation.test.mjs`.
+
+### Import an existing flag selection
+
+In the Explorer, click **Import flags**, paste text or choose a local file (up to
+1 MB), then review the preview and confirm. Imports merge into the saved
+selection by default; **Replace the current selection** starts a new selection.
+Unknown options and incomplete arguments are listed and excluded. Known options
+absent from the selected GCC release receive a compatibility warning.
+
+Supported formats:
+
+- **Text:** whitespace-separated flags, `compile_flags.txt`, quotes, backslash
+  line continuations and `#` comments. Paste flags rather than a shell script.
+- **Ant XML:** complete files or `compilerarg` / `linkerarg` fragments. `value`
+  contains one argument; `line` contains a tokenized argument list. XML entities
+  such as `&quot;` are decoded. Build properties and file references are not expanded.
+- **JSON:** GCC Explorer exports with `compile` and `link` arrays, or a string
+  array containing full flags.
+
+All parsing happens locally. No command is executed or uploaded. Catalogue
+matching identifies options, not the validity of their values, linker suboptions
+or every target-specific constraint. Flags remain available after refreshing.
