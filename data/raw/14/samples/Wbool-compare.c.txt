@@ -1,0 +1,4 @@
+Wbool-compare.c: In function 'f':
+Wbool-compare.c:3:26: warning: comparison of constant '2' with boolean expression is always false [-Wbool-compare]
+    3 | int f(bool b) { return b == 2; }
+      |                          ^~

@@ -360,6 +360,11 @@ export function parseManPage(source) {
   }
   flushPara();
 
+  // Consecutive labels share the next body only within the same section.
+  for (let i = entries.length - 2; i >= 0; i--) {
+    const a = entries[i], b = entries[i + 1];
+    if (!a.blocks.length && a.section === b.section && a.subsection === b.subsection && a.group === b.group) a.blocks = b.blocks;
+  }
   return entries;
 }
 

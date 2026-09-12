@@ -1,0 +1,4 @@
+Wempty-body.c: In function 'f':
+Wempty-body.c:2:23: warning: suggest braces around empty body in an 'if' statement [-Wempty-body]
+ void f(int x) { if (x); }
+                       ^

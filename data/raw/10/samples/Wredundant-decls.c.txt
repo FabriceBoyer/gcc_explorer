@@ -1,0 +1,6 @@
+Wredundant-decls.c:3:5: warning: redundant redeclaration of 'f' [-Wredundant-decls]
+    3 | int f(int);
+      |     ^
+Wredundant-decls.c:2:5: note: previous declaration of 'f' was here
+    2 | int f(int);
+      |     ^

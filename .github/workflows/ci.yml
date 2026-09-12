@@ -59,6 +59,9 @@ jobs:
       - name: Rebuild the dataset from data/raw
         run: SOURCE_DATE_EPOCH=0 node tools/build-dataset.mjs
 
+      - name: Documentation regression tests
+        run: node --test tools/tests/documentation.test.mjs
+
       - name: Fail if the committed dataset differs
         run: |
           if ! git diff --quiet -- public/data/options.json public/data/docs.json public/data/profiles.json; then

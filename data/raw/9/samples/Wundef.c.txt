@@ -1,0 +1,3 @@
+Wundef.c:2:5: warning: "MISSING_FEATURE" is not defined, evaluates to 0 [-Wundef]
+    2 | #if MISSING_FEATURE
+      |     ^~~~~~~~~~~~~~~

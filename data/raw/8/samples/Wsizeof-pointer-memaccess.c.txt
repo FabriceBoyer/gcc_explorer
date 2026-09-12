@@ -1,0 +1,4 @@
+Wsizeof-pointer-memaccess.c: In function 'f':
+Wsizeof-pointer-memaccess.c:3:62: warning: argument to 'sizeof' in 'memcpy' call is the same expression as the destination; did you mean to provide an explicit length? [-Wsizeof-pointer-memaccess]
+ void f(char *dst, const char *src) { memcpy(dst, src, sizeof dst); }
+                                                              ^~~

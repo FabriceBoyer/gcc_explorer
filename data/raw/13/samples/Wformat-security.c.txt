@@ -1,0 +1,4 @@
+Wformat-security.c: In function 'f':
+Wformat-security.c:3:1: warning: format not a string literal and no format arguments [-Wformat-security]
+    3 | void f(const char *untrusted) { printf(untrusted); }
+      | ^~~~

@@ -1,0 +1,7 @@
+Wformat-truncation.c: In function 'f':
+Wformat-truncation.c:3:50: warning: '%s' directive output truncated writing 5 bytes into a region of size 2 [-Wformat-truncation=]
+ void f(void) { char b[2]; snprintf(b, sizeof b, "%s", "hello"); }
+                                                  ^~   ~~~~~~~
+Wformat-truncation.c:3:27: note: 'snprintf' output 6 bytes into a destination of size 2
+ void f(void) { char b[2]; snprintf(b, sizeof b, "%s", "hello"); }
+                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

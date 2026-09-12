@@ -1,0 +1,4 @@
+Wmultichar.c: In function 'f':
+Wmultichar.c:2:22: warning: multi-character character constant [-Wmultichar]
+    2 | int f(void) { return 'ab'; }
+      |                      ^~~~

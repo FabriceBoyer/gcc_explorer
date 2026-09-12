@@ -1,0 +1,4 @@
+Wdelete-non-virtual-dtor.cc: In function 'void dispose(Base*)':
+Wdelete-non-virtual-dtor.cc:3:32: warning: deleting object of polymorphic class type 'Base' which has non-virtual destructor might cause undefined behavior [-Wdelete-non-virtual-dtor]
+    3 | void dispose(Base *p) { delete p; }
+      |                                ^

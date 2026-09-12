@@ -1,0 +1,6 @@
+Woverloaded-virtual.cc:2:28: warning: 'virtual void Base::f(int)' was hidden [-Woverloaded-virtual=]
+    2 | struct Base { virtual void f(int); };
+      |                            ^
+Woverloaded-virtual.cc:3:30: note:   by 'void Derived::f(double)'
+    3 | struct Derived : Base { void f(double); };
+      |                              ^

@@ -1,0 +1,2 @@
+// FLAGS: -Wswitch-default
+int f(int x) { switch(x) { case 1: return 2; } return 0; }

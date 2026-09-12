@@ -1,0 +1,4 @@
+Wtype-limits.c: In function 'f':
+Wtype-limits.c:2:30: warning: comparison of unsigned expression < 0 is always false [-Wtype-limits]
+    2 | int f(unsigned x) { return x < 0; }
+      |                              ^

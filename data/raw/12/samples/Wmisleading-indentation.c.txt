@@ -1,0 +1,7 @@
+Wmisleading-indentation.c: In function 'f':
+Wmisleading-indentation.c:3:3: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+    3 |   if (x)
+      |   ^~
+Wmisleading-indentation.c:5:5: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+    5 |     return x;
+      |     ^~~~~~

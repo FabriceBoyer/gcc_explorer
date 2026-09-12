@@ -1,0 +1,5 @@
+Wpessimizing-move.cc: In function 'std::string f()':
+Wpessimizing-move.cc:4:61: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+    4 | std::string f() { std::string s("example"); return std::move(s); }
+      |                                                    ~~~~~~~~~^~~
+Wpessimizing-move.cc:4:61: note: remove 'std::move' call

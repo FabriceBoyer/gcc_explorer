@@ -1,0 +1,4 @@
+Wparentheses.c: In function 'f':
+Wparentheses.c:2:20: warning: suggest parentheses around assignment used as truth value [-Wparentheses]
+    2 | int f(int x) { if (x = 2) return x; return 0; }
+      |                    ^

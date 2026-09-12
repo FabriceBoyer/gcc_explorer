@@ -97,6 +97,7 @@ const LINK_NAMES = new Set([
 ]);
 
 function deriveCategory({ name, manSubsection, classes }) {
+  if (name.startsWith('--param')) return 'param';
   if (manSubsection) {
     for (const [re, cat] of CATEGORY_BY_SUBSECTION) if (re.test(manSubsection)) return cat;
   }
@@ -245,6 +246,20 @@ for (const v of versions) {
       const e = { ...entry, md, primary: manPrimary(entry) };
       manEntries.push(e);
       for (const k of manKeys(entry)) if (!man.has(k)) man.set(k, e);
+      // Parameters are nested definition-list items, not top-level options.
+      if (entry.ixName.startsWith('--param ')) {
+        for (let i = 0; i < entry.blocks.length; i++) {
+          const b = entry.blocks[i];
+          if (b.type !== 'dt') continue;
+          const name = b.text.replace(/[*`]/g, '');
+          if (!/^[a-z][a-z0-9-]+$/.test(name)) continue;
+          let end = i + 1;
+          while (end < entry.blocks.length && entry.blocks[end].type !== 'dt') end++;
+          const body = blocksToMarkdown(entry.blocks.slice(i + 1, end));
+          if (body) man.set(`--param=${name}=`, { ...e, md: body + '\n\nThis internal tuning parameter can change between GCC releases. Inspect the selected compiler with `gcc -Q --help=params` before choosing a value.' });
+        }
+      }
+
     }
   }
 
@@ -417,6 +432,16 @@ for (const o of options.values()) {
   o.cat = deriveCategory({ name: o.name, manSubsection: o.manSection, classes: [...o.cls] });
 }
 
+// Resolve documented aliases without manufacturing compiler semantics.
+for (let pass = 0; pass < 3; pass++) for (const o of options.values()) {
+  if (o.doc || !o.alias) continue;
+  const target = options.get(o.alias) || options.get(o.alias.replace(/=$/, ''));
+  if (!target?.doc) continue;
+  o.doc = `Alias of \`${target.name}\` according to GCC help. The following manual describes that canonical option.\n\n${target.doc}`;
+  o.docFrom = target.docFrom;
+  o.manSection = target.manSection;
+}
+
 // --- build / runtime / size impact -----------------------------------------
 
 const impactTable = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'data', 'impact.json'), 'utf8'));
@@ -478,7 +503,7 @@ for (const file of fs.readdirSync(sampleDir).sort()) {
     if (/unrecognized command[ -]line option|unrecognized argument/.test(out)) continue;
     outputs[v] = out;
   }
-  const targets = flags.split(/\s+/).filter((f) => f.startsWith('-')).map((f) => splitName(f)[0]);
+  const targets = flags.split(/\s+/).filter((f) => f.startsWith('-')).map((f) => f.includes('=') ? f.slice(0, f.indexOf('=') + 1) : splitName(f)[0]);
   const id = file.replace(/\.(c|cc)$/, '');
   samples.push({
     id,

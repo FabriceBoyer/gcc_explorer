@@ -474,3 +474,20 @@ with or endorsed by the FSF or the GCC project.
 Open **Selection** in the navigation or **Explain** in the selection bar to read a report of your saved flags. Choose GCC 8–15 and C/C++, search the report, and toggle baseline-enabled options, observed umbrella effects, full manual text and diagnostic examples. Explicit unsupported flags remain visible with a warning. Multiple arguments of one option remain separate. Defaults and pack effects are reference observations, not a command-line simulator. The source release of each manual entry is shown; it can differ from the selected GCC version.
 
 Download **HTML** for a standalone, printable document (no external assets or scripts), or **Markdown** for version control and reviews. Both exports include every displayed entry, the compiler context and the current documentation settings. These exports are explanatory reports; build-system snippets remain available in Explorer. Showing baseline or umbrella entries does not add them to the saved selection.
+
+### Documentation enrichment and diagnostic examples
+
+The manual parser preserves shared descriptions for consecutive option labels and
+extracts individual `--param` definitions from GCC's nested manual lists. GCC help
+aliases reuse the canonical option's manual with an explicit alias notice. Manual
+provenance remains the source GCC release; text from a newer compiler is not a
+promise about an older compiler. Undocumented internals are left marked as such.
+
+To refresh only the real diagnostic examples (without running benchmarks), run
+`./tools/extract/collect-samples.sh` or pass major versions such as `8 15`, then
+`npm run data:build`. This uses the official `gcc:<major>` Docker images. Each
+sample declares its compiler flags in `// FLAGS:`; captured output is committed
+under `data/raw/<major>/samples/`. Examples intentionally contain problematic
+code: they illustrate diagnostics, not production patterns. Unsupported flags
+are excluded from per-version diagnostic output. Check documentation extraction
+with `node --test tools/tests/documentation.test.mjs`.
